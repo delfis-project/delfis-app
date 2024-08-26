@@ -2,5 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="delfisBar">#064273</color>
     <color name="delfis01">#064273</color>
 </resources>
