@@ -19,7 +19,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 // Após o tempo acabar, inicie a MainActivity (tela de login)
-                Intent intent = new Intent(SplashScreen.this, login.class);
+                Intent intent = new Intent(SplashScreen.this, Login.class);
                 startActivity(intent);
                 finish(); // Finaliza a Splash Screen Activity
             }

@@ -23,7 +23,7 @@
         </activity>
 
         <!-- Registro da MainActivity (tela de login) -->
-        <activity android:name=".login" android:exported="true" />
+        <activity android:name=".Login" android:exported="true" />
 
         <!-- Registro da HomeActivity -->
         <activity android:name=".Home" />
