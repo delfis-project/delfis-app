@@ -22,16 +22,10 @@
             </intent-filter>
         </activity>
 
-        <!-- Registro da MainActivity (tela de login) -->
         <activity android:name=".Login" android:exported="true" />
-
-        <!-- Registro da HomeActivity -->
         <activity android:name=".Home" />
-
-        <!-- Registro da RegisterActivity -->
         <activity android:name=".Register" />
-
-        <!-- Registro da StoreActivity -->
+        <activity android:name=".Error" />
         <activity android:name=".Store" android:exported="true" />
     </application>
 

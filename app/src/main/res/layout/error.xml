@@ -24,6 +24,7 @@
         android:layout_marginTop="144dp"
         android:backgroundTint="#03355D"
         android:text="VOLTAR"
+        android:textColor="#FFFFFF"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

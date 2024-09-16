@@ -1,28 +1,39 @@
 package com.example.delfis;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class Home extends AppCompatActivity {
+    BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        // Encontre o botão "loja" pelo ID
-        Button lojaButton = findViewById(R.id.button2);
+        nav = findViewById(R.id.navbar);
 
-        // Adicione um OnClickListener ao botão "loja"
-        lojaButton.setOnClickListener(new View.OnClickListener() {
+        // Listener para navegação
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                // Crie um Intent para iniciar a atividade Store
-                Intent intent = new Intent(Home.this, Store.class);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+
+                if (item.getItemId() == R.id.lojafooter) {
+                    intent = new Intent(Home.this, Store.class);
+                } else if (item.getItemId() == R.id.homefooter) {
+                    intent = new Intent(Home.this, Home.class);
+                } else {
+                    intent = new Intent(Home.this, Error.class);
+                }
+
                 startActivity(intent);
+                return true;
             }
         });
     }

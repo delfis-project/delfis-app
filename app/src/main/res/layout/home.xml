@@ -5,15 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView20"
-        android:layout_width="452dp"
-        android:layout_height="83dp"
-        android:scaleType="centerCrop"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/atividadebackground" />
+        android:background="@drawable/nav_bg"
+        app:itemTextColor="@drawable/item_active"
+        app:itemIconTint="@drawable/item_active"
+        app:itemIconSize="30sp"
+        app:menu="@menu/menu_item"
+        android:id="@+id/navbar"/>
 
     <ImageView
         android:id="@+id/imageView4"
@@ -155,76 +159,5 @@
         app:layout_constraintStart_toStartOf="@+id/imageView16"
         app:layout_constraintTop_toTopOf="@+id/imageView16"
         app:layout_constraintVertical_bias="0.36" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="93dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="1dp"
-        android:backgroundTint="#003F73"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="0px"
-        app:icon="@drawable/config"
-        app:iconGravity="textEnd"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="92dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="68dp"
-        android:backgroundTint="#003F73"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="0px"
-        app:icon="@drawable/leaderboard"
-        app:iconGravity="textEnd"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="90dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="68dp"
-        android:backgroundTint="#003F73"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="0px"
-        app:icon="@drawable/casa"
-        app:iconGravity="textEnd"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="93dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="68dp"
-        android:backgroundTint="#003F73"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="0px"
-        app:icon="@drawable/carrinho"
-        app:iconGravity="textEnd"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
