@@ -37,6 +37,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
+                System.out.println(email + password);
 
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(Login.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
