@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.delfis"
+    namespace = "goldenage.delfis.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.delfis"
+        applicationId = "goldenage.delfis.app"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -41,4 +41,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    compileOnly("org.projectlombok:lombok:1.18.28")
+    annotationProcessor("org.projectlombok:lombok:1.18.28")
 }

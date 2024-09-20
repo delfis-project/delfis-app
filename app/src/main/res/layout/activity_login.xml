@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#064273"
-    tools:context=".Login" >
+    tools:context="goldenage.delfis.app.activity.LoginActivity" >
 
     <ImageView
         android:id="@+id/imageView2"
@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/delfis" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/editTextTextUsername"
         android:layout_width="265dp"
         android:layout_height="44dp"
         android:layout_marginTop="24dp"
@@ -61,7 +61,7 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername"
         app:layout_constraintVertical_bias="0.115" />
 
     <Button
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.405" />
 
     <TextView
-        android:id="@+id/criarconta"
+        android:id="@+id/criarConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CRIAR CONTA"
@@ -98,7 +98,7 @@
         android:textColor="#FFFFFF"
         android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

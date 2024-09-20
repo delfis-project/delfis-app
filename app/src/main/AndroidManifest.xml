@@ -16,7 +16,7 @@
 
         <!-- Registro da SplashScreenActivity -->
         <activity
-            android:name=".SplashScreen"
+            android:name=".activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Login" android:exported="true" />
-        <activity android:name=".Home" />
-        <activity android:name=".Register" />
-        <activity android:name=".Error" />
-        <activity android:name=".Store" android:exported="true" />
+        <activity android:name=".activity.LoginActivity" android:exported="true" />
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ErrorActivity" />
+        <activity android:name=".activity.StoreActivity" android:exported="true" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.delfis;
+package goldenage.delfis.app;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package network;
+package goldenage.delfis.app.util;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
