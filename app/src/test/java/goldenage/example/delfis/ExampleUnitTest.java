@@ -1,4 +1,4 @@
-package goldenage.delfis.app;
+package goldenage.app.delfis;
 
 import org.junit.Test;
 

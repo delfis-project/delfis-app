@@ -1,5 +1,7 @@
 package goldenage.delfis.app.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,13 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import goldenage.delfis.app.R;
 
+import goldenage.delfis.app.api.LoginRequestApi;
 import goldenage.delfis.app.model.LoginRequest;
 import goldenage.delfis.app.model.LoginResponse;
-import goldenage.delfis.app.api.LoginRequestApi;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginActivity"; // Tag para logs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +35,16 @@ public class LoginActivity extends AppCompatActivity {
         TextView criarContaTextView = findViewById(R.id.criarConta);
 
         entrarButton.setOnClickListener(v -> {
-            String username = usernameEditText.getText().toString();
+            String email = usernameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
+            System.out.println(email + password);
 
-            if (username.isEmpty() || password.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            LoginRequest loginRequest = new LoginRequest(username, password);
+            LoginRequest loginRequest = new LoginRequest(email, password);
 
             LoginRequestApi loginRequestApi = RetrofitClient.getClient().create(LoginRequestApi.class);
             Call<LoginResponse> call = loginRequestApi.login(loginRequest);
