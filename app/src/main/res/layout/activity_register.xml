@@ -198,7 +198,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#064273"
-        android:popupBackground="#cor_fundo_popup"
+        android:popupBackground="#064273"
         android:spinnerMode="dropdown"
         tools:layout_editor_absoluteX="73dp"
         tools:layout_editor_absoluteY="507dp"
