@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,6 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
 
-        <!-- Registro da SplashScreenActivity -->
         <activity
             android:name="goldenage.delfis.app.activity.SplashScreenActivity"
             android:exported="true">
@@ -25,7 +25,7 @@
         </activity>
 
         <activity android:name="goldenage.delfis.app.activity.LoginActivity" android:exported="true" />
-        <activity android:name="goldenage.delfis.app.activity.HomeActivity" />
+        <activity android:name="goldenage.delfis.app.activity.HomeActivity" android:exported="true" />
         <activity android:name="goldenage.delfis.app.activity.RegisterActivity" />
         <activity android:name="goldenage.delfis.app.activity.ErrorActivity" />
         <activity android:name="goldenage.delfis.app.activity.StoreActivity" android:exported="true" />
