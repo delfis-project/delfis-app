@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import goldenage.delfis.app.api.LoginRequestApi;
+import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.LoginRequest;
 import goldenage.delfis.app.model.LoginResponse;
 import goldenage.delfis.app.model.UserRequest;
@@ -27,11 +27,10 @@ import goldenage.delfis.app.R;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText nameEditText, usernameEditText, passwordEditText, emailEditText, birthDateEditText;
-    private Button criarButton;
-    private LoginRequestApi apiService;
+    private DelfisApiService apiService;
 
-    private final String usernameUnlogged = "SEM-LOGIN";
-    private final String passwordUnlogged = "SEM-LOGIN";
+    private final String UNLOGGED_USERNAME = "SEM-LOGIN";
+    private final String UNLOGGED_PASSWORD = "SEM-LOGIN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.editTextTextPassword2);
         emailEditText = findViewById(R.id.editTextTextEmailAddress3);
         birthDateEditText = findViewById(R.id.datas);
-        criarButton = findViewById(R.id.entrar);
+        Button criarButton = findViewById(R.id.entrar);
 
         Retrofit retrofit = RetrofitClient.getClient();
-        apiService = retrofit.create(LoginRequestApi.class);
+        apiService = retrofit.create(DelfisApiService.class);
 
         // TextWatcher para formatar a data de nascimento
         birthDateEditText.addTextChangedListener(new TextWatcher() {
@@ -117,9 +116,9 @@ public class RegisterActivity extends AppCompatActivity {
             String email = emailEditText.getText().toString();
             String birthDate = birthDateEditText.getText().toString();
 
-            LoginRequest loginRequest = new LoginRequest(usernameUnlogged, passwordUnlogged);
-            LoginRequestApi loginRequestApi = RetrofitClient.getClient().create(LoginRequestApi.class);
-            Call<LoginResponse> call = loginRequestApi.login(loginRequest);
+            LoginRequest loginRequest = new LoginRequest(UNLOGGED_USERNAME, UNLOGGED_PASSWORD);
+            DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+            Call<LoginResponse> call = delfisApiService.login(loginRequest);
 
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
