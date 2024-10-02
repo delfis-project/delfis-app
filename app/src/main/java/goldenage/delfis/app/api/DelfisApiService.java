@@ -22,4 +22,10 @@ public interface DelfisApiService {
 
     @GET("api/streak/get-by-app-user/{id}")
     Call<Streak> getCurrentStreakByUser(@Header("Authorization") String token, @Path("id") long fkAppUserId);
+
+    @POST("/api/session/insert/{id}")
+    Call<Void> startSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
+
+    @POST("/api/session/finish/{id}")
+    Call<Void> finishSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
 }
