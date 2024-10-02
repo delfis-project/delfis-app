@@ -17,7 +17,8 @@
 
         <activity
             android:name="goldenage.delfis.app.activity.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,6 +30,7 @@
         <activity android:name="goldenage.delfis.app.activity.RegisterActivity" />
         <activity android:name="goldenage.delfis.app.activity.ErrorActivity" />
         <activity android:name="goldenage.delfis.app.activity.StoreActivity" android:exported="true" />
+        <activity android:name="goldenage.delfis.app.activity.ConfigActivity" />
     </application>
 
 </manifest>

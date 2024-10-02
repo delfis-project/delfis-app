@@ -43,6 +43,8 @@ public class HomeActivity extends AppCompatActivity {
                     intent = new Intent(HomeActivity.this, StoreActivity.class);
                 } else if (item.getItemId() == R.id.homefooter) {
                     intent = new Intent(HomeActivity.this, HomeActivity.class);
+                } else if (item.getItemId() == R.id.configfooter) {
+                    intent = new Intent(HomeActivity.this, ConfigActivity.class);
                 } else {
                     intent = new Intent(HomeActivity.this, ErrorActivity.class);
                 }
