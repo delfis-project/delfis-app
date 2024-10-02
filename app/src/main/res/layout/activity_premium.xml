@@ -42,7 +42,7 @@
         android:layout_width="318dp"
         android:layout_height="48dp"
         android:layout_marginBottom="8dp"
-        android:text="após assinar o plano premium, mensalmente será cobrado o valor da assinatura. O plano pode ser cancelado a qualquer momento"
+        android:text="Após assinar o plano premium, mensalmente será cobrado o valor da assinatura. O plano pode ser cancelado a qualquer momento"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
