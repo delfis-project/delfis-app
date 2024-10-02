@@ -8,7 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-public interface LoginRequestApi {
+public interface DelfisApiService {
 
     @POST("api/auth/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);

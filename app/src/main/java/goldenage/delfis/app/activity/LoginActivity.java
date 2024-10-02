@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import goldenage.delfis.app.R;
 
-import goldenage.delfis.app.api.LoginRequestApi;
+import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.LoginRequest;
 import goldenage.delfis.app.model.LoginResponse;
 import goldenage.delfis.app.util.RetrofitClient;
@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
 
             LoginRequest loginRequest = new LoginRequest(email, password);
 
-            LoginRequestApi loginRequestApi = RetrofitClient.getClient().create(LoginRequestApi.class);
-            Call<LoginResponse> call = loginRequestApi.login(loginRequest);
+            DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+            Call<LoginResponse> call = delfisApiService.login(loginRequest);
 
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
