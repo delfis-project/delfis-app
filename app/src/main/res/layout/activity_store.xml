@@ -154,7 +154,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textNome"
         android:layout_width="121dp"
         android:layout_height="27dp"
         android:layout_marginTop="8dp"

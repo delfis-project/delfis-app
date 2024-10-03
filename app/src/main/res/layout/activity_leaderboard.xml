@@ -20,18 +20,21 @@
         android:id="@+id/navbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="414dp"
-        android:layout_height="504dp"
+        android:id="@+id/recyclerViewUsers"
+        android:layout_width="394dp"
+        android:layout_height="546dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/user_ranking" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/item_user_leaderboard" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_width="425dp"
+        android:layout_height="187dp"
         android:background="@drawable/trofeu_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +55,8 @@
 
         <ImageView
             android:id="@+id/imageView12"
-            android:layout_width="158dp"
-            android:layout_height="142dp"
+            android:layout_width="123dp"
+            android:layout_height="92dp"
             android:layout_marginBottom="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

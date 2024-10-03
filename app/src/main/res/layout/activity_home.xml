@@ -132,7 +132,7 @@
         app:layout_constraintVertical_bias="0.534" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textLugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sequência"
@@ -146,7 +146,7 @@
         app:layout_constraintVertical_bias="0.291" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textPontos"
         android:layout_width="131dp"
         android:layout_height="117dp"
         android:text="fazer desafio diário"

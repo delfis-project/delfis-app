@@ -1,5 +1,6 @@
 package goldenage.delfis.app.api;
 
+import java.util.List;
 import java.util.Map;
 
 import goldenage.delfis.app.model.Session;
@@ -32,9 +33,12 @@ public interface DelfisApiService {
     @GET("api/streak/get-current-streak-by-app-user-id/{id}")
     Call<Streak> getCurrentStreakByUser(@Header("Authorization") String token, @Path("id") long fkAppUserId);
 
-    @POST("/api/session/insert/{id}")
+    @POST("api/session/insert/{id}")
     Call<Session> startSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
 
-    @POST("/api/session/finish/{id}")
+    @POST("api/session/finish/{id}")
     Call<Session> finishSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
+
+    @GET("api/app-user/leaderboard")
+    Call<List<User>> getLeaderboard(@Header("Authorization") String token);
 }
