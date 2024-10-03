@@ -88,12 +88,12 @@ public class RegisterActivity extends AppCompatActivity {
                 if (len >= 2) {
                     formatted.append(cleanInput.substring(0, 2));
                     if (len >= 4) {
-                        formatted.append("-").append(cleanInput.substring(2, 4));
+                        formatted.append("/").append(cleanInput.substring(2, 4));
                         if (len > 4) {
-                            formatted.append("-").append(cleanInput.substring(4));
+                            formatted.append("/").append(cleanInput.substring(4));
                         }
                     } else {
-                        formatted.append("-").append(cleanInput.substring(2));
+                        formatted.append("/").append(cleanInput.substring(2));
                     }
                 } else {
                     formatted.append(cleanInput);
@@ -112,6 +112,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         criarButton.setOnClickListener(v -> {
+            Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show();
+
             String name = nameEditText.getText().toString().trim();
             String username = usernameEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
@@ -176,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             try {
                                                 if (response.code() == 400) { // Código de erro de validação
                                                     String errorBody = response.errorBody().string();
+                                                    System.out.println(errorBody);
                                                     JSONObject errorJson = new JSONObject(errorBody);
 
                                                     // Verifica e exibe erros para cada campo

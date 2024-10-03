@@ -153,7 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:ems="10"
-        android:hint="DD-MM-AAAA"
+        android:hint="DD/MM/AAAA"
         android:inputType="date"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
