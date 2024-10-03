@@ -22,6 +22,7 @@ import goldenage.delfis.app.R;
 import goldenage.delfis.app.activity.game.CacaPalavrasActivity;
 import goldenage.delfis.app.activity.game.SudokuActivity;
 import goldenage.delfis.app.model.Streak;
+import goldenage.delfis.app.model.User;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -31,6 +32,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class HomeActivity extends AppCompatActivity {
+    User user;
     BottomNavigationView nav;
     ImageView btSudoku, btCacaPalavras;
     TextView textCoins, textStreak;
@@ -40,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        user = (User) getIntent().getSerializableExtra("user");
         nav = findViewById(R.id.navbar);
         btSudoku = findViewById(R.id.btSudoku);
         btCacaPalavras = findViewById(R.id.btCacaPalavras);
@@ -71,6 +74,9 @@ public class HomeActivity extends AppCompatActivity {
                 } else {
                     intent = new Intent(HomeActivity.this, ErrorActivity.class);
                 }
+
+                if (user != null)
+                    intent.putExtra("user", user);
 
                 startActivity(intent);
                 return true;
