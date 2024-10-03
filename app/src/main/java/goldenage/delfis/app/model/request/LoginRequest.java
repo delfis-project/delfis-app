@@ -1,4 +1,4 @@
-package goldenage.delfis.app.model;
+package goldenage.delfis.app.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,8 @@
-package goldenage.delfis.app.model;
+package goldenage.delfis.app.model.request;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

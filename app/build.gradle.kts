@@ -65,4 +65,6 @@ dependencies {
     implementation("androidx.camera:camera-extensions:1.2.2")
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation("androidx.lifecycle:lifecycle-process:2.5.0")
 }

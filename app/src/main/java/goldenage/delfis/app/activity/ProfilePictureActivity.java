@@ -106,9 +106,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
         }
 
         btCapturar = findViewById(R.id.btCapturar);
-        btCapturar.setOnClickListener(v -> {
-            takePhoto();
-        });
+        btCapturar.setOnClickListener(v -> takePhoto());
     }
 
     private void takePhoto() {

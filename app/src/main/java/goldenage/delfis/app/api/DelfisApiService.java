@@ -1,13 +1,13 @@
 package goldenage.delfis.app.api;
 
-import java.util.List;
 import java.util.Map;
 
-import goldenage.delfis.app.model.LoginRequest;
-import goldenage.delfis.app.model.LoginResponse;
+import goldenage.delfis.app.model.Session;
+import goldenage.delfis.app.model.request.LoginRequest;
+import goldenage.delfis.app.model.response.LoginResponse;
 import goldenage.delfis.app.model.Streak;
 import goldenage.delfis.app.model.User;
-import goldenage.delfis.app.model.UserRequest;
+import goldenage.delfis.app.model.request.UserRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -33,8 +33,8 @@ public interface DelfisApiService {
     Call<Streak> getCurrentStreakByUser(@Header("Authorization") String token, @Path("id") long fkAppUserId);
 
     @POST("/api/session/insert/{id}")
-    Call<Void> startSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
+    Call<Session> startSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
 
     @POST("/api/session/finish/{id}")
-    Call<Void> finishSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
+    Call<Session> finishSession(@Header("Authorization") String token, @Path("id") long fkAppUserId);
 }

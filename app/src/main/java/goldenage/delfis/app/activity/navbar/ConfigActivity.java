@@ -1,13 +1,17 @@
 package goldenage.delfis.app.activity.navbar;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,15 +25,23 @@ import java.time.format.DateTimeFormatter;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.activity.LoginActivity;
 import goldenage.delfis.app.activity.ProfilePictureActivity;
+import goldenage.delfis.app.api.DelfisApiService;
+import goldenage.delfis.app.model.Session;
 import goldenage.delfis.app.model.User;
+import goldenage.delfis.app.model.response.LoginResponse;
 import goldenage.delfis.app.util.ActivityUtil;
+import goldenage.delfis.app.util.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ConfigActivity extends AppCompatActivity {
     User user;
     BottomNavigationView nav;
     TextView levelUser, textNome, textEmail, textNascimento;
-    ImageView btMudarFoto;
+    ImageView btMudarFoto, btSair;
     CircleImageView imgPerfil;
 
     @Override
@@ -45,6 +57,7 @@ public class ConfigActivity extends AppCompatActivity {
         textNascimento = findViewById(R.id.textNascimento);
         imgPerfil = findViewById(R.id.imgPerfil);
         btMudarFoto = findViewById(R.id.btMudarFoto);
+        btSair = findViewById(R.id.btSair);
 
         user = (User) getIntent().getSerializableExtra("user");
         if (user != null) {
@@ -76,26 +89,43 @@ public class ConfigActivity extends AppCompatActivity {
             }
         }
 
-        btMudarFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-            }
+        btMudarFoto.setOnClickListener(v -> {
+            Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
 
         // Listener para navegação
-        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent = ActivityUtil.getNextIntent(ConfigActivity.this, item);
-                if (user != null)
-                    intent.putExtra("user", user);
+        nav.setOnItemSelectedListener(item -> {
+            Intent intent = ActivityUtil.getNextIntent(ConfigActivity.this, item);
+            if (user != null)
+                intent.putExtra("user", user);
 
-                startActivity(intent);
-                return true;
-            }
+            startActivity(intent);
+            return true;
+        });
+
+        btSair.setOnClickListener(v -> {
+            DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+            Call<Session> call = delfisApiService.finishSession(user.getToken(), user.getId());
+            Toast.makeText(ConfigActivity.this, "Saindo...", Toast.LENGTH_SHORT).show();
+            call.enqueue(new Callback<Session>() {
+                @Override
+                public void onResponse(Call<Session> call, Response<Session> response) {
+                    if(response.isSuccessful()) {
+                        finishAffinity();
+                    } else {
+                        Log.d(TAG, "Erro ao recuperar sessão: " + response.code());
+                        Toast.makeText(ConfigActivity.this, "Falha ao finalizar sessão. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Session> call, Throwable t) {
+                    Log.e(TAG, "Erro ao conectar para finalizar sessão.", t);
+                    Toast.makeText(ConfigActivity.this, "Erro de conexão ao carregar seus dados. Verifique sua internet e tente novamente.", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 }

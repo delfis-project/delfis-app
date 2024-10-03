@@ -36,5 +36,6 @@ public class User implements Serializable {
     private String updatedAt;
     private String token;
     private Streak currentStreak;
+    private Session currentSession;
 }
 

@@ -14,9 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import goldenage.delfis.app.api.DelfisApiService;
-import goldenage.delfis.app.model.LoginRequest;
-import goldenage.delfis.app.model.LoginResponse;
-import goldenage.delfis.app.model.UserRequest;
+import goldenage.delfis.app.model.request.LoginRequest;
+import goldenage.delfis.app.model.response.LoginResponse;
+import goldenage.delfis.app.model.request.UserRequest;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -112,8 +112,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         criarButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show();
-
             String name = nameEditText.getText().toString().trim();
             String username = usernameEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
@@ -146,6 +144,8 @@ public class RegisterActivity extends AppCompatActivity {
                 birthDateEditText.requestFocus();
                 return;
             }
+
+            Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show();
 
             LoginRequest loginRequest = new LoginRequest(UNLOGGED_USERNAME, UNLOGGED_PASSWORD);
             DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
