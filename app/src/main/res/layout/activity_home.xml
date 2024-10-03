@@ -147,18 +147,18 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="142dp"
-        android:layout_height="70dp"
+        android:layout_width="131dp"
+        android:layout_height="117dp"
         android:text="fazer desafio diário"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView16"
         app:layout_constraintEnd_toEndOf="@+id/imageView16"
-        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="@+id/imageView16"
         app:layout_constraintTop_toTopOf="@+id/imageView16"
-        app:layout_constraintVertical_bias="0.36" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <TextView
         android:id="@+id/textView23"

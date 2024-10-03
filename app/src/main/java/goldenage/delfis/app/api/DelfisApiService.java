@@ -29,7 +29,7 @@ public interface DelfisApiService {
     @PATCH("api/app-user/update/{id}")
     Call<User> updateUserPartially(@Header("Authorization") String token, @Path("id") long id, @Body Map<String, Object> updates);
 
-    @GET("api/streak/get-by-app-user/{id}")
+    @GET("api/streak/get-current-streak-by-app-user-id/{id}")
     Call<Streak> getCurrentStreakByUser(@Header("Authorization") String token, @Path("id") long fkAppUserId);
 
     @POST("/api/session/insert/{id}")

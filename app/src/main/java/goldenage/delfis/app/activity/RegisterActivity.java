@@ -24,11 +24,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import goldenage.delfis.app.R;
 
-public class RegisterActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
+
+public class RegisterActivity extends AppCompatActivity {
     private EditText nameEditText, usernameEditText, passwordEditText, emailEditText, birthDateEditText;
     private DelfisApiService apiService;
-
     private final String UNLOGGED_USERNAME = "SEM-LOGIN";
     private final String UNLOGGED_PASSWORD = "SEM-LOGIN";
 
@@ -42,8 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.editTextTextPassword2);
         emailEditText = findViewById(R.id.editTextTextEmailAddress3);
         birthDateEditText = findViewById(R.id.datas);
-        Button criarButton = findViewById(R.id.entrar);
 
+        Button criarButton = findViewById(R.id.entrar);
         Retrofit retrofit = RetrofitClient.getClient();
         apiService = retrofit.create(DelfisApiService.class);
 
@@ -54,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                previousText = s.toString();  // Armazena o texto anterior
+                previousText = s.toString(); // Armazena o texto anterior
             }
 
             @Override
@@ -62,7 +65,6 @@ public class RegisterActivity extends AppCompatActivity {
                 if (isUpdating) {
                     return;
                 }
-
                 String currentText = s.toString();
                 String cleanInput = currentText.replaceAll("[^\\d]", ""); // Remove qualquer caractere que não seja número
 
@@ -110,11 +112,38 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         criarButton.setOnClickListener(v -> {
-            String name = nameEditText.getText().toString();
-            String username = usernameEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
-            String email = emailEditText.getText().toString();
-            String birthDate = birthDateEditText.getText().toString();
+            String name = nameEditText.getText().toString().trim();
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
+            String email = emailEditText.getText().toString().trim();
+            String birthDate = birthDateEditText.getText().toString().trim();
+
+            // Verifica campos obrigatórios
+            if (name.isEmpty()) {
+                Toast.makeText(this, "Nome está em branco", Toast.LENGTH_SHORT).show();
+                nameEditText.requestFocus();
+                return;
+            }
+            if (username.isEmpty()) {
+                Toast.makeText(this, "Nome de usuário está em branco", Toast.LENGTH_SHORT).show();
+                usernameEditText.requestFocus();
+                return;
+            }
+            if (password.isEmpty()) {
+                Toast.makeText(this, "Senha está em branco", Toast.LENGTH_SHORT).show();
+                passwordEditText.requestFocus();
+                return;
+            }
+            if (email.isEmpty()) {
+                Toast.makeText(this, "E-mail está em branco", Toast.LENGTH_SHORT).show();
+                emailEditText.requestFocus();
+                return;
+            }
+            if (birthDate.isEmpty()) {
+                Toast.makeText(this, "Data de nascimento está em branco", Toast.LENGTH_SHORT).show();
+                birthDateEditText.requestFocus();
+                return;
+            }
 
             LoginRequest loginRequest = new LoginRequest(UNLOGGED_USERNAME, UNLOGGED_PASSWORD);
             DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
@@ -130,18 +159,57 @@ public class RegisterActivity extends AppCompatActivity {
                             if (token != null && !token.isEmpty()) {
                                 UserRequest userRequest = new UserRequest(name, username, password, email, birthDate);
                                 Call<Void> call2 = apiService.createUser(token, userRequest);
+
                                 call2.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call2, Response<Void> response) {
-                                        System.out.println(response.raw().body());
-                                        System.out.println(response.code());
+                                        Log.d(TAG, String.valueOf(response.raw().body()));
+                                        Log.d(TAG, String.valueOf(response.code()));
+
                                         if (response.isSuccessful()) {
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                             finish();
                                             Toast.makeText(RegisterActivity.this, "Usuário criado com sucesso!", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(RegisterActivity.this, "Erro ao criar usuário.", Toast.LENGTH_SHORT).show();
+                                            try {
+                                                if (response.code() == 400) { // Código de erro de validação
+                                                    String errorBody = response.errorBody().string();
+                                                    JSONObject errorJson = new JSONObject(errorBody);
+
+                                                    // Verifica e exibe erros para cada campo
+                                                    if (errorJson.has("nome")) {
+                                                        String nameError = errorJson.getString("nome");
+                                                        nameEditText.setError(nameError);
+                                                    }
+                                                    if (errorJson.has("email")) {
+                                                        String emailError = errorJson.getString("email");
+                                                        emailEditText.setError(emailError);
+                                                    }
+                                                    if (errorJson.has("apelido")) {
+                                                        String usernameError = errorJson.getString("apelido");
+                                                        usernameEditText.setError(usernameError);
+                                                    }
+                                                    if (errorJson.has("senha")) {
+                                                        String passwordError = errorJson.getString("senha");
+                                                        passwordEditText.setError(passwordError);
+                                                    }
+                                                    if (errorJson.has("data_nascimento")) {
+                                                        String birthDateError = errorJson.getString("data_nascimento");
+                                                        birthDateEditText.setError(birthDateError);
+                                                    }
+                                                } else if (response.code() == 409) { // Código de erro para duplicidade
+                                                    Toast.makeText(RegisterActivity.this,
+                                                            "Erro: " + (username.isEmpty() ? "Nome de usuário" : "E-mail") + " já existe!",
+                                                            Toast.LENGTH_LONG).show();
+                                                } else {
+                                                    // Outros erros
+                                                    Toast.makeText(RegisterActivity.this, "Erro ao criar usuário. Tente novamente.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (IOException | JSONException e) {
+                                                e.printStackTrace();
+                                                Toast.makeText(RegisterActivity.this, "Erro ao processar a resposta. Verifique os dados.", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     }
 

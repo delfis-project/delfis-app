@@ -8,11 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.model.User;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class StoreActivity extends AppCompatActivity {
+    User user;
     BottomNavigationView nav;
 
     @Override
@@ -23,6 +25,8 @@ public class StoreActivity extends AppCompatActivity {
         // Configuração do BottomNavigationView
         nav = findViewById(R.id.navbar);
         nav.setSelectedItemId(R.id.lojafooter); // Seleciona o item "Loja"
+
+        user = (User) getIntent().getSerializableExtra("user");
 
         // Listener para navegação entre itens do BottomNavigationView
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -39,6 +43,9 @@ public class StoreActivity extends AppCompatActivity {
                     // Abrir a classe Error para os outros itens
                     intent = new Intent(StoreActivity.this, ErrorActivity.class);
                 }
+
+                if (user != null)
+                    intent.putExtra("user", user);
 
                 startActivity(intent); // Inicia a nova atividade
                 return true;

@@ -26,6 +26,7 @@ import goldenage.delfis.app.model.User;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.FirebaseApp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,9 +53,12 @@ public class HomeActivity extends AppCompatActivity {
         textCoins.setText(String.valueOf(user.getCoins()));
 
         Streak streakAtual = user.getCurrentStreak();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
-        int dias = LocalDate.now().compareTo(inicio);
+        int dias = 0;
+        if(streakAtual != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
+            dias = LocalDate.now().compareTo(inicio) + 1;
+        }
         textStreak.setText(String.valueOf(dias));
 
         notificarDesafioDiario();

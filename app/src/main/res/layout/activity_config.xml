@@ -70,17 +70,19 @@
         app:layout_constraintStart_toStartOf="@+id/imageView22"
         app:layout_constraintTop_toTopOf="@+id/imageView22" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgPerfil"
-        android:layout_width="174dp"
-        android:layout_height="156dp"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:src="@drawable/perfilsemfoto"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView20"
         app:layout_constraintEnd_toEndOf="@+id/imageView20"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/imageView20"
         app:layout_constraintTop_toTopOf="@+id/imageView20"
-        app:layout_constraintVertical_bias="0.34"
-        tools:srcCompat="@drawable/perfilsemfoto" />
+        app:layout_constraintVertical_bias="0.353" />
 
     <TextView
         android:id="@+id/textNome"
@@ -98,11 +100,10 @@
         android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:text="Carregando..."
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/imageView20"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/imageView20"
         app:layout_constraintTop_toBottomOf="@+id/textNome" />
 
@@ -110,11 +111,10 @@
         android:id="@+id/textNascimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:text="Carregando..."
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/imageView20"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/imageView20"
         app:layout_constraintTop_toBottomOf="@+id/textEmail" />
 
@@ -178,7 +178,7 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SAIR"
+        android:text="Sair"
         android:textColor="#FDF6FE"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton3"

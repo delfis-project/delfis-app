@@ -1,16 +1,17 @@
 package goldenage.delfis.app.activity;
 
-import android.content.ContentValues;
+import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.OrientationEventListener;
-import android.view.Surface;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
@@ -28,8 +30,9 @@ import androidx.core.content.ContextCompat;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +49,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfilePictureActivity extends AppCompatActivity {
-    private static final String IMAGE_MIME_TYPE = "image/jpeg";
-    private static final String IMAGE_PATH = "Pictures/delfis";
+    private final ActivityResultLauncher<String[]> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestMultiplePermissions(),
+            permissions -> {
+                boolean permissionGranted = true;
+                for (Map.Entry<String, Boolean> entry : permissions.entrySet()) {
+                    if (Arrays.asList(REQUIRED_PERMISSIONS).contains(entry.getKey()) && !entry.getValue()) {
+                        permissionGranted = false;
+                        break;
+                    }
+                }
+                if (permissionGranted) {
+                    startCamera();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permissões negadas. Não é possível usar a câmera sem concedê-las.", Toast.LENGTH_SHORT).show();
+                }
+            }
+    );
     private static final String[] REQUIRED_PERMISSIONS = new String[]{
             android.Manifest.permission.CAMERA,
             android.Manifest.permission.RECORD_AUDIO,
@@ -58,8 +76,8 @@ public class ProfilePictureActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private final CameraSelector cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
     private User user;
-
-    ImageView btCapturar;
+    ImageView btCapturar, imgCarregando;
+    TextView textCarregando, textCapturar;
 
     @Override
     protected void onDestroy() {
@@ -75,99 +93,78 @@ public class ProfilePictureActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         cameraExecutor = Executors.newSingleThreadExecutor();
         viewFinder = findViewById(R.id.viewFinder);
+        imgCarregando = findViewById(R.id.imgCarregando);
+        textCarregando = findViewById(R.id.textCarregando);
+        textCapturar = findViewById(R.id.textCapturar);
 
+        // Verifica se todas as permissões foram concedidas
         if (allPermissionsGranted()) {
-            startCamera();
+            startCamera(); // Se sim, inicia a câmera
         } else {
-            requestPermissions();
+            requestPermissions(); // Se não, solicita as permissões
         }
 
         btCapturar = findViewById(R.id.btCapturar);
-        btCapturar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takePhoto();
-            }
+        btCapturar.setOnClickListener(v -> {
+            takePhoto();
         });
     }
 
     private void takePhoto() {
-        if (imageCapture == null) {
-            return;
+        if (imageCapture != null) {
+            imageCapture.takePicture(ContextCompat.getMainExecutor(this), new ImageCapture.OnImageCapturedCallback() {
+                @Override
+                public void onCaptureSuccess(@NonNull ImageProxy image) {
+                    viewFinder.setVisibility(View.INVISIBLE);
+                    btCapturar.setVisibility(View.INVISIBLE);
+                    textCapturar.setVisibility(View.INVISIBLE);
+                    imgCarregando.setVisibility(View.VISIBLE);
+                    textCarregando.setVisibility(View.VISIBLE);
+                    super.onCaptureSuccess(image);
+                    Bitmap bitmap = imageProxyToBitmap(image);
+                    bitmap = rotateImage(bitmap, 270);
+                    uploadImageToFirebase(bitmap);
+                    image.close();
+                }
+
+                @Override
+                public void onError(@NonNull ImageCaptureException exception) {
+                    super.onError(exception);
+                    Log.e("CameraX", "Photo capture failed", exception);
+                }
+            });
         }
-
-        // Definir um nome e caminho para a imagem
-        String name = "IMG_" + System.currentTimeMillis();
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, name);
-        values.put(MediaStore.Images.Media.MIME_TYPE, IMAGE_MIME_TYPE);
-        values.put(MediaStore.Images.Media.RELATIVE_PATH, IMAGE_PATH);
-
-        // Configurar as opções de saída da imagem
-        ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(
-                getContentResolver(),
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                values
-        ).build();
-
-        // Listener para rotação da imagem
-        OrientationEventListener orientationEventListener = new OrientationEventListener(this) {
-            @Override
-            public void onOrientationChanged(int orientation) {
-                int rotation;
-                if (orientation >= 45 && orientation < 135) {
-                    rotation = Surface.ROTATION_270;
-                } else if (orientation >= 135 && orientation < 225) {
-                    rotation = Surface.ROTATION_180;
-                } else if (orientation >= 225 && orientation < 315) {
-                    rotation = Surface.ROTATION_90;
-                } else {
-                    rotation = Surface.ROTATION_0;
-                }
-                imageCapture.setTargetRotation(rotation);
-            }
-        };
-        orientationEventListener.enable();
-
-        // Salvar a imagem e fazer upload
-        imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(this), new ImageCapture.OnImageSavedCallback() {
-            @Override
-            public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                Uri savedUri = outputFileResults.getSavedUri();
-                if (savedUri != null) {
-                    uploadToFirebase(savedUri);
-                } else {
-                    Toast.makeText(ProfilePictureActivity.this, "Erro ao salvar imagem", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onError(@NonNull ImageCaptureException exception) {
-                Log.e("Log", "Erro ao capturar imagem: " + exception.getMessage());
-            }
-        });
     }
 
-    private void uploadToFirebase(Uri fileUri) {
+    private Bitmap imageProxyToBitmap(ImageProxy imageProxy) {
+        ImageProxy.PlaneProxy[] planes = imageProxy.getPlanes();
+        ByteBuffer buffer = planes[0].getBuffer();
+        byte[] bytes = new byte[buffer.remaining()];
+        buffer.get(bytes);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    private void uploadImageToFirebase(Bitmap imageBitmap) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
-        StorageReference photoRef = storageRef.child("profile_pictures/" + user.getId() + ".jpg");
+        @SuppressLint("DefaultLocale") StorageReference imageRef = storageRef
+                .child(String.format("profile_pictures/%d.jpg", this.user.getId()));
 
-        UploadTask uploadTask = photoRef.putFile(fileUri);
-        uploadTask.addOnSuccessListener(taskSnapshot -> {
-            photoRef.getDownloadUrl().addOnSuccessListener(uri -> {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        imageRef.putBytes(data).addOnSuccessListener(taskSnapshot -> {
+            imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 String downloadUrl = uri.toString();
-
-                Toast.makeText(ProfilePictureActivity.this, "Upload bem-sucedido!", Toast.LENGTH_SHORT).show();
                 Log.d("Firebase", "Download URL: " + downloadUrl);
-
                 savePhotoUrlToDatabase(downloadUrl);
             }).addOnFailureListener(e -> {
-                Toast.makeText(ProfilePictureActivity.this, "Erro ao recuperar URL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Firebase", "Erro ao recuperar URL: " + e.getMessage());
             });
         }).addOnFailureListener(e -> {
-            Toast.makeText(ProfilePictureActivity.this, "Falha no upload: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("Firebase", "Falha no upload: " + e.getMessage());
         });
     }
 
@@ -232,19 +229,4 @@ public class ProfilePictureActivity extends AppCompatActivity {
     private void requestPermissions() {
         activityResultLauncher.launch(REQUIRED_PERMISSIONS);
     }
-
-    private ActivityResultLauncher<String[]> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), permissions -> {
-        boolean permissionGranted = true;
-        for (Map.Entry<String, Boolean> entry : permissions.entrySet()) {
-            if (Arrays.asList(REQUIRED_PERMISSIONS).contains(entry.getKey()) && !entry.getValue()) {
-                permissionGranted = false;
-                break;
-            }
-        }
-        if (!permissionGranted) {
-            Toast.makeText(getApplicationContext(), "Permissão NEGADA.", Toast.LENGTH_SHORT).show();
-        } else {
-            startCamera();
-        }
-    });
 }

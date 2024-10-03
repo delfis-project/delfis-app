@@ -11,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import goldenage.delfis.app.R;
-
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.LoginRequest;
 import goldenage.delfis.app.model.LoginResponse;
+import goldenage.delfis.app.model.Streak;
 import goldenage.delfis.app.model.User;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
@@ -36,12 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         TextView criarContaTextView = findViewById(R.id.criarConta);
 
         entrarButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+
             String email = usernameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
-            System.out.println(email + password);
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(LoginActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -58,8 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (loginResponse != null) {
                             String token = loginResponse.getToken();
                             if (token != null && !token.isEmpty()) {
-                                // Token recebido, redireciona para a atividade Home
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 Call<User> userCall = delfisApiService.getUserByUsername(token, loginRequest.getUsername());
 
                                 userCall.enqueue(new Callback<User>() {  // pegando infos do usuário
@@ -69,41 +68,63 @@ public class LoginActivity extends AppCompatActivity {
                                             User user = response.body();
                                             if (user != null) {
                                                 user.setToken(token);
-                                                intent.putExtra("user", user);
-                                                startActivity(intent);
+
+                                                Call<Streak> streakCall = delfisApiService.getCurrentStreakByUser(token, user.getId());
+                                                streakCall.enqueue(new Callback<Streak>() {
+                                                    @Override
+                                                    public void onResponse(Call<Streak> call, Response<Streak> response) {
+                                                        if (response.isSuccessful()) {
+                                                            Streak streak = response.body();
+                                                            user.setCurrentStreak(streak);
+
+                                                            intent.putExtra("user", user);
+                                                            startActivity(intent);
+                                                        } else {
+                                                            Log.d(TAG, "Erro ao recuperar streak: código " + response.code());
+                                                            Toast.makeText(LoginActivity.this, "Não foi possível recuperar as informações do streak. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<Streak> call, Throwable t) {
+                                                        Log.e(TAG, "Erro na conexão ao buscar streak.", t);
+                                                        Toast.makeText(LoginActivity.this, "Erro ao conectar com o servidor. Verifique sua conexão e tente novamente.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
                                             } else {
-                                                Toast.makeText(LoginActivity.this, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code(), Toast.LENGTH_SHORT).show();
+                                                Log.d(TAG, "Erro ao recuperar dados do usuário: resposta vazia.");
+                                                Toast.makeText(LoginActivity.this, "Erro ao carregar dados do usuário. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
-                                            Toast.makeText(LoginActivity.this, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code(), Toast.LENGTH_SHORT).show();
-                                            Log.d(TAG, "Erro na resposta da API: " + response.code());
+                                            Log.d(TAG, "Erro ao recuperar usuário: código " + response.code());
+                                            Toast.makeText(LoginActivity.this, "Erro ao buscar informações do usuário. Tente novamente.", Toast.LENGTH_SHORT).show();
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<User> call, Throwable t) {
-                                        Log.e(TAG, "Erro durante a recuperação dos dados do usuário. Reinicie o app e tente novamente: ", t);
-                                        Toast.makeText(LoginActivity.this, "Erro durante recuperação de dados do usuário. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
+                                        Log.e(TAG, "Erro ao conectar para recuperar dados do usuário.", t);
+                                        Toast.makeText(LoginActivity.this, "Falha na conexão ao recuperar dados do usuário. Verifique sua conexão e tente novamente.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             } else {
-                                Toast.makeText(LoginActivity.this, "Login falhou: token não recebido. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "Token não recebido. Reinicie o app e tente novamente: " + token);
+                                Log.d(TAG, "Token não recebido ou inválido.");
+                                Toast.makeText(LoginActivity.this, "Erro ao autenticar. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(LoginActivity.this, "Resposta vazia da API. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "Resposta vazia da API. Reinicie o app e tente novamente: ");
+                            Log.d(TAG, "Resposta da API vazia.");
+                            Toast.makeText(LoginActivity.this, "Falha ao realizar login. Resposta do servidor vazia.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(LoginActivity.this, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code(), Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code());
+                        Log.d(TAG, "Erro no login: código " + response.code());
+                        Toast.makeText(LoginActivity.this, "Erro ao realizar login. Verifique suas credenciais e tente novamente.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, "Falha na conexão com a API. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "Falha na conexão com a API. Reinicie o app e tente novamente: ", t);
+                    Log.e(TAG, "Erro na conexão durante o login.", t);
+                    Toast.makeText(LoginActivity.this, "Falha ao conectar com o servidor. Verifique sua conexão e tente novamente.", Toast.LENGTH_SHORT).show();
                 }
             });
         });

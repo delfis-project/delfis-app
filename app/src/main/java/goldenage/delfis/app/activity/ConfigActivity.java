@@ -1,9 +1,12 @@
 package goldenage.delfis.app.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +17,10 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.model.User;
 
@@ -21,7 +28,8 @@ public class ConfigActivity extends AppCompatActivity {
     User user;
     BottomNavigationView nav;
     TextView levelUser, textNome, textEmail, textNascimento;
-    ImageView imgPerfil;
+    ImageView btMudarFoto;
+    CircleImageView imgPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +43,39 @@ public class ConfigActivity extends AppCompatActivity {
         textEmail = findViewById(R.id.textEmail);
         textNascimento = findViewById(R.id.textNascimento);
         imgPerfil = findViewById(R.id.imgPerfil);
+        btMudarFoto = findViewById(R.id.btMudarFoto);
 
         user = (User) getIntent().getSerializableExtra("user");
         if (user != null) {
             levelUser.setText(String.valueOf(user.getLevel()));
             textNome.setText(user.getName());
             textEmail.setText(user.getEmail());
-            textNascimento.setText(user.getBirthDate());
-            if (user.getPictureUrl() != null)
+
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String data = LocalDate.parse(user.getBirthDate(), inputFormatter).format(outputFormatter);
+            textNascimento.setText(data);
+
+            if (user.getPictureUrl() != null) {
+                int widthValue = (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        160,
+                        getResources().getDisplayMetrics());
+                int heightValue = (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        180,
+                        getResources().getDisplayMetrics());
+
+                ViewGroup.LayoutParams layoutParams = imgPerfil.getLayoutParams();
+                layoutParams.width = widthValue;
+                layoutParams.height = heightValue;
+                imgPerfil.setLayoutParams(layoutParams);
+
                 Glide.with(this).load(user.getPictureUrl()).into(imgPerfil);
+            }
         }
 
-        imgPerfil.setOnClickListener(new View.OnClickListener() {
+        btMudarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
