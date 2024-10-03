@@ -120,27 +120,27 @@ public class RegisterActivity extends AppCompatActivity {
 
             // Verifica campos obrigatórios
             if (name.isEmpty()) {
-                Toast.makeText(this, "Nome está em branco", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, insira seu nome.", Toast.LENGTH_SHORT).show();
                 nameEditText.requestFocus();
                 return;
             }
             if (username.isEmpty()) {
-                Toast.makeText(this, "Nome de usuário está em branco", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, escolha um nome de usuário.", Toast.LENGTH_SHORT).show();
                 usernameEditText.requestFocus();
                 return;
             }
             if (password.isEmpty()) {
-                Toast.makeText(this, "Senha está em branco", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, crie uma senha.", Toast.LENGTH_SHORT).show();
                 passwordEditText.requestFocus();
                 return;
             }
             if (email.isEmpty()) {
-                Toast.makeText(this, "E-mail está em branco", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, insira seu e-mail.", Toast.LENGTH_SHORT).show();
                 emailEditText.requestFocus();
                 return;
             }
             if (birthDate.isEmpty()) {
-                Toast.makeText(this, "Data de nascimento está em branco", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, insira sua data de nascimento.", Toast.LENGTH_SHORT).show();
                 birthDateEditText.requestFocus();
                 return;
             }
@@ -167,10 +167,11 @@ public class RegisterActivity extends AppCompatActivity {
                                         Log.d(TAG, String.valueOf(response.code()));
 
                                         if (response.isSuccessful()) {
+                                            // Sucesso
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                             finish();
-                                            Toast.makeText(RegisterActivity.this, "Usuário criado com sucesso!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterActivity.this, "Cadastro realizado com sucesso! Você pode fazer login agora.", Toast.LENGTH_SHORT).show();
                                         } else {
                                             try {
                                                 if (response.code() == 400) { // Código de erro de validação
@@ -200,15 +201,15 @@ public class RegisterActivity extends AppCompatActivity {
                                                     }
                                                 } else if (response.code() == 409) { // Código de erro para duplicidade
                                                     Toast.makeText(RegisterActivity.this,
-                                                            "Erro: " + (username.isEmpty() ? "Nome de usuário" : "E-mail") + " já existe!",
+                                                            "Desculpe, já existe uma conta com esse nome de usuário ou e-mail. Tente outro.",
                                                             Toast.LENGTH_LONG).show();
                                                 } else {
                                                     // Outros erros
-                                                    Toast.makeText(RegisterActivity.this, "Erro ao criar usuário. Tente novamente.", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(RegisterActivity.this, "Ocorreu um erro ao criar sua conta. Tente novamente.", Toast.LENGTH_SHORT).show();
                                                 }
                                             } catch (IOException | JSONException e) {
                                                 e.printStackTrace();
-                                                Toast.makeText(RegisterActivity.this, "Erro ao processar a resposta. Verifique os dados.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterActivity.this, "Ocorreu um erro inesperado. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }

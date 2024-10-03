@@ -41,6 +41,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.activity.navbar.ConfigActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.User;
 import goldenage.delfis.app.util.RetrofitClient;

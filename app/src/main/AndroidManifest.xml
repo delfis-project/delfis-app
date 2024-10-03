@@ -26,6 +26,12 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CompraMoedasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.navbar.LeaderboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.WaitingActivity"
             android:exported="false" />
         <activity
@@ -45,14 +51,14 @@
             android:name=".activity.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".activity.navbar.HomeActivity"
             android:exported="true" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.ErrorActivity" />
         <activity
-            android:name=".activity.StoreActivity"
+            android:name=".activity.navbar.StoreActivity"
             android:exported="true" />
-        <activity android:name=".activity.ConfigActivity" />
+        <activity android:name=".activity.navbar.ConfigActivity" />
     </application>
 
 </manifest>

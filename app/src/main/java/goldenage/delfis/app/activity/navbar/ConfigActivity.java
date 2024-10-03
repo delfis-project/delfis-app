@@ -1,7 +1,6 @@
-package goldenage.delfis.app.activity;
+package goldenage.delfis.app.activity.navbar;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -22,7 +21,9 @@ import java.time.format.DateTimeFormatter;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.activity.ProfilePictureActivity;
 import goldenage.delfis.app.model.User;
+import goldenage.delfis.app.util.ActivityUtil;
 
 public class ConfigActivity extends AppCompatActivity {
     User user;
@@ -88,18 +89,7 @@ public class ConfigActivity extends AppCompatActivity {
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent;
-
-                if (item.getItemId() == R.id.lojafooter) {
-                    intent = new Intent(ConfigActivity.this, StoreActivity.class);
-                } else if (item.getItemId() == R.id.homefooter) {
-                    intent = new Intent(ConfigActivity.this, HomeActivity.class);
-                } else if (item.getItemId() == R.id.configfooter) {
-                    intent = new Intent(ConfigActivity.this, ConfigActivity.class);
-                } else {
-                    intent = new Intent(ConfigActivity.this, ErrorActivity.class);
-                }
-
+                Intent intent = ActivityUtil.getNextIntent(ConfigActivity.this, item);
                 if (user != null)
                     intent.putExtra("user", user);
 

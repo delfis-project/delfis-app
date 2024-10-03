@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity;
+package goldenage.delfis.app.activity.navbar;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -23,13 +23,12 @@ import goldenage.delfis.app.activity.game.CacaPalavrasActivity;
 import goldenage.delfis.app.activity.game.SudokuActivity;
 import goldenage.delfis.app.model.Streak;
 import goldenage.delfis.app.model.User;
+import goldenage.delfis.app.util.ActivityUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.FirebaseApp;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class HomeActivity extends AppCompatActivity {
@@ -54,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Streak streakAtual = user.getCurrentStreak();
         int dias = 0;
-        if(streakAtual != null) {
+        if (streakAtual != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
             dias = LocalDate.now().compareTo(inicio) + 1;
@@ -63,44 +62,23 @@ public class HomeActivity extends AppCompatActivity {
 
         notificarDesafioDiario();
 
-        // Listener para navegação
-        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent;
+        nav.setOnItemSelectedListener(item -> {
+            Intent intent = ActivityUtil.getNextIntent(HomeActivity.this, item);
+            if (user != null)
+                intent.putExtra("user", user);
 
-                if (item.getItemId() == R.id.lojafooter) {
-                    intent = new Intent(HomeActivity.this, StoreActivity.class);
-                } else if (item.getItemId() == R.id.homefooter) {
-                    intent = new Intent(HomeActivity.this, HomeActivity.class);
-                } else if (item.getItemId() == R.id.configfooter) {
-                    intent = new Intent(HomeActivity.this, ConfigActivity.class);
-                } else {
-                    intent = new Intent(HomeActivity.this, ErrorActivity.class);
-                }
-
-                if (user != null)
-                    intent.putExtra("user", user);
-
-                startActivity(intent);
-                return true;
-            }
+            startActivity(intent);
+            return true;
         });
 
-        btSudoku.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, SudokuActivity.class);
-                startActivity(intent);
-            }
+        btSudoku.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, SudokuActivity.class);
+            startActivity(intent);
         });
 
-        btCacaPalavras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, CacaPalavrasActivity.class);
-                startActivity(intent);
-            }
+        btCacaPalavras.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, CacaPalavrasActivity.class);
+            startActivity(intent);
         });
     }
 
