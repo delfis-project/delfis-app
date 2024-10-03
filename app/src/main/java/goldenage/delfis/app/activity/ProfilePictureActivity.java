@@ -56,7 +56,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
     private ExecutorService cameraExecutor;
     private PreviewView viewFinder;
     private ImageCapture imageCapture;
-    private CameraSelector cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
+    private final CameraSelector cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
     private User user;
 
     ImageView btCapturar;

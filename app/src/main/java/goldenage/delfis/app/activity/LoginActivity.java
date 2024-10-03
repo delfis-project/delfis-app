@@ -15,6 +15,7 @@ import goldenage.delfis.app.R;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.LoginRequest;
 import goldenage.delfis.app.model.LoginResponse;
+import goldenage.delfis.app.model.User;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
             Call<LoginResponse> call = delfisApiService.login(loginRequest);
 
-            call.enqueue(new Callback<LoginResponse>() {
+            call.enqueue(new Callback<LoginResponse>() {  // logando
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful()) {
@@ -59,25 +60,50 @@ public class LoginActivity extends AppCompatActivity {
                             if (token != null && !token.isEmpty()) {
                                 // Token recebido, redireciona para a atividade Home
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                startActivity(intent);
+                                Call<User> userCall = delfisApiService.getUserByUsername(token, loginRequest.getUsername());
+
+                                userCall.enqueue(new Callback<User>() {  // pegando infos do usuário
+                                    @Override
+                                    public void onResponse(Call<User> call, Response<User> response) {
+                                        if (response.isSuccessful()) {
+                                            User user = response.body();
+                                            if (user != null) {
+                                                user.setToken(token);
+                                                intent.putExtra("user", user);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code(), Toast.LENGTH_SHORT).show();
+                                            Log.d(TAG, "Erro na resposta da API: " + response.code());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<User> call, Throwable t) {
+                                        Log.e(TAG, "Erro durante a recuperação dos dados do usuário. Reinicie o app e tente novamente: ", t);
+                                        Toast.makeText(LoginActivity.this, "Erro durante recuperação de dados do usuário. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             } else {
-                                Toast.makeText(LoginActivity.this, "Login falhou: token não recebido", Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "Token não recebido: " + token);
+                                Toast.makeText(LoginActivity.this, "Login falhou: token não recebido. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, "Token não recebido. Reinicie o app e tente novamente: " + token);
                             }
                         } else {
-                            Toast.makeText(LoginActivity.this, "Resposta vazia da API", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "Resposta vazia da API");
+                            Toast.makeText(LoginActivity.this, "Resposta vazia da API. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Resposta vazia da API. Reinicie o app e tente novamente: ");
                         }
                     } else {
-                        Toast.makeText(LoginActivity.this, "Erro na resposta da API: " + response.code(), Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Erro na resposta da API: " + response.code());
+                        Toast.makeText(LoginActivity.this, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code(), Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Erro na resposta da API. Reinicie o app e tente novamente: " + response.code());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, "Falha na conexão com a API", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "Falha na conexão com a API", t);
+                    Toast.makeText(LoginActivity.this, "Falha na conexão com a API. Reinicie o app e tente novamente: ", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Falha na conexão com a API. Reinicie o app e tente novamente: ", t);
                 }
             });
         });
