@@ -3,11 +3,12 @@ package goldenage.delfis.app.api;
 import java.util.List;
 import java.util.Map;
 
-import goldenage.delfis.app.model.Session;
+import goldenage.delfis.app.model.response.Plan;
+import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.request.LoginRequest;
 import goldenage.delfis.app.model.response.LoginResponse;
-import goldenage.delfis.app.model.Streak;
-import goldenage.delfis.app.model.User;
+import goldenage.delfis.app.model.response.Streak;
+import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.model.request.UserRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -41,4 +42,7 @@ public interface DelfisApiService {
 
     @GET("api/app-user/leaderboard")
     Call<List<User>> getLeaderboard(@Header("Authorization") String token);
+
+    @GET("api/app-user/leaderboard")
+    Call<Plan> getPlanByName(@Header("Authorization") String token, String name);
 }

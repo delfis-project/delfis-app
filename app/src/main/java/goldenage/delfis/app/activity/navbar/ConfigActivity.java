@@ -6,31 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.LoginActivity;
 import goldenage.delfis.app.activity.ProfilePictureActivity;
 import goldenage.delfis.app.api.DelfisApiService;
-import goldenage.delfis.app.model.Session;
-import goldenage.delfis.app.model.User;
-import goldenage.delfis.app.model.response.LoginResponse;
+import goldenage.delfis.app.model.response.Session;
+import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
@@ -49,8 +43,8 @@ public class ConfigActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
-
         nav = findViewById(R.id.navbar);
+        nav.setSelectedItemId(R.id.configfooter);
         levelUser = findViewById(R.id.leveluser);
         textNome = findViewById(R.id.textNome);
         textEmail = findViewById(R.id.textEmail);

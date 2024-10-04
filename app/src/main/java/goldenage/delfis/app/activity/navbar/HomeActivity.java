@@ -7,26 +7,22 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.game.CacaPalavrasActivity;
+import goldenage.delfis.app.activity.game.WordSearchActivity;
 import goldenage.delfis.app.activity.game.SudokuActivity;
-import goldenage.delfis.app.model.Streak;
-import goldenage.delfis.app.model.User;
+import goldenage.delfis.app.model.response.Streak;
+import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -42,8 +38,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        user = (User) getIntent().getSerializableExtra("user");
         nav = findViewById(R.id.navbar);
+        nav.setSelectedItemId(R.id.homefooter);
+        user = (User) getIntent().getSerializableExtra("user");
         btSudoku = findViewById(R.id.btSudoku);
         btCacaPalavras = findViewById(R.id.btCacaPalavras);
         textCoins = findViewById(R.id.textCoins);
@@ -77,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         btCacaPalavras.setOnClickListener(view -> {
-            Intent intent = new Intent(HomeActivity.this, CacaPalavrasActivity.class);
+            Intent intent = new Intent(HomeActivity.this, WordSearchActivity.class);
             startActivity(intent);
         });
     }

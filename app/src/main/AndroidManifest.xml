@@ -26,7 +26,16 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
         <activity
-            android:name=".activity.CompraMoedasActivity"
+            android:name=".activity.sell.PowerupsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.sell.ThemesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.sell.PremiumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.sell.CoinsActivity"
             android:exported="false" />
         <activity
             android:name=".activity.navbar.LeaderboardActivity"

@@ -1,4 +1,4 @@
-package goldenage.delfis.app.model;
+package goldenage.delfis.app.model.response;
 
 import com.google.gson.annotations.SerializedName;
 

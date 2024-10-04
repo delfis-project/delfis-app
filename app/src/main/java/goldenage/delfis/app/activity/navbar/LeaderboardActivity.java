@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,10 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.LoginActivity;
 import goldenage.delfis.app.adapter.AdapterUserLeaderboard;
 import goldenage.delfis.app.api.DelfisApiService;
-import goldenage.delfis.app.model.User;
+import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
@@ -41,6 +39,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard);
 
         nav = findViewById(R.id.navbar);
+        nav.setSelectedItemId(R.id.leaderfooter);
         user = (User) getIntent().getSerializableExtra("user");
         recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
 

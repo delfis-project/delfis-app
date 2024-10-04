@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.model.User;
+import goldenage.delfis.app.model.response.User;
 
 public class AdapterUserLeaderboard extends RecyclerView.Adapter<AdapterUserLeaderboard.ViewHolderLeaderboard> {
     private final List<User> listaUser;

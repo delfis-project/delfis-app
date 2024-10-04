@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity;
+package goldenage.delfis.app.activity.sell;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import goldenage.delfis.app.R;
 
-public class CompraMoedasActivity extends AppCompatActivity {
+public class CoinsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageView23"
-        android:layout_width="412dp"
-        android:layout_height="690dp"
+        android:layout_width="413dp"
+        android:layout_height="680dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,14 +28,14 @@
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="206dp"
-        android:layout_height="47dp"
+        android:layout_width="215dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="600dp"
         android:backgroundTint="#002543"
-        android:text="comprar 20R$/mês"
+        android:text="Assinar: 20R$/mês"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="613dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView15"
@@ -49,5 +49,5 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.285" />
 </androidx.constraintlayout.widget.ConstraintLayout>
