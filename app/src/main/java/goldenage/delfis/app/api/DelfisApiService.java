@@ -8,6 +8,7 @@ import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.request.LoginRequest;
 import goldenage.delfis.app.model.response.LoginResponse;
 import goldenage.delfis.app.model.response.Streak;
+import goldenage.delfis.app.model.response.SudokuBoard;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.model.request.UserRequest;
 import retrofit2.Call;
@@ -45,4 +46,7 @@ public interface DelfisApiService {
 
     @GET("api/app-user/leaderboard")
     Call<Plan> getPlanByName(@Header("Authorization") String token, String name);
+
+    @POST("api/sudoku/generate")
+    Call<SudokuBoard> generateSudokuBoard(@Header("Authorization") String token);
 }

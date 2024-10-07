@@ -70,21 +70,27 @@ public class HomeActivity extends AppCompatActivity {
 
         btSudoku.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, SudokuActivity.class);
+
+            if (user != null)
+                intent.putExtra("user", user);
+
             startActivity(intent);
         });
 
         btCacaPalavras.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, WordSearchActivity.class);
+
+            if (user != null)
+                intent.putExtra("user", user);
+
             startActivity(intent);
         });
     }
 
     public void notificarDesafioDiario() {
-        // Cria o intent para abrir a HomeActivity ao clicar na notificação
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        // Construtor da notificação
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Já fez sua atividade diária?")
@@ -94,17 +100,14 @@ public class HomeActivity extends AppCompatActivity {
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
-        // Criação do canal de notificação (necessário para Android 8 ou superior)
         NotificationChannel channel = new NotificationChannel("channel_id", "Notificar",
                 NotificationManager.IMPORTANCE_HIGH);
         NotificationManager manager = getSystemService(NotificationManager.class);
         manager.createNotificationChannel(channel);
 
-        // Verifica se a permissão para postar notificações foi concedida (Android 13 ou superior)
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // Solicita permissão se ainda não foi concedida
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-            return;  // Sai se a permissão não foi concedida ainda
+            return;
         }
 
         // Envia a notificação
