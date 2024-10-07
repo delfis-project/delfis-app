@@ -26,6 +26,12 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
         <activity
+            android:name=".activity.game.WordSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".model.response.WordSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.game.SudokuActivity"
             android:exported="false" />
         <activity

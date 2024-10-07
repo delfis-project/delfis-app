@@ -25,7 +25,9 @@ public class SudokuActivity extends AppCompatActivity {
     private User user;
     private GridLayout sudokuGrid;
     private Button btCheck;
-    private final int[][] sudokuBoard = new int[6][6];
+    private final int BOARD_HEIGHT = 6;
+    private final int BOARD_WIDTH = 6;
+    private final int[][] sudokuBoard = new int[BOARD_WIDTH][BOARD_HEIGHT];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,11 @@ public class SudokuActivity extends AppCompatActivity {
     }
 
     private boolean isSudokuValid(int[][] board) {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < BOARD_WIDTH; i++) {
             boolean[] rowCheck = new boolean[7];
             boolean[] colCheck = new boolean[7];
 
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < BOARD_HEIGHT; j++) {
                 if (board[i][j] != 0) {
                     if (rowCheck[board[i][j]]) {
                         return false;
@@ -125,7 +127,7 @@ public class SudokuActivity extends AppCompatActivity {
         int availableWidth = screenWidth - (int) (16 * metrics.density * 2);
         int availableHeight = screenHeight - (int) (16 * metrics.density);
 
-        int buttonSize = Math.min(availableWidth / 6, availableHeight / 6); // Divide pela quantidade de colunas e linhas
+        int buttonSize = Math.min(availableWidth / BOARD_WIDTH, availableHeight / BOARD_HEIGHT);
 
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board.get(i).size(); j++) {

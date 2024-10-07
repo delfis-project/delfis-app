@@ -16,8 +16,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.game.WordSearchActivity;
 import goldenage.delfis.app.activity.game.SudokuActivity;
+import goldenage.delfis.app.activity.game.WordSearchActivity;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;

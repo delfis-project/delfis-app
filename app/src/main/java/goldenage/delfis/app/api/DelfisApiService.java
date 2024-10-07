@@ -11,6 +11,7 @@ import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.SudokuBoard;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.model.request.UserRequest;
+import goldenage.delfis.app.model.response.WordSearch;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -18,6 +19,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface DelfisApiService {
     @POST("api/auth/login")
@@ -49,4 +51,7 @@ public interface DelfisApiService {
 
     @POST("api/sudoku/generate")
     Call<SudokuBoard> generateSudokuBoard(@Header("Authorization") String token);
+
+    @POST("api/word-search/generate")
+    Call<WordSearch> generateWordSearch(@Header("Authorization") String token, @Query("gridSize") int gridSize, @Query("words") String words);
 }
