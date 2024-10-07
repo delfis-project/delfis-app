@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import goldenage.delfis.app.R;
 
 public class WordSearchActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

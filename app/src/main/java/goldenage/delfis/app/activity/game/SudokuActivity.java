@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat;
 import goldenage.delfis.app.R;
 
 public class SudokuActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,5 +1,6 @@
 package goldenage.delfis.app.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -40,24 +41,24 @@ public class LoginActivity extends AppCompatActivity {
         entrarButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 
-            String email = usernameEditText.getText().toString();
+            String username = usernameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "Por favor, preencha todos os campos antes de continuar.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             Toast.makeText(LoginActivity.this, "Entrando...", Toast.LENGTH_SHORT).show();
 
-            LoginRequest loginRequest = new LoginRequest(email, password);
+            LoginRequest loginRequest = new LoginRequest(username, password);
 
             DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
             Call<LoginResponse> call = delfisApiService.login(loginRequest);
 
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                     if (response.isSuccessful()) {
                         LoginResponse loginResponse = response.body();
                         if (loginResponse != null) {
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 userCall.enqueue(new Callback<User>() {
                                     @Override
-                                    public void onResponse(Call<User> call, Response<User> response) {
+                                    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                                         if (response.isSuccessful()) {
                                             User user = response.body();
                                             if (user != null) {
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 Call<Streak> streakCall = delfisApiService.getCurrentStreakByUser(token, user.getId());
                                                 streakCall.enqueue(new Callback<Streak>() {
                                                     @Override
-                                                    public void onResponse(Call<Streak> call, Response<Streak> response) {
+                                                    public void onResponse(@NonNull Call<Streak> call, @NonNull Response<Streak> response) {
                                                         if (response.isSuccessful()) {
                                                             Streak streak = response.body();
                                                             user.setCurrentStreak(streak);
@@ -84,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                                             Call<Session> callSession = delfisApiService.startSession(token, user.getId());
                                                             callSession.enqueue(new Callback<Session>() {
                                                                 @Override
-                                                                public void onResponse(Call<Session> call, Response<Session> response) {
+                                                                public void onResponse(@NonNull Call<Session> call, @NonNull Response<Session> response) {
                                                                     if (response.isSuccessful()) {
                                                                         Session session = response.body();
                                                                         user.setCurrentSession(session);
@@ -98,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                 }
 
                                                                 @Override
-                                                                public void onFailure(Call<Session> call, Throwable t) {
+                                                                public void onFailure(@NonNull Call<Session> call, @NonNull Throwable t) {
                                                                     Log.d(TAG, "Erro ao recuperar sessão: " + t.getMessage());
                                                                     Toast.makeText(LoginActivity.this, "Não foi possível iniciar sua sessão no momento. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
                                                                 }
@@ -110,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     }
 
                                                     @Override
-                                                    public void onFailure(Call<Streak> call, Throwable t) {
+                                                    public void onFailure(@NonNull Call<Streak> call, @NonNull Throwable t) {
                                                         Log.e(TAG, "Erro na conexão ao buscar streak.", t);
                                                         Toast.makeText(LoginActivity.this, "Erro de conexão com o servidor. Por favor, verifique sua internet e tente novamente.", Toast.LENGTH_SHORT).show();
                                                     }
@@ -126,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void onFailure(Call<User> call, Throwable t) {
+                                    public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                                         Log.e(TAG, "Erro ao conectar para recuperar dados do usuário.", t);
                                         Toast.makeText(LoginActivity.this, "Erro de conexão ao carregar seus dados. Verifique sua internet e tente novamente.", Toast.LENGTH_SHORT).show();
                                     }
@@ -141,12 +142,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     } else {
                         Log.d(TAG, "Erro no login: código " + response.code());
-                        Toast.makeText(LoginActivity.this, "Credenciais incorretas. Verifique seu email e senha e tente novamente.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Credenciais incorretas. Verifique seu username e senha e tente novamente.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                     Log.e(TAG, "Erro na conexão durante o login.", t);
                     Toast.makeText(LoginActivity.this, "Falha ao conectar com o servidor. Verifique sua conexão com a internet e tente novamente.", Toast.LENGTH_SHORT).show();
                 }
