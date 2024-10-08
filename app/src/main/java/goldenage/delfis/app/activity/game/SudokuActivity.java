@@ -91,7 +91,6 @@ public class SudokuActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<SudokuBoard> call, @NonNull Response<SudokuBoard> response) {
                 if (response.isSuccessful()) {
                     SudokuBoard sudoku = response.body();
-                    System.out.println(sudoku.getBoard());
                     populateSudokuGrid(sudoku.getBoard());
                 } else {
                     Toast.makeText(SudokuActivity.this, "Falha ao carregar o Sudoku", Toast.LENGTH_LONG).show();

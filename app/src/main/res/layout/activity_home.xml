@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="-2dp"
+    tools:layout_editor_absoluteY="28dp">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/nav_bg"
+        app:itemIconSize="30sp"
+        app:itemIconTint="@drawable/item_active"
+        app:itemTextColor="@drawable/item_active"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/nav_bg"
-        app:itemTextColor="@drawable/item_active"
-        app:itemIconTint="@drawable/item_active"
-        app:itemIconSize="30sp"
-        app:menu="@menu/menu_item"
-        android:id="@+id/navbar"/>
+        app:menu="@menu/menu_item" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -78,44 +80,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btCacaPalavras"
+        app:layout_constraintBottom_toTopOf="@+id/btJogoVelha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/atividadebackground" />
 
     <ImageView
-        android:id="@+id/btCacaPalavras"
+        android:id="@+id/btJogoVelha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView10"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btDesafiosMatematicos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/atividadebackground" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/btDesafiosMatematicos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView12"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/atividadebackground" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="156dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/atividadebackground" />
+        app:srcCompat="@drawable/atividadebackground"
+        tools:layout_editor_absoluteY="489dp" />
 
     <TextView
         android:id="@+id/textStreak"
@@ -177,15 +167,28 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Caça-Palavras"
+        android:text="Jogo da Velha"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btCacaPalavras"
-        app:layout_constraintEnd_toEndOf="@+id/btCacaPalavras"
+        app:layout_constraintBottom_toBottomOf="@+id/btJogoVelha"
+        app:layout_constraintEnd_toEndOf="@+id/btJogoVelha"
         app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="@+id/btCacaPalavras"
-        app:layout_constraintTop_toTopOf="@+id/btCacaPalavras"
+        app:layout_constraintStart_toStartOf="@+id/btJogoVelha"
+        app:layout_constraintTop_toTopOf="@+id/btJogoVelha"
         app:layout_constraintVertical_bias="0.451" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desafios Matemáticos"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btDesafiosMatematicos"
+        app:layout_constraintEnd_toEndOf="@+id/btDesafiosMatematicos"
+        app:layout_constraintStart_toStartOf="@+id/btDesafiosMatematicos"
+        app:layout_constraintTop_toTopOf="@+id/btDesafiosMatematicos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

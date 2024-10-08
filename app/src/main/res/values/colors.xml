@@ -5,5 +5,6 @@
     <color name="delfis01">#064273</color>
     <color name="delfisBackground">#113D6C</color>
     <color name="sudokuTemplate" tools:ignore="ReferenceType">@drawable/sudokutemplate</color>
+    <color name="wordSearchTemplate" tools:ignore="ReferenceType">@drawable/wordsearchtemplate</color>
     <color name="falsefooter">#A6A6A6</color>
 </resources>

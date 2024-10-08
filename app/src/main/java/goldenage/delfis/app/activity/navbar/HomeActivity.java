@@ -17,7 +17,6 @@ import androidx.core.app.NotificationManagerCompat;
 
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.activity.game.SudokuActivity;
-import goldenage.delfis.app.activity.game.WordSearchActivity;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
@@ -42,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         nav.setSelectedItemId(R.id.homefooter);
         user = (User) getIntent().getSerializableExtra("user");
         btSudoku = findViewById(R.id.btSudoku);
-        btCacaPalavras = findViewById(R.id.btCacaPalavras);
+        btCacaPalavras = findViewById(R.id.btJogoVelha);
         textCoins = findViewById(R.id.textCoins);
         textStreak = findViewById(R.id.textStreak);
 
