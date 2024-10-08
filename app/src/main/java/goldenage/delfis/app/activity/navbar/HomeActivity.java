@@ -17,6 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.activity.game.SudokuActivity;
+import goldenage.delfis.app.activity.game.TicTacToeActivity;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
@@ -29,7 +30,7 @@ import java.time.format.DateTimeFormatter;
 public class HomeActivity extends AppCompatActivity {
     User user;
     BottomNavigationView nav;
-    ImageView btSudoku;
+    ImageView btSudoku, btJogoVelha, btDesafiosMatematicos;
     TextView textCoins, textStreak;
 
     @Override
@@ -41,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
         nav.setSelectedItemId(R.id.bottom_menu);
         user = (User) getIntent().getSerializableExtra("user");
         btSudoku = findViewById(R.id.btSudoku);
+        btJogoVelha = findViewById(R.id.btJogoVelha);
+        btDesafiosMatematicos = findViewById(R.id.btDesafiosMatematicos);
         textCoins = findViewById(R.id.textCoins);
         textStreak = findViewById(R.id.textStreak);
 
@@ -61,6 +64,15 @@ public class HomeActivity extends AppCompatActivity {
 
         btSudoku.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, SudokuActivity.class);
+
+            if (user != null)
+                intent.putExtra("user", user);
+
+            startActivity(intent);
+        });
+
+        btJogoVelha.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, TicTacToeActivity.class);
 
             if (user != null)
                 intent.putExtra("user", user);

@@ -14,7 +14,7 @@ import java.util.List;
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
-import goldenage.delfis.app.model.response.SudokuBoard;
+import goldenage.delfis.app.model.response.Sudoku;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
@@ -82,13 +82,13 @@ public class SudokuActivity extends AppCompatActivity {
 
     private void fetchSudokuBoard() {
         DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
-        Call<SudokuBoard> call = delfisApiService.generateSudokuBoard(user.getToken());
+        Call<Sudoku> call = delfisApiService.generateSudokuBoard(user.getToken());
 
-        call.enqueue(new Callback<SudokuBoard>() {
+        call.enqueue(new Callback<Sudoku>() {
             @Override
-            public void onResponse(@NonNull Call<SudokuBoard> call, @NonNull Response<SudokuBoard> response) {
+            public void onResponse(@NonNull Call<Sudoku> call, @NonNull Response<Sudoku> response) {
                 if (response.isSuccessful()) {
-                    SudokuBoard sudoku = response.body();
+                    Sudoku sudoku = response.body();
                     populateSudokuGrid(sudoku.getBoard());
                 } else {
                     Toast.makeText(SudokuActivity.this, "Falha ao carregar o Sudoku", Toast.LENGTH_LONG).show();
@@ -96,7 +96,7 @@ public class SudokuActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<SudokuBoard> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Sudoku> call, @NonNull Throwable t) {
                 Toast.makeText(SudokuActivity.this, "Erro ao conectar ao servidor. Verifique sua conexão.", Toast.LENGTH_LONG).show();
             }
         });

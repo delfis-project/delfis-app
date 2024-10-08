@@ -8,7 +8,7 @@ import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.request.LoginRequest;
 import goldenage.delfis.app.model.response.LoginResponse;
 import goldenage.delfis.app.model.response.Streak;
-import goldenage.delfis.app.model.response.SudokuBoard;
+import goldenage.delfis.app.model.response.Sudoku;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.model.request.UserRequest;
 import goldenage.delfis.app.model.response.WordSearch;
@@ -50,7 +50,7 @@ public interface DelfisApiService {
     Call<Plan> getPlanByName(@Header("Authorization") String token, String name);
 
     @POST("api/sudoku/generate")
-    Call<SudokuBoard> generateSudokuBoard(@Header("Authorization") String token);
+    Call<Sudoku> generateSudokuBoard(@Header("Authorization") String token);
 
     @POST("api/word-search/generate")
     Call<WordSearch> generateWordSearch(@Header("Authorization") String token, @Query("gridSize") int gridSize, @Query("words") String words);

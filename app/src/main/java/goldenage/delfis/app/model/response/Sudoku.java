@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SudokuBoard {
+public class Sudoku {
     private List<List<String>> board;
 }
 
