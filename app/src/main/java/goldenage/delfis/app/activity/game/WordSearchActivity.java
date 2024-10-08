@@ -51,7 +51,7 @@ public class WordSearchActivity extends AppCompatActivity {
                     WordSearch wordSearch = response.body();
                     buildWordSearchGrid(wordSearch);
                 } else {
-                    Toast.makeText(WordSearchActivity.this, "Falha ao carregar o caça-palavras", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WordSearchActivity.this, "Falha ao carregar o caça-palavras", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -63,7 +63,7 @@ public class WordSearchActivity extends AppCompatActivity {
     }
 
     private void buildWordSearchGrid(WordSearch wordSearch) {
-        String[] rows = wordSearch.getGrid().split("\r\n");
+        String[] rows = wordSearch.getGrid().split("\n");
         int size = wordSearch.getGridSize();
 
         gridLayout.setRowCount(size);
@@ -74,10 +74,16 @@ public class WordSearchActivity extends AppCompatActivity {
         int buttonSize = Math.min(gridWidth / size, gridHeight / size);
 
         for (int i = 0; i < size; i++) {
-            String[] columns = rows[i].trim().split(" ");
+            // Aqui usamos split("") para obter cada letra individualmente na linha
+            String[] columns = rows[i].split("");
             for (int j = 0; j < size; j++) {
                 Button button = new Button(this);
-                button.setText(columns[j]);
+
+                if (j < columns.length) {
+                    button.setText(columns[j]);
+                } else {
+                    button.setText("");
+                }
 
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams(
                         GridLayout.spec(i, 1f), GridLayout.spec(j, 1f)

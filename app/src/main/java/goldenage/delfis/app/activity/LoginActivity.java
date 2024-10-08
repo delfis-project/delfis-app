@@ -45,11 +45,11 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordEditText.getText().toString();
 
             if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(LoginActivity.this, "Por favor, preencha todos os campos antes de continuar.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Por favor, preencha todos os campos antes de continuar.", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            Toast.makeText(LoginActivity.this, "Entrando...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Entrando...", Toast.LENGTH_LONG).show();
 
             LoginRequest loginRequest = new LoginRequest(username, password);
 
@@ -94,62 +94,62 @@ public class LoginActivity extends AppCompatActivity {
                                                                         startActivity(intent);
                                                                     } else {
                                                                         Log.d(TAG, "Erro ao recuperar sessão: " + response.code());
-                                                                        Toast.makeText(LoginActivity.this, "Falha ao carregar sua sessão. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(LoginActivity.this, "Falha ao carregar sua sessão. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                                                                     }
                                                                 }
 
                                                                 @Override
                                                                 public void onFailure(@NonNull Call<Session> call, @NonNull Throwable t) {
                                                                     Log.d(TAG, "Erro ao recuperar sessão: " + t.getMessage());
-                                                                    Toast.makeText(LoginActivity.this, "Não foi possível iniciar sua sessão no momento. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(LoginActivity.this, "Não foi possível iniciar sua sessão no momento. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                                                                 }
                                                             });
                                                         } else {
                                                             Log.d(TAG, "Erro ao recuperar streak: " + response.code());
-                                                            Toast.makeText(LoginActivity.this, "Falha ao carregar sua sequência atual de conquistas. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(LoginActivity.this, "Falha ao carregar sua sequência atual de conquistas. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                                                         }
                                                     }
 
                                                     @Override
                                                     public void onFailure(@NonNull Call<Streak> call, @NonNull Throwable t) {
                                                         Log.e(TAG, "Erro na conexão ao buscar streak.", t);
-                                                        Toast.makeText(LoginActivity.this, "Erro de conexão com o servidor. Por favor, verifique sua internet e tente novamente.", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(LoginActivity.this, "Erro de conexão com o servidor. Por favor, verifique sua internet e tente novamente.", Toast.LENGTH_LONG).show();
                                                     }
                                                 });
                                             } else {
                                                 Log.d(TAG, "Erro ao recuperar dados do usuário: resposta vazia.");
-                                                Toast.makeText(LoginActivity.this, "Ocorreu um erro ao carregar suas informações. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginActivity.this, "Ocorreu um erro ao carregar suas informações. Por favor, tente novamente.", Toast.LENGTH_LONG).show();
                                             }
                                         } else {
                                             Log.d(TAG, "Erro ao recuperar usuário: código " + response.code());
-                                            Toast.makeText(LoginActivity.this, "Não foi possível carregar seus dados de usuário. Verifique sua conexão e tente novamente.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, "Não foi possível carregar seus dados de usuário. Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                                         Log.e(TAG, "Erro ao conectar para recuperar dados do usuário.", t);
-                                        Toast.makeText(LoginActivity.this, "Erro de conexão ao carregar seus dados. Verifique sua internet e tente novamente.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Erro de conexão ao carregar seus dados. Verifique sua internet e tente novamente.", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             } else {
                                 Log.d(TAG, "Token não recebido ou inválido.");
-                                Toast.makeText(LoginActivity.this, "Autenticação falhou. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Autenticação falhou. Por favor, tente novamente.", Toast.LENGTH_LONG).show();
                             }
                         } else {
                             Log.d(TAG, "Resposta da API vazia.");
-                            Toast.makeText(LoginActivity.this, "Não recebemos resposta do servidor. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Não recebemos resposta do servidor. Por favor, tente novamente.", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Log.d(TAG, "Erro no login: código " + response.code());
-                        Toast.makeText(LoginActivity.this, "Credenciais incorretas. Verifique seu username e senha e tente novamente.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Credenciais incorretas. Verifique seu username e senha e tente novamente.", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                     Log.e(TAG, "Erro na conexão durante o login.", t);
-                    Toast.makeText(LoginActivity.this, "Falha ao conectar com o servidor. Verifique sua conexão com a internet e tente novamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Falha ao conectar com o servidor. Verifique sua conexão com a internet e tente novamente.", Toast.LENGTH_LONG).show();
                 }
             });
         });

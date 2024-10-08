@@ -17,13 +17,53 @@
         app:layout_constraintBottom_toTopOf="@+id/btCheck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button android:id="@+id/btn_0_0" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_0_1" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_0_2" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_0_3" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_0_4" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_0_5" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_1_0" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_1_1" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_1_2" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_1_3" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_1_4" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_1_5" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_2_0" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_2_1" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_2_2" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_2_3" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_2_4" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_2_5" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_3_0" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_3_1" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_3_2" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_3_3" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_3_4" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_3_5" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_4_0" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_4_1" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_4_2" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_4_3" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_4_4" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_4_5" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_5_0" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_5_1" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_5_2" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_5_3" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_5_4" style="@style/SudokuButtonStyle" />
+        <Button android:id="@+id/btn_5_5" style="@style/SudokuButtonStyle" />
+
+    </GridLayout>
 
     <Button
         android:id="@+id/btCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/delfisBackground"
         android:text="Checar Tabuleiro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

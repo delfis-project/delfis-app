@@ -102,7 +102,7 @@ public class ConfigActivity extends AppCompatActivity {
         btSair.setOnClickListener(v -> {
             DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
             Call<Session> call = delfisApiService.finishSession(user.getToken(), user.getId());
-            Toast.makeText(ConfigActivity.this, "Saindo...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigActivity.this, "Saindo...", Toast.LENGTH_LONG).show();
             call.enqueue(new Callback<Session>() {
                 @Override
                 public void onResponse(Call<Session> call, Response<Session> response) {
@@ -110,14 +110,14 @@ public class ConfigActivity extends AppCompatActivity {
                         finishAffinity();
                     } else {
                         Log.d(TAG, "Erro ao recuperar sessão: " + response.code());
-                        Toast.makeText(ConfigActivity.this, "Falha ao finalizar sessão. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ConfigActivity.this, "Falha ao finalizar sessão. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Session> call, Throwable t) {
                     Log.e(TAG, "Erro ao conectar para finalizar sessão.", t);
-                    Toast.makeText(ConfigActivity.this, "Erro de conexão ao carregar seus dados. Verifique sua internet e tente novamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigActivity.this, "Erro de conexão ao carregar seus dados. Verifique sua internet e tente novamente.", Toast.LENGTH_LONG).show();
                 }
             });
         });

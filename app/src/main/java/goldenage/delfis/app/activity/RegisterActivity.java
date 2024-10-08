@@ -120,32 +120,32 @@ public class RegisterActivity extends AppCompatActivity {
 
             // Verifica campos obrigatórios
             if (name.isEmpty()) {
-                Toast.makeText(this, "Por favor, insira seu nome.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, insira seu nome.", Toast.LENGTH_LONG).show();
                 nameEditText.requestFocus();
                 return;
             }
             if (username.isEmpty()) {
-                Toast.makeText(this, "Por favor, escolha um nome de usuário.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, escolha um nome de usuário.", Toast.LENGTH_LONG).show();
                 usernameEditText.requestFocus();
                 return;
             }
             if (password.isEmpty()) {
-                Toast.makeText(this, "Por favor, crie uma senha.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, crie uma senha.", Toast.LENGTH_LONG).show();
                 passwordEditText.requestFocus();
                 return;
             }
             if (email.isEmpty()) {
-                Toast.makeText(this, "Por favor, insira seu e-mail.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, insira seu e-mail.", Toast.LENGTH_LONG).show();
                 emailEditText.requestFocus();
                 return;
             }
             if (birthDate.isEmpty()) {
-                Toast.makeText(this, "Por favor, insira sua data de nascimento.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor, insira sua data de nascimento.", Toast.LENGTH_LONG).show();
                 birthDateEditText.requestFocus();
                 return;
             }
 
-            Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Aguarde...", Toast.LENGTH_LONG).show();
 
             LoginRequest loginRequest = new LoginRequest(UNLOGGED_USERNAME, UNLOGGED_PASSWORD);
             DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
@@ -173,7 +173,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                             finish();
-                                            Toast.makeText(RegisterActivity.this, "Cadastro realizado com sucesso! Você pode fazer login agora.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterActivity.this, "Cadastro realizado com sucesso! Você pode fazer login agora.", Toast.LENGTH_LONG).show();
                                         } else {
                                             try {
                                                 if (response.code() == 400) { // Código de erro de validação
@@ -208,37 +208,37 @@ public class RegisterActivity extends AppCompatActivity {
                                                             Toast.LENGTH_LONG).show();
                                                 } else {
                                                     // Outros erros
-                                                    Toast.makeText(RegisterActivity.this, "Ocorreu um erro ao criar sua conta. Tente novamente.", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(RegisterActivity.this, "Ocorreu um erro ao criar sua conta. Tente novamente.", Toast.LENGTH_LONG).show();
                                                 }
                                             } catch (IOException | JSONException e) {
                                                 e.printStackTrace();
-                                                Toast.makeText(RegisterActivity.this, "Ocorreu um erro inesperado. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterActivity.this, "Ocorreu um erro inesperado. Por favor, tente novamente.", Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<Void> call2, Throwable t) {
-                                        Toast.makeText(RegisterActivity.this, "Falha na conexão com a API.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this, "Falha na conexão com a API.", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             } else {
-                                Toast.makeText(RegisterActivity.this, "Login falhou: token não recebido", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Login falhou: token não recebido", Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "Token não recebido: " + token);
                             }
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Resposta vazia da API", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Resposta vazia da API", Toast.LENGTH_LONG).show();
                             Log.d(TAG, "Resposta vazia da API");
                         }
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Erro na resposta da API: " + response.code(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Erro na resposta da API: " + response.code(), Toast.LENGTH_LONG).show();
                         Log.d(TAG, "Erro na resposta da API: " + response.code());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    Toast.makeText(RegisterActivity.this, "Falha na conexão com a API", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Falha na conexão com a API", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "Falha na conexão com a API", t);
                 }
             });

@@ -1,8 +1,7 @@
 package goldenage.delfis.app.activity.game;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.Toast;
@@ -28,6 +27,7 @@ public class SudokuActivity extends AppCompatActivity {
     private final int BOARD_HEIGHT = 6;
     private final int BOARD_WIDTH = 6;
     private final int[][] sudokuBoard = new int[BOARD_WIDTH][BOARD_HEIGHT];
+    private Button[][] buttons = new Button[BOARD_WIDTH][BOARD_HEIGHT];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,33 @@ public class SudokuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sudoku);
 
         user = (User) getIntent().getSerializableExtra("user");
-        sudokuGrid = findViewById(R.id.sudokuGrid);
         btCheck = findViewById(R.id.btCheck);
+        sudokuGrid = findViewById(R.id.sudokuGrid);
 
-        Toast.makeText(SudokuActivity.this, "Carregando sudoku...", Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
+            for (int j = 0; j < BOARD_WIDTH; j++) {
+                String buttonID = "btn_" + i + "_" + j;
+
+                @SuppressLint("DiscouragedApi")
+                int resId = getResources().getIdentifier(buttonID, "id", getPackageName());
+
+                buttons[i][j] = findViewById(resId);
+                int finalJ = j;
+                int finalI = i;
+
+                buttons[i][j].setOnClickListener(v -> {
+                    int currentValue = Integer.parseInt(buttons[finalI][finalJ].getText().toString());
+                    currentValue = (currentValue + 1) % 7;
+                    if (currentValue == 0) {
+                        currentValue = 1;
+                    }
+                    buttons[finalI][finalJ].setText(String.valueOf(currentValue));
+                    sudokuBoard[finalI][finalJ] = currentValue;
+                });
+            }
+        }
+
+        Toast.makeText(SudokuActivity.this, "Carregando sudoku...", Toast.LENGTH_LONG).show();
         fetchSudokuBoard();
 
         btCheck.setOnClickListener(v -> checkSudokuAnswers());
@@ -46,9 +69,9 @@ public class SudokuActivity extends AppCompatActivity {
 
     private void checkSudokuAnswers() {
         if (isSudokuValid(sudokuBoard)) {
-            Toast.makeText(SudokuActivity.this, "Parabéns! Todas as respostas estão corretas!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SudokuActivity.this, "Parabéns! Todas as respostas estão corretas!", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(SudokuActivity.this, "Algumas respostas estão incorretas. Tente novamente!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SudokuActivity.this, "Algumas respostas estão incorretas. Tente novamente!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -106,7 +129,7 @@ public class SudokuActivity extends AppCompatActivity {
                     SudokuBoard sudoku = response.body();
                     populateSudokuGrid(sudoku.getBoard());
                 } else {
-                    Toast.makeText(SudokuActivity.this, "Falha ao carregar o Sudoku", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SudokuActivity.this, "Falha ao carregar o Sudoku", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -118,56 +141,19 @@ public class SudokuActivity extends AppCompatActivity {
     }
 
     private void populateSudokuGrid(List<List<String>> board) {
-        sudokuGrid.removeAllViews();
-
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int screenWidth = metrics.widthPixels;
-        int screenHeight = metrics.heightPixels;
-
-        int availableWidth = screenWidth - (int) (16 * metrics.density * 2);
-        int availableHeight = screenHeight - (int) (16 * metrics.density);
-
-        int buttonSize = Math.min(availableWidth / BOARD_WIDTH, availableHeight / BOARD_HEIGHT);
-
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board.get(i).size(); j++) {
                 String value = board.get(i).get(j);
-                createSudokuButton(i, j, value, buttonSize);
+                Button button = buttons[i][j];
+                if (!value.isEmpty()) {
+                    button.setText(value);
+                    button.setEnabled(false);
+                    sudokuBoard[i][j] = Integer.parseInt(value);
+                } else {
+                    button.setText("");
+                    sudokuBoard[i][j] = 0;
+                }
             }
         }
-    }
-
-    private void createSudokuButton(int row, int col, String value, int buttonSize) {
-        Button button = new Button(this);
-        button.setGravity(Gravity.CENTER);
-
-        if (!value.isEmpty()) {
-            button.setText(value);
-            button.setEnabled(false);
-            sudokuBoard[row][col] = Integer.parseInt(value);
-        } else {
-            button.setText("0");
-            sudokuBoard[row][col] = 0;
-        }
-
-        button.setOnClickListener(v -> {
-            int currentValue = Integer.parseInt(button.getText().toString());
-            currentValue = (currentValue + 1) % 7;
-            if (currentValue == 0) {
-                currentValue = 1;
-            }
-
-            button.setText(String.valueOf(currentValue));
-            sudokuBoard[row][col] = currentValue;
-        });
-
-        GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-        param.rowSpec = GridLayout.spec(row);
-        param.columnSpec = GridLayout.spec(col);
-        param.width = buttonSize;
-        param.height = buttonSize;
-        button.setLayoutParams(param);
-
-        sudokuGrid.addView(button);
     }
 }

@@ -47,7 +47,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         recyclerViewUsers.setAdapter(adapterUserLeaderboard);
         recyclerViewUsers.setLayoutManager(new LinearLayoutManager(this));
 
-        Toast.makeText(LeaderboardActivity.this, "Carregando usuários...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LeaderboardActivity.this, "Carregando usuários...", Toast.LENGTH_LONG).show();
         loadLeaderboard(user.getToken());
 
         nav.setOnItemSelectedListener(item -> {
@@ -72,14 +72,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                     adapterUserLeaderboard.notifyDataSetChanged();
                 } else {
                     Log.d(TAG, "Erro ao recuperar usuários: " + response.code());
-                    Toast.makeText(LeaderboardActivity.this, "Falha ao carregar placar. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LeaderboardActivity.this, "Falha ao carregar placar. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 Log.d(TAG, "Erro ao recuperar usuários: " + t.getMessage());
-                Toast.makeText(LeaderboardActivity.this, "Não foi possível carregar o placar. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LeaderboardActivity.this, "Não foi possível carregar o placar. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
             }
         });
     }

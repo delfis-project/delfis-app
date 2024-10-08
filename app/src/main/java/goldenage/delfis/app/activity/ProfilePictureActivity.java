@@ -63,7 +63,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
                 if (permissionGranted) {
                     startCamera();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Permissões negadas. Não é possível usar a câmera sem concedê-las.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Permissões negadas. Não é possível usar a câmera sem concedê-las.", Toast.LENGTH_LONG).show();
                 }
             }
     );
@@ -186,7 +186,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(ProfilePictureActivity.this, "Erro ao salvar URL: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfilePictureActivity.this, "Erro ao salvar URL: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

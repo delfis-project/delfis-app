@@ -33,13 +33,13 @@ public class PremiumActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     Plan plan = response.body();
                 } else {
-                    Toast.makeText(PremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Plan> call, Throwable t) {
-                Toast.makeText(PremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
             }
         });
     }
