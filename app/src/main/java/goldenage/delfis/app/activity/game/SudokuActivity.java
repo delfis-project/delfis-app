@@ -22,12 +22,11 @@ import retrofit2.Response;
 
 public class SudokuActivity extends AppCompatActivity {
     private User user;
-    private GridLayout sudokuGrid;
     private Button btCheck;
     private final int BOARD_HEIGHT = 6;
     private final int BOARD_WIDTH = 6;
     private final int[][] sudokuBoard = new int[BOARD_WIDTH][BOARD_HEIGHT];
-    private Button[][] buttons = new Button[BOARD_WIDTH][BOARD_HEIGHT];
+    private final Button[][] buttons = new Button[BOARD_WIDTH][BOARD_HEIGHT];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class SudokuActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("user");
         btCheck = findViewById(R.id.btCheck);
-        sudokuGrid = findViewById(R.id.sudokuGrid);
 
         for (int i = 0; i < BOARD_HEIGHT; i++) {
             for (int j = 0; j < BOARD_WIDTH; j++) {
@@ -75,49 +73,6 @@ public class SudokuActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isSudokuValid(int[][] board) {
-        for (int i = 0; i < BOARD_WIDTH; i++) {
-            boolean[] rowCheck = new boolean[7];
-            boolean[] colCheck = new boolean[7];
-
-            for (int j = 0; j < BOARD_HEIGHT; j++) {
-                if (board[i][j] != 0) {
-                    if (rowCheck[board[i][j]]) {
-                        return false;
-                    }
-                    rowCheck[board[i][j]] = true;
-                }
-
-                if (board[j][i] != 0) {
-                    if (colCheck[board[j][i]]) {
-                        return false;
-                    }
-                    colCheck[board[j][i]] = true;
-                }
-            }
-        }
-
-        for (int blockRow = 0; blockRow < 2; blockRow++) {
-            for (int blockCol = 0; blockCol < 3; blockCol++) {
-                boolean[] blockCheck = new boolean[7];
-
-                for (int i = 0; i < 2; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        int value = board[blockRow * 2 + i][blockCol * 3 + j];
-                        if (value != 0) {
-                            if (blockCheck[value]) {
-                                return false;
-                            }
-                            blockCheck[value] = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        return true;
-    }
-
     private void fetchSudokuBoard() {
         DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
         Call<SudokuBoard> call = delfisApiService.generateSudokuBoard(user.getToken());
@@ -140,6 +95,49 @@ public class SudokuActivity extends AppCompatActivity {
         });
     }
 
+    private boolean isSudokuValid(int[][] board) {
+        for (int i = 0; i < BOARD_WIDTH; i++) {
+            boolean[] rowCheck = new boolean[7];
+            boolean[] colCheck = new boolean[7];
+
+            for (int j = 0; j < BOARD_HEIGHT; j++) {
+                if (board[i][j] != 0) {
+                    if (rowCheck[board[i][j]]) {
+                        return false;
+                    }
+                    rowCheck[board[i][j]] = true;
+                }
+
+                if (board[j][i] != 0) {
+                    if (colCheck[board[j][i]]) {
+                        return false;
+                    }
+                    colCheck[board[j][i]] = true;
+                }
+            }
+        }
+
+        for (int blockRow = 0; blockRow < 3; blockRow += 2) {
+            for (int blockCol = 0; blockCol < 3; blockCol++) {
+                boolean[] blockCheck = new boolean[7];
+
+                for (int i = 0; i < 2; i++) { // 2 linhas
+                    for (int j = 0; j < 3; j++) { // 3 colunas
+                        int value = board[blockRow + i][blockCol + j];
+                        if (value != 0) {
+                            if (blockCheck[value]) {
+                                return false;
+                            }
+                            blockCheck[value] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     private void populateSudokuGrid(List<List<String>> board) {
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board.get(i).size(); j++) {
@@ -148,9 +146,11 @@ public class SudokuActivity extends AppCompatActivity {
                 if (!value.isEmpty()) {
                     button.setText(value);
                     button.setEnabled(false);
+                    button.setBackgroundColor(getResources().getColor(R.color.delfisBackground));
                     sudokuBoard[i][j] = Integer.parseInt(value);
                 } else {
-                    button.setText("");
+                    button.setText("0");
+                    button.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                     sudokuBoard[i][j] = 0;
                 }
             }
