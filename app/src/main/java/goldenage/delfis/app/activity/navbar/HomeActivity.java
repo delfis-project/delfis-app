@@ -29,7 +29,7 @@ import java.time.format.DateTimeFormatter;
 public class HomeActivity extends AppCompatActivity {
     User user;
     BottomNavigationView nav;
-    ImageView btSudoku, btCacaPalavras;
+    ImageView btSudoku;
     TextView textCoins, textStreak;
 
     @Override
@@ -37,24 +37,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        nav = findViewById(R.id.navbar);
-        nav.setSelectedItemId(R.id.homefooter);
+        nav = findViewById(R.id.bottomNavigationView);
+        nav.setSelectedItemId(R.id.bottom_menu);
         user = (User) getIntent().getSerializableExtra("user");
         btSudoku = findViewById(R.id.btSudoku);
-        btCacaPalavras = findViewById(R.id.btJogoVelha);
         textCoins = findViewById(R.id.textCoins);
         textStreak = findViewById(R.id.textStreak);
 
         textCoins.setText(String.valueOf(user.getCoins()));
 
-        Streak streakAtual = user.getCurrentStreak();
-        int dias = 0;
-        if (streakAtual != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
-            dias = LocalDate.now().compareTo(inicio) + 1;
-        }
-        textStreak.setText(String.valueOf(dias));
+        atualizarStreak();
 
         notificarDesafioDiario();
 
@@ -75,15 +67,17 @@ public class HomeActivity extends AppCompatActivity {
 
             startActivity(intent);
         });
+    }
 
-        btCacaPalavras.setOnClickListener(view -> {
-            Intent intent = new Intent(HomeActivity.this, WordSearchActivity.class);
-
-            if (user != null)
-                intent.putExtra("user", user);
-
-            startActivity(intent);
-        });
+    private void atualizarStreak() {
+        Streak streakAtual = user.getCurrentStreak();
+        int dias = 0;
+        if (streakAtual != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
+            dias = (int) (LocalDate.now().toEpochDay() - inicio.toEpochDay()) + 1;
+        }
+        textStreak.setText(String.valueOf(dias));
     }
 
     public void notificarDesafioDiario() {
@@ -109,7 +103,6 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
-        // Envia a notificação
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(1, builder.build());
     }

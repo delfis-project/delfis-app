@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import goldenage.delfis.app.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.SudokuBoard;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.util.ActivityUtil;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;

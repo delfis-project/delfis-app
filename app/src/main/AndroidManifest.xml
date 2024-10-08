@@ -26,6 +26,9 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
         <activity
+            android:name=".activity.EditInfosActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.game.TicTacToeActivity"
             android:exported="false" />
         <activity
