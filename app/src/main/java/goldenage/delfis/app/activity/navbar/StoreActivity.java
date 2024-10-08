@@ -26,42 +26,16 @@ public class StoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-        nav = findViewById(R.id.navbar);
+        nav = findViewById(R.id.bottomNavigationView); // Ajuste para usar o bottomNavigationView
         user = (User) getIntent().getSerializableExtra("user");
-        nav.setSelectedItemId(R.id.lojafooter);
+        nav.setSelectedItemId(R.id.bottom_menu); // Ajusta o item selecionado
         btTemas = findViewById(R.id.btTemas);
         btPowerups = findViewById(R.id.btPowerups);
         btMoedas = findViewById(R.id.btMoedas);
         btPremium = findViewById(R.id.btPremium);
 
-        btMoedas.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, CoinsActivity.class);
-            if (user != null)
-                intent.putExtra("user", user);
-            startActivity(intent);
-        });
-
-        btPremium.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, PremiumActivity.class);
-            if (user != null)
-                intent.putExtra("user", user);
-            startActivity(intent);
-        });
-
-        btTemas.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, ThemesActivity.class);
-            if (user != null)
-                intent.putExtra("user", user);
-            startActivity(intent);
-        });
-
-        btPowerups.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, PowerupsActivity.class);
-            if (user != null)
-                intent.putExtra("user", user);
-            startActivity(intent);
-        });
-
+        // Listener para navegação
+        nav.setSelectedItemId(R.id.lojaMenu);
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(StoreActivity.this, item);
             if (user != null)
@@ -69,6 +43,30 @@ public class StoreActivity extends AppCompatActivity {
 
             startActivity(intent);
             return true;
+        });
+
+        btTemas.setOnClickListener(v -> {
+            Intent intent = new Intent(StoreActivity.this, ThemesActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        });
+
+        btPowerups.setOnClickListener(v -> {
+            Intent intent = new Intent(StoreActivity.this, PowerupsActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        });
+
+        btMoedas.setOnClickListener(v -> {
+            Intent intent = new Intent(StoreActivity.this, CoinsActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        });
+
+        btPremium.setOnClickListener(v -> {
+            Intent intent = new Intent(StoreActivity.this, PremiumActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
     }
 }

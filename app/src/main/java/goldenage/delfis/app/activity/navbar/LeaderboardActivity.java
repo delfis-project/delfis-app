@@ -38,8 +38,8 @@ public class LeaderboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
 
-        nav = findViewById(R.id.navbar);
-        nav.setSelectedItemId(R.id.leaderfooter);
+        nav = findViewById(R.id.bottomNavigationView); // Ajuste para usar o bottomNavigationView
+        nav.setSelectedItemId(R.id.placarMenu); // Ajusta o item selecionado
         user = (User) getIntent().getSerializableExtra("user");
         recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
 

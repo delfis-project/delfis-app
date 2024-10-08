@@ -38,8 +38,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        nav = findViewById(R.id.navbar);
-        nav.setSelectedItemId(R.id.homefooter);
+        nav = findViewById(R.id.bottomNavigationView);
+        nav.setSelectedItemId(R.id.bottom_menu);
         user = (User) getIntent().getSerializableExtra("user");
         btSudoku = findViewById(R.id.btSudoku);
         btCacaPalavras = findViewById(R.id.btCacaPalavras);
@@ -48,22 +48,14 @@ public class HomeActivity extends AppCompatActivity {
 
         textCoins.setText(String.valueOf(user.getCoins()));
 
-        Streak streakAtual = user.getCurrentStreak();
-        int dias = 0;
-        if (streakAtual != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
-            dias = LocalDate.now().compareTo(inicio) + 1;
-        }
-        textStreak.setText(String.valueOf(dias));
-
+        atualizarStreak(); // Chama o método para atualizar o streak
         notificarDesafioDiario();
 
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(HomeActivity.this, item);
-            if (user != null)
+            if (user != null) {
                 intent.putExtra("user", user);
-
+            }
             startActivity(intent);
             return true;
         });
@@ -79,12 +71,22 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private void atualizarStreak() {
+        // Aqui você deve garantir que o método getCurrentStreak() retorna um objeto válido
+        Streak streakAtual = user.getCurrentStreak();
+        int dias = 0;
+        if (streakAtual != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
+            dias = (int) (LocalDate.now().toEpochDay() - inicio.toEpochDay()) + 1;
+        }
+        textStreak.setText(String.valueOf(dias));
+    }
+
     public void notificarDesafioDiario() {
-        // Cria o intent para abrir a HomeActivity ao clicar na notificação
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        // Construtor da notificação
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Já fez sua atividade diária?")
@@ -94,20 +96,16 @@ public class HomeActivity extends AppCompatActivity {
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
-        // Criação do canal de notificação (necessário para Android 8 ou superior)
         NotificationChannel channel = new NotificationChannel("channel_id", "Notificar",
                 NotificationManager.IMPORTANCE_HIGH);
         NotificationManager manager = getSystemService(NotificationManager.class);
         manager.createNotificationChannel(channel);
 
-        // Verifica se a permissão para postar notificações foi concedida (Android 13 ou superior)
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // Solicita permissão se ainda não foi concedida
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-            return;  // Sai se a permissão não foi concedida ainda
+            return;
         }
 
-        // Envia a notificação
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(1, builder.build());
     }

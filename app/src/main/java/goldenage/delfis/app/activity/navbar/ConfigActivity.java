@@ -43,8 +43,8 @@ public class ConfigActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
-        nav = findViewById(R.id.navbar);
-        nav.setSelectedItemId(R.id.configfooter);
+        nav = findViewById(R.id.bottomNavigationView); // Ajuste para usar o bottomNavigationView
+        nav.setSelectedItemId(R.id.configMenu); // Ajusta o item selecionado
         levelUser = findViewById(R.id.leveluser);
         textNome = findViewById(R.id.textNome);
         textEmail = findViewById(R.id.textEmail);

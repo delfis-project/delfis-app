@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_menu">
+
+    <item
+        android:id="@+id/homeMenu"
+    android:title="Início"
+    android:icon="@drawable/casa" />
+    <item
+        android:id="@+id/lojaMenu"
+    android:title="Loja"
+    android:icon="@drawable/carrinho" />
+    <item
+        android:id="@+id/placarMenu"
+    android:title="Placar"
+    android:icon="@drawable/leaderboard" />
+    <item
+        android:id="@+id/configMenu"
+    android:title="Config"
+    android:icon="@drawable/config" />
+</menu>
