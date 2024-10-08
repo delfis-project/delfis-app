@@ -1,6 +1,7 @@
 package goldenage.delfis.app.activity.game;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -12,9 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.SudokuBoard;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.util.ActivityUtil;
 import goldenage.delfis.app.util.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,6 +71,12 @@ public class SudokuActivity extends AppCompatActivity {
     private void checkSudokuAnswers() {
         if (isSudokuValid(sudokuBoard)) {
             Toast.makeText(SudokuActivity.this, "Parabéns! Todas as respostas estão corretas!", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
+            if (user != null)
+                intent.putExtra("user", user);
+
+            startActivity(intent);
         } else {
             Toast.makeText(SudokuActivity.this, "Algumas respostas estão incorretas. Tente novamente!", Toast.LENGTH_LONG).show();
         }
@@ -82,6 +91,7 @@ public class SudokuActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<SudokuBoard> call, @NonNull Response<SudokuBoard> response) {
                 if (response.isSuccessful()) {
                     SudokuBoard sudoku = response.body();
+                    System.out.println(sudoku.getBoard());
                     populateSudokuGrid(sudoku.getBoard());
                 } else {
                     Toast.makeText(SudokuActivity.this, "Falha ao carregar o Sudoku", Toast.LENGTH_LONG).show();
