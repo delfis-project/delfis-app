@@ -106,11 +106,11 @@ public class SudokuActivity extends AppCompatActivity {
     }
 
     private boolean isSudokuValid(int[][] board) {
-        for (int i = 0; i < BOARD_WIDTH; i++) {
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
             boolean[] rowCheck = new boolean[7];
             boolean[] colCheck = new boolean[7];
 
-            for (int j = 0; j < BOARD_HEIGHT; j++) {
+            for (int j = 0; j < BOARD_WIDTH; j++) {
                 if (board[i][j] != 0) {
                     if (rowCheck[board[i][j]]) {
                         return false;
@@ -123,24 +123,6 @@ public class SudokuActivity extends AppCompatActivity {
                         return false;
                     }
                     colCheck[board[j][i]] = true;
-                }
-            }
-        }
-
-        for (int blockRow = 0; blockRow < 3; blockRow += 2) {
-            for (int blockCol = 0; blockCol < 3; blockCol++) {
-                boolean[] blockCheck = new boolean[7];
-
-                for (int i = 0; i < 2; i++) { // 2 linhas
-                    for (int j = 0; j < 3; j++) { // 3 colunas
-                        int value = board[blockRow + i][blockCol + j];
-                        if (value != 0) {
-                            if (blockCheck[value]) {
-                                return false;
-                            }
-                            blockCheck[value] = true;
-                        }
-                    }
                 }
             }
         }
