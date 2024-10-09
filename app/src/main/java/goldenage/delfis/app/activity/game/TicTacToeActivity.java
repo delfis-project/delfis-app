@@ -1,6 +1,7 @@
 package goldenage.delfis.app.activity.game;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,16 +11,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+
+import goldenage.delfis.app.BuildConfig;
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.activity.navbar.HomeActivity;
 import goldenage.delfis.app.model.client.GptClient;
 import goldenage.delfis.app.model.response.User;
+
 import android.content.Intent;
+import android.widget.Toast;
 
 public class TicTacToeActivity extends AppCompatActivity {
     private int jogada;
@@ -30,8 +35,8 @@ public class TicTacToeActivity extends AppCompatActivity {
     private List<Integer> botoes;
     private static final char PLAYER_X = 'x';
     private static final char PLAYER_O = 'o';
-    private String API_URL = "";
-    private String API_KEY = "";
+    private static final String API_URL = BuildConfig.GPT_API_URL;
+    private static final String API_KEY = BuildConfig.GPT_API_KEY;
     private User user;
 
     @Override
@@ -84,8 +89,11 @@ public class TicTacToeActivity extends AppCompatActivity {
         return verificarLinhaOuColuna(jogo[0][0], jogo[1][1], jogo[2][2]) || verificarLinhaOuColuna(jogo[0][2], jogo[1][1], jogo[2][0]);
     }
 
-    public void limparJogo() throws InterruptedException {
-        Thread.sleep(2000);
+    public void limparJogo() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ignored) {
+        }
 
         jogo = new char[3][3];
         jogada = 0;
@@ -97,7 +105,7 @@ public class TicTacToeActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.resultado)).setText("");
     }
 
-    public void verificarSeAcabou() throws InterruptedException {
+    public void verificarSeAcabou() {
         if (verificarVitoria()) {
             String resultado = jogada % 2 != 0 ? "Vitória!" : "Derrota :(";
             ((TextView) findViewById(R.id.resultado)).setText(resultado);
@@ -108,7 +116,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                 finish();
             }, 2000);
         } else if (jogada == 9) {
-            ((TextView) findViewById(R.id.resultado)).setText("Empate... Reiniciando o jogo!");
+            Toast.makeText(this, "Empate! Reiniciando...", Toast.LENGTH_LONG).show();
             limparJogo();
         }
     }
@@ -140,11 +148,12 @@ public class TicTacToeActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int i, int j) {
                 if (mapPosicoes.containsKey(String.format("a%d%d", i, j))) {
-                    if(jogo[i][j] == '\u0000') {
+                    if (jogo[i][j] == '\u0000') {
                         ((ImageView) findViewById(mapPosicoes.get(String.format("a%d%d", i, j)))).setImageResource(R.drawable.o);
                         jogo[i][j] = PLAYER_O;
                         jogada++;
                         verificarSeAcabou();
+                        Log.d("GptClient", "gpt green");
                     } else {
                         fazerJogadaAutomatica();
                     }

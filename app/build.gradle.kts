@@ -1,7 +1,12 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
 }
+
+val properties = Properties()
+file("config.properties").inputStream().use { properties.load(it) }
 
 android {
     namespace = "goldenage.delfis.app"
@@ -15,6 +20,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "GPT_API_URL", "\"${properties["GPT_API_URL"]}\"")
+        buildConfigField("String", "GPT_API_KEY", "\"${properties["GPT_API_KEY"]}\"")
     }
 
     buildTypes {
@@ -26,6 +34,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -69,6 +82,4 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     implementation("androidx.lifecycle:lifecycle-process:2.5.0")
-
-    implementation("io.github.cdimascio:dotenv-java:3.0.0")
 }
