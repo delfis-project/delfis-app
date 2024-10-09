@@ -17,7 +17,7 @@ import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.request.LoginRequest;
 import goldenage.delfis.app.model.response.LoginResponse;
 import goldenage.delfis.app.model.request.UserRequest;
-import goldenage.delfis.app.util.RetrofitClient;
+import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         birthDateEditText = findViewById(R.id.datas);
 
         Button criarButton = findViewById(R.id.entrar);
-        Retrofit retrofit = RetrofitClient.getClient();
+        Retrofit retrofit = RetrofitFactory.getClient();
         apiService = retrofit.create(DelfisApiService.class);
 
         // TextWatcher para formatar a data de nascimento
@@ -148,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Aguarde...", Toast.LENGTH_LONG).show();
 
             LoginRequest loginRequest = new LoginRequest(UNLOGGED_USERNAME, UNLOGGED_PASSWORD);
-            DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+            DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
             Call<LoginResponse> call = delfisApiService.login(loginRequest);
 
             call.enqueue(new Callback<LoginResponse>() {

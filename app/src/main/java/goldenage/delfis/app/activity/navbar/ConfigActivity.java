@@ -26,7 +26,7 @@ import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
-import goldenage.delfis.app.util.RetrofitClient;
+import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,7 +100,7 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         btSair.setOnClickListener(v -> {
-            DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+            DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
             Call<Session> call = delfisApiService.finishSession(user.getToken(), user.getId());
             Toast.makeText(ConfigActivity.this, "Saindo...", Toast.LENGTH_LONG).show();
             call.enqueue(new Callback<Session>() {

@@ -21,7 +21,7 @@ import goldenage.delfis.app.adapter.AdapterUserLeaderboard;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
-import goldenage.delfis.app.util.RetrofitClient;
+import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,7 +61,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     }
 
     private void loadLeaderboard(String token) {
-        DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
         Call<List<User>> call = delfisApiService.getLeaderboard(token);
         call.enqueue(new Callback<List<User>>() {
             @Override

@@ -16,7 +16,7 @@ import goldenage.delfis.app.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Sudoku;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.util.RetrofitClient;
+import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -81,7 +81,7 @@ public class SudokuActivity extends AppCompatActivity {
     }
 
     private void fetchSudokuBoard() {
-        DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
         Call<Sudoku> call = delfisApiService.generateSudokuBoard(user.getToken());
 
         call.enqueue(new Callback<Sudoku>() {

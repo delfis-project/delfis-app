@@ -44,7 +44,7 @@ import goldenage.delfis.app.R;
 import goldenage.delfis.app.activity.navbar.ConfigActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.util.RetrofitClient;
+import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -98,11 +98,10 @@ public class ProfilePictureActivity extends AppCompatActivity {
         textCarregando = findViewById(R.id.textCarregando);
         textCapturar = findViewById(R.id.textCapturar);
 
-        // Verifica se todas as permissões foram concedidas
         if (allPermissionsGranted()) {
-            startCamera(); // Se sim, inicia a câmera
+            startCamera();
         } else {
-            requestPermissions(); // Se não, solicita as permissões
+            requestPermissions();
         }
 
         btCapturar = findViewById(R.id.btCapturar);
@@ -151,7 +150,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
                 .child(String.format("profile_pictures/%d.jpg", this.user.getId()));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
         byte[] data = baos.toByteArray();
 
         imageRef.putBytes(data).addOnSuccessListener(taskSnapshot -> {
@@ -171,7 +170,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("pictureUrl", downloadUrl);
 
-        DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
         Call<User> call = delfisApiService.updateUserPartially(user.getToken(), user.getId(), map);
         call.enqueue(new Callback<User>() {
             @Override

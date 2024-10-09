@@ -19,7 +19,7 @@ import goldenage.delfis.app.model.request.LoginRequest;
 import goldenage.delfis.app.model.response.LoginResponse;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.util.RetrofitClient;
+import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
             LoginRequest loginRequest = new LoginRequest(username, password);
 
-            DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+            DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
             Call<LoginResponse> call = delfisApiService.login(loginRequest);
 
             call.enqueue(new Callback<LoginResponse>() {

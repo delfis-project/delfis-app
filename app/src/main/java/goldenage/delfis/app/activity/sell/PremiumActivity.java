@@ -9,7 +9,7 @@ import goldenage.delfis.app.R;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Plan;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.util.RetrofitClient;
+import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,7 +25,7 @@ public class PremiumActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("user");
 
-        DelfisApiService delfisApiService = RetrofitClient.getClient().create(DelfisApiService.class);
+        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
         Call<Plan> call = delfisApiService.getPlanByName(user.getToken(), PREMIUM_NAME);
         call.enqueue(new Callback<Plan>() {
             @Override
