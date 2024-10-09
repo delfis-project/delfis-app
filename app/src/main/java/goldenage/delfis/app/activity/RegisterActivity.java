@@ -180,32 +180,31 @@ public class RegisterActivity extends AppCompatActivity {
                                                     JSONObject errorJson = new JSONObject(errorBody);
 
                                                     // Verifica e exibe erros para cada campo
-                                                    if (errorJson.has("nome")) {
-                                                        String nameError = errorJson.getString("nome");
+                                                    if (errorJson.has("name")) {
+                                                        String nameError = errorJson.getString("name");
                                                         nameEditText.setError(nameError);
                                                     }
                                                     if (errorJson.has("email")) {
                                                         String emailError = errorJson.getString("email");
                                                         emailEditText.setError(emailError);
                                                     }
-                                                    if (errorJson.has("apelido")) {
-                                                        String usernameError = errorJson.getString("apelido");
+                                                    if (errorJson.has("username")) {
+                                                        String usernameError = errorJson.getString("username");
                                                         usernameEditText.setError(usernameError);
                                                     }
-                                                    if (errorJson.has("senha")) {
-                                                        String passwordError = errorJson.getString("senha");
+                                                    if (errorJson.has("password")) {
+                                                        String passwordError = errorJson.getString("password");
                                                         passwordEditText.setError(passwordError);
                                                     }
-                                                    if (errorJson.has("data_nascimento")) {
-                                                        String birthDateError = errorJson.getString("data_nascimento");
+                                                    if (errorJson.has("birthDate")) {
+                                                        String birthDateError = errorJson.getString("birthDate");
                                                         birthDateEditText.setError(birthDateError);
                                                     }
-                                                } else if (response.code() == 409) { // Código de erro para duplicidade
+                                                } else if (response.code() == 409) {
                                                     Toast.makeText(RegisterActivity.this,
                                                             "Desculpe, já existe uma conta com esse nome de usuário ou e-mail. Tente outro.",
                                                             Toast.LENGTH_LONG).show();
                                                 } else {
-                                                    // Outros erros
                                                     Toast.makeText(RegisterActivity.this, "Ocorreu um erro ao criar sua conta. Tente novamente.", Toast.LENGTH_LONG).show();
                                                 }
                                             } catch (IOException | JSONException e) {
