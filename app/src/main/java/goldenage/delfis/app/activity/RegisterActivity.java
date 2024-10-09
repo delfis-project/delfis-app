@@ -29,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText nameEditText, usernameEditText, passwordEditText, emailEditText, birthDateEditText;
@@ -144,6 +146,17 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "Por favor, insira sua data de nascimento.", Toast.LENGTH_LONG).show();
                 birthDateEditText.requestFocus();
                 return;
+            } else {
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(birthDate, inputFormatter);
+                if(LocalDate.now().getYear() - localDate.getYear() > 130
+                    || localDate.getDayOfMonth() > 31
+                    || localDate.getDayOfMonth() < 1
+                    || localDate.getMonthValue() > 12
+                    || localDate.getMonthValue() < 1) {
+                    Toast.makeText(this, "Por favor, insira uma data de nascimento válida.", Toast.LENGTH_LONG).show();
+                    birthDateEditText.requestFocus();
+                }
             }
 
             Toast.makeText(this, "Aguarde...", Toast.LENGTH_LONG).show();
@@ -167,19 +180,17 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(@NonNull Call<Void> call2, @NonNull Response<Void> response) {
                                         if (response.isSuccessful()) {
-                                            // Sucesso
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                             finish();
                                             Toast.makeText(RegisterActivity.this, "Cadastro realizado com sucesso! Você pode fazer login agora.", Toast.LENGTH_LONG).show();
                                         } else {
                                             try {
-                                                if (response.code() == 400) { // Código de erro de validação
+                                                if (response.code() == 400) {
                                                     String errorBody = response.errorBody().string();
                                                     System.out.println(errorBody);
                                                     JSONObject errorJson = new JSONObject(errorBody);
 
-                                                    // Verifica e exibe erros para cada campo
                                                     if (errorJson.has("name")) {
                                                         String nameError = errorJson.getString("name");
                                                         nameEditText.setError(nameError);

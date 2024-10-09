@@ -59,6 +59,8 @@ public class HomeActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
+finish();
+            finish();
             return true;
         });
 
@@ -69,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
+            finish();
         });
 
         btJogoVelha.setOnClickListener(view -> {
@@ -78,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
+            finish();
         });
     }
 

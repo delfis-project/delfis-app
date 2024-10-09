@@ -75,6 +75,7 @@ public class SudokuActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(SudokuActivity.this, "Algumas respostas estão incorretas. Tente novamente!", Toast.LENGTH_LONG).show();
         }
@@ -98,6 +99,7 @@ public class SudokuActivity extends AppCompatActivity {
                         intent.putExtra("user", user);
 
                     startActivity(intent);
+                    finish();
                 }
             }
 
@@ -110,6 +112,7 @@ public class SudokuActivity extends AppCompatActivity {
                     intent.putExtra("user", user);
 
                 startActivity(intent);
+                finish();
             }
         });
     }

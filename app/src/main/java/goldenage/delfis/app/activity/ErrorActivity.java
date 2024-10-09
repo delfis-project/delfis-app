@@ -14,10 +14,9 @@ public class ErrorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error);
 
-        // Botão para voltar à tela anterior
         Button backButton = findViewById(R.id.button);
         backButton.setOnClickListener(v -> {
-            finish(); // Fecha a Activity e retorna para a anterior
+            finish();
         });
     }
 }

@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.activity.EditInfoActivity;
 import goldenage.delfis.app.activity.ProfilePictureActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
@@ -35,7 +36,7 @@ public class ConfigActivity extends AppCompatActivity {
     private User user;
     private BottomNavigationView nav;
     private TextView levelUser, textNome, textEmail, textNascimento;
-    private ImageView btMudarFoto, btSair;
+    private ImageView btMudarFoto, btSair, btEditarInfo;
     private CircleImageView imgPerfil;
 
     @Override
@@ -52,6 +53,7 @@ public class ConfigActivity extends AppCompatActivity {
         imgPerfil = findViewById(R.id.imgPerfil);
         btMudarFoto = findViewById(R.id.btMudarFoto);
         btSair = findViewById(R.id.btSair);
+        btEditarInfo = findViewById(R.id.btEditarInfo);
 
         user = (User) getIntent().getSerializableExtra("user");
         if (user != null) {
@@ -87,6 +89,14 @@ public class ConfigActivity extends AppCompatActivity {
             Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
+        });
+
+        btEditarInfo.setOnClickListener(v -> {
+            Intent intent = new Intent(ConfigActivity.this, EditInfoActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            finish();
         });
 
         // Listener para navegação
@@ -96,6 +106,7 @@ public class ConfigActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
+            finish();
             return true;
         });
 
