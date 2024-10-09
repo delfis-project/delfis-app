@@ -41,13 +41,13 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        nameEditText = findViewById(R.id.editTextText);
-        usernameEditText = findViewById(R.id.editTextTextPassword3);
-        passwordEditText = findViewById(R.id.editTextTextPassword2);
-        emailEditText = findViewById(R.id.editTextTextEmailAddress3);
-        birthDateEditText = findViewById(R.id.datas);
+        nameEditText = findViewById(R.id.editTextNome);
+        usernameEditText = findViewById(R.id.editTextUsername);
+        passwordEditText = findViewById(R.id.editTextSenha);
+        emailEditText = findViewById(R.id.editTextEmail);
+        birthDateEditText = findViewById(R.id.editTextData);
 
-        Button criarButton = findViewById(R.id.entrar);
+        Button criarButton = findViewById(R.id.btAtualizar);
         Retrofit retrofit = RetrofitFactory.getClient();
         apiService = retrofit.create(DelfisApiService.class);
 

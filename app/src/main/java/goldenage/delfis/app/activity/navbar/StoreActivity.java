@@ -17,9 +17,9 @@ import goldenage.delfis.app.util.ActivityUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class StoreActivity extends AppCompatActivity {
-    User user;
-    BottomNavigationView nav;
-    ImageView btTemas, btPowerups, btMoedas, btPremium;
+    private User user;
+    private BottomNavigationView nav;
+    private ImageView btTemas, btPowerups, btMoedas, btPremium;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

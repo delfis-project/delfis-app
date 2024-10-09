@@ -28,10 +28,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class HomeActivity extends AppCompatActivity {
-    User user;
-    BottomNavigationView nav;
-    ImageView btSudoku, btJogoVelha, btDesafiosMatematicos;
-    TextView textCoins, textStreak;
+    private User user;
+    private BottomNavigationView nav;
+    private ImageView btSudoku, btJogoVelha, btDesafiosMatematicos;
+    private TextView textCoins, textStreak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

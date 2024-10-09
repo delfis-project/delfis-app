@@ -25,7 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-
     private static final String TAG = "LoginActivity"; // Tag para logs
 
     @Override
@@ -34,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         EditText usernameEditText = findViewById(R.id.editTextTextUsername);
-        EditText passwordEditText = findViewById(R.id.editTextTextPassword2);
-        Button entrarButton = findViewById(R.id.entrar);
+        EditText passwordEditText = findViewById(R.id.editTextSenha);
+        Button entrarButton = findViewById(R.id.btAtualizar);
         TextView criarContaTextView = findViewById(R.id.criarConta);
 
         entrarButton.setOnClickListener(v -> {

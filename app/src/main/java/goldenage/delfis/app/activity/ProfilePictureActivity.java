@@ -77,8 +77,8 @@ public class ProfilePictureActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private final CameraSelector cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
     private User user;
-    ImageView btCapturar, imgCarregando;
-    TextView textCarregando, textCapturar;
+    private ImageView btCapturar, imgCarregando;
+    private TextView textCarregando, textCapturar;
 
     @Override
     protected void onDestroy() {

@@ -15,8 +15,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PremiumActivity extends AppCompatActivity {
-    User user;
-    private final String PREMIUM_NAME = "Premium";
+    private User user;
+    private static final String PREMIUM_NAME = "Premium";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

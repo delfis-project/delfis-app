@@ -27,11 +27,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LeaderboardActivity extends AppCompatActivity {
-    BottomNavigationView nav;
-    User user;
-    RecyclerView recyclerViewUsers;
-    List<User> users = new ArrayList<>();
-    AdapterUserLeaderboard adapterUserLeaderboard;
+    private BottomNavigationView nav;
+    private User user;
+    private RecyclerView recyclerViewUsers;
+    private List<User> users = new ArrayList<>();
+    private AdapterUserLeaderboard adapterUserLeaderboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

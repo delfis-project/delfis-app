@@ -32,11 +32,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ConfigActivity extends AppCompatActivity {
-    User user;
-    BottomNavigationView nav;
-    TextView levelUser, textNome, textEmail, textNascimento;
-    ImageView btMudarFoto, btSair;
-    CircleImageView imgPerfil;
+    private User user;
+    private BottomNavigationView nav;
+    private TextView levelUser, textNome, textEmail, textNascimento;
+    private ImageView btMudarFoto, btSair;
+    private CircleImageView imgPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
