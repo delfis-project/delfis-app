@@ -10,6 +10,6 @@ import retrofit2.http.POST;
 
 public interface GptApiService {
     @Headers("Content-Type: application/json")
-    @POST("path/to/endpoint")
+    @POST("/v1/chat/completions")
     Call<GptResponse> enviarMensagem(@Header("Authorization") String authHeader, @Body GptRequest body);
 }

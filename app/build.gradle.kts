@@ -69,4 +69,6 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     implementation("androidx.lifecycle:lifecycle-process:2.5.0")
+
+    implementation("io.github.cdimascio:dotenv-java:3.0.0")
 }

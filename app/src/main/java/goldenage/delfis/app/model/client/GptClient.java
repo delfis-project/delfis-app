@@ -27,8 +27,8 @@ public class GptClient {
         this.apiKey = apiKey;
     }
 
-    public void enviarJogadaGPT(String jogoStr, final GPTCallback callback) {
-        String prompt = String.format("Tenho essa matriz que representa um jogo da velha em Java: %s\nO caracter 'o' representa a bolinha. O caracter 'x' representa o x. O resto são posições que você pode jogar.\nVocê é a bolinha. Faça uma jogada. Represente colocando a sua resposta nesse formato:\ni: posição j: posição", jogoStr);
+    public void enviarJogadaGpt(String jogoStr, final GPTCallback callback) {
+        String prompt = String.format("Tenho essa matriz que representa um jogo da velha em Java: %s\nO caracter 'o' representa a bolinha. O caracter 'x' representa o x. O resto são posições que você pode jogar.\nVocê é a bolinha. Faça uma jogada inteligente. Represente colocando a sua resposta nesse formato:\ni: posição j: posição", jogoStr);
 
         List<GptRequest.Message> messages = new ArrayList<>();
         messages.add(new GptRequest.Message("system", "Você deve fazer uma jogada em um jogo da velha."));
