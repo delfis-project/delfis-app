@@ -39,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView criarContaTextView = findViewById(R.id.criarConta);
 
         entrarButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-
             String username = usernameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
@@ -78,36 +76,32 @@ public class LoginActivity extends AppCompatActivity {
                                                 streakCall.enqueue(new Callback<Streak>() {
                                                     @Override
                                                     public void onResponse(@NonNull Call<Streak> call, @NonNull Response<Streak> response) {
-                                                        if (response.isSuccessful()) {
-                                                            Streak streak = response.body();
-                                                            user.setCurrentStreak(streak);
+                                                        Streak streak = response.body();
+                                                        user.setCurrentStreak(streak);
 
-                                                            Call<Session> callSession = delfisApiService.startSession(token, user.getId());
-                                                            callSession.enqueue(new Callback<Session>() {
-                                                                @Override
-                                                                public void onResponse(@NonNull Call<Session> call, @NonNull Response<Session> response) {
-                                                                    if (response.isSuccessful()) {
-                                                                        Session session = response.body();
-                                                                        user.setCurrentSession(session);
+                                                        Call<Session> callSession = delfisApiService.startSession(token, user.getId());
+                                                        callSession.enqueue(new Callback<Session>() {
+                                                            @Override
+                                                            public void onResponse(@NonNull Call<Session> call, @NonNull Response<Session> response) {
+                                                                if (response.isSuccessful()) {
+                                                                    Session session = response.body();
+                                                                    user.setCurrentSession(session);
 
-                                                                        intent.putExtra("user", user);
-                                                                        startActivity(intent);
-                                                                    } else {
-                                                                        Log.d(TAG, "Erro ao recuperar sessão: " + response.code());
-                                                                        Toast.makeText(LoginActivity.this, "Falha ao carregar sua sessão. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-                                                                    }
+                                                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                                    intent.putExtra("user", user);
+                                                                    startActivity(intent);
+                                                                } else {
+                                                                    Log.d(TAG, "Erro ao recuperar sessão: " + response.code());
+                                                                    Toast.makeText(LoginActivity.this, "Falha ao carregar sua sessão. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                                                                 }
+                                                            }
 
-                                                                @Override
-                                                                public void onFailure(@NonNull Call<Session> call, @NonNull Throwable t) {
-                                                                    Log.d(TAG, "Erro ao recuperar sessão: " + t.getMessage());
-                                                                    Toast.makeText(LoginActivity.this, "Não foi possível iniciar sua sessão no momento. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-                                                                }
-                                                            });
-                                                        } else {
-                                                            Log.d(TAG, "Erro ao recuperar streak: " + response.code());
-                                                            Toast.makeText(LoginActivity.this, "Falha ao carregar sua sequência atual de conquistas. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-                                                        }
+                                                            @Override
+                                                            public void onFailure(@NonNull Call<Session> call, @NonNull Throwable t) {
+                                                                Log.d(TAG, "Erro ao recuperar sessão: " + t.getMessage());
+                                                                Toast.makeText(LoginActivity.this, "Não foi possível iniciar sua sessão no momento. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
                                                     }
 
                                                     @Override

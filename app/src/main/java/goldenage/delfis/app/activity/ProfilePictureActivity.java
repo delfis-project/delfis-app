@@ -174,7 +174,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
         Call<User> call = delfisApiService.updateUserPartially(user.getToken(), user.getId(), map);
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful()) {
                     user = response.body();
                     Intent intent = new Intent(ProfilePictureActivity.this, ConfigActivity.class);
@@ -184,7 +184,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Toast.makeText(ProfilePictureActivity.this, "Erro ao salvar URL: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

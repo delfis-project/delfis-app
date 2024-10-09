@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import goldenage.delfis.app.api.DelfisApiService;
@@ -153,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                     if (response.isSuccessful()) {
                         LoginResponse loginResponse = response.body();
                         if (loginResponse != null) {
@@ -164,10 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 call2.enqueue(new Callback<Void>() {
                                     @Override
-                                    public void onResponse(Call<Void> call2, Response<Void> response) {
-                                        Log.d(TAG, String.valueOf(response.raw().body()));
-                                        Log.d(TAG, String.valueOf(response.code()));
-
+                                    public void onResponse(@NonNull Call<Void> call2, @NonNull Response<Void> response) {
                                         if (response.isSuccessful()) {
                                             // Sucesso
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -218,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void onFailure(Call<Void> call2, Throwable t) {
+                                    public void onFailure(@NonNull Call<Void> call2, @NonNull Throwable t) {
                                         Toast.makeText(RegisterActivity.this, "Falha na conexão com a API.", Toast.LENGTH_LONG).show();
                                     }
                                 });
@@ -237,7 +235,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                     Toast.makeText(RegisterActivity.this, "Falha na conexão com a API", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "Falha na conexão com a API", t);
                 }

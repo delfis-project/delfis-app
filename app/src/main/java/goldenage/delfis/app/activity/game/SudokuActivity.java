@@ -92,12 +92,24 @@ public class SudokuActivity extends AppCompatActivity {
                     populateSudokuGrid(sudoku.getBoard());
                 } else {
                     Toast.makeText(SudokuActivity.this, "Falha ao carregar o Sudoku", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
+                    if (user != null)
+                        intent.putExtra("user", user);
+
+                    startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Sudoku> call, @NonNull Throwable t) {
                 Toast.makeText(SudokuActivity.this, "Erro ao conectar ao servidor. Verifique sua conexão.", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
+                if (user != null)
+                    intent.putExtra("user", user);
+
+                startActivity(intent);
             }
         });
     }
