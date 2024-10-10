@@ -2,7 +2,7 @@
 Delfis app Android. Jogos para exercitar a mente todos os dias!
 
 ## Funcionalidades
-- Jogos: caça-palavras e sudoku (por enquanto!)
+- Jogos: sudoku, jogo da velha e desafios matemáticos (por enquanto!)
 - Competição!
 - Compra de temas para personalização do app
 - Compra de powerups para utilização estratégica
@@ -39,4 +39,8 @@ Siga as etapas abaixo para instalar o aplicativo via APK:
 ## Para mais informações
 Contate os desenvolvedores: [@EduardoNehmeSS](https://github.com/EduardoNehmeSS) e [@joaodinizaraujo](https://github.com/joaodinizaraujo)
 
-![Tela Inicial](link-da-imagem)
+<hr />
+<div style="display: flex">
+   <img src="https://firebasestorage.googleapis.com/v0/b/delfis-app.appspot.com/o/tela_login.png?alt=media&token=1411fb9b-bccb-4c71-a0bb-13c03ef19f42" alt="tela de login da Delfis!" />
+   <img src="https://firebasestorage.googleapis.com/v0/b/delfis-app.appspot.com/o/home.png?alt=media&token=4417ac6d-707d-4903-a0b3-6dd8756207ba" alt="home da Delfis!" />
+</div>
