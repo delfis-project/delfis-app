@@ -89,14 +89,12 @@ public class ConfigActivity extends AppCompatActivity {
             Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
 
         btEditarInfo.setOnClickListener(v -> {
             Intent intent = new Intent(ConfigActivity.this, EditInfoActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
 
         // Listener para navegação
@@ -106,7 +104,7 @@ public class ConfigActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
-            finish();
+            
             return true;
         });
 

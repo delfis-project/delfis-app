@@ -182,7 +182,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         if (response.isSuccessful()) {
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
-                                            finish();
+                                            
                                             Toast.makeText(RegisterActivity.this, "Cadastro realizado com sucesso! Você pode fazer login agora.", Toast.LENGTH_LONG).show();
                                         } else {
                                             try {

@@ -26,15 +26,15 @@ public class User implements Serializable {
     private int coins;
     private String birthDate;
     private String pictureUrl;
+    private String createdAt;
+    private String updatedAt;
+    private String token;
 
     @SerializedName("fkPlanId")
     private int planId;
     @SerializedName("fkUserRoleId")
     private int userRoleId;
 
-    private String createdAt;
-    private String updatedAt;
-    private String token;
     private Streak currentStreak;
     private Session currentSession;
 }

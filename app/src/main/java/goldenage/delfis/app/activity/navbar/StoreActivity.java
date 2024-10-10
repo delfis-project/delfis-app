@@ -41,7 +41,7 @@ public class StoreActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
-            finish();
+            
             return true;
         });
 
@@ -49,28 +49,28 @@ public class StoreActivity extends AppCompatActivity {
             Intent intent = new Intent(StoreActivity.this, ThemesActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
+            
         });
 
         btPowerups.setOnClickListener(v -> {
             Intent intent = new Intent(StoreActivity.this, PowerupsActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
+            
         });
 
         btMoedas.setOnClickListener(v -> {
             Intent intent = new Intent(StoreActivity.this, CoinsActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
+            
         });
 
         btPremium.setOnClickListener(v -> {
             Intent intent = new Intent(StoreActivity.this, PremiumActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
+            
         });
     }
 }

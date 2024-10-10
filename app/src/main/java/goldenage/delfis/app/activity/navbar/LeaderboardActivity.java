@@ -56,7 +56,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
             startActivity(intent);
-            finish();
+            
             return true;
         });
     }

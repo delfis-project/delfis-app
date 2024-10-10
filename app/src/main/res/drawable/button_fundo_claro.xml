@@ -1,5 +1,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/delfisBackground" />
+    <solid android:color="#003F73" />
     <corners
         android:alpha="0.7"
         android:topLeftRadius="20dp"

@@ -113,7 +113,6 @@ public class TicTacToeActivity extends AppCompatActivity {
                 Intent intent = new Intent(TicTacToeActivity.this, HomeActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
-                finish();
             }, 2000);
         } else if (jogada == 9) {
             Toast.makeText(this, "Empate! Reiniciando...", Toast.LENGTH_LONG).show();

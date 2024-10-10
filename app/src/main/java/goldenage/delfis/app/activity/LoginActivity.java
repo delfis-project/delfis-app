@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                                                     intent.putExtra("user", user);
                                                                     startActivity(intent);
-                                                                    finish();
+                                                                    
                                                                 } else {
                                                                     Log.d(TAG, "Erro ao recuperar sessão: " + response.code());
                                                                     Toast.makeText(LoginActivity.this, "Falha ao carregar sua sessão. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
         criarContaTextView.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
-            finish();
+            
         });
     }
 }

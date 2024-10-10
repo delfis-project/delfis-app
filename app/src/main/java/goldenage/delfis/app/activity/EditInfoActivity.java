@@ -117,7 +117,7 @@ public class EditInfoActivity extends AppCompatActivity {
                             Intent intent = new Intent(EditInfoActivity.this, ConfigActivity.class);
                             intent.putExtra("user", user);
                             startActivity(intent);
-                            finish();
+                            
                             Toast.makeText(EditInfoActivity.this, "Atualização realizada com sucesso!", Toast.LENGTH_LONG).show();
                         }
                     } else {

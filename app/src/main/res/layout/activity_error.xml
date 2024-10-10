@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/delfistriste" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btCompra3"
         android:layout_width="219dp"
         android:layout_height="65dp"
         android:layout_marginTop="144dp"

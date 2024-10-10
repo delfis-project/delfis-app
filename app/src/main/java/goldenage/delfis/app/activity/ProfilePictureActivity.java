@@ -180,7 +180,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
                     Intent intent = new Intent(ProfilePictureActivity.this, ConfigActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
-                    finish();
+                    
                 }
             }
 
