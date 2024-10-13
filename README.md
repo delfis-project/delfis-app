@@ -37,7 +37,7 @@ Siga as etapas abaixo para instalar o aplicativo via APK:
 4. Certifique-se de que o emulador está configurado corretamente ou conecte um dispositivo Android real para testar.
 
 ## Para mais informações
-Contate os desenvolvedores: [@EduardoNehmeSS](https://github.com/EduardoNehmeSS) e [@joaodinizaraujo](https://github.com/joaodinizaraujo)
+Contate os desenvolvedores: [@EduardoNehmeSS](https://github.com/EduardoNehmeSS), [@joaodinizaraujo](https://github.com/joaodinizaraujo) e [@GuLeiteAbreu007](https://github.com/GuLeiteAbreu007)
 
 <hr />
 <div style="display: flex">
