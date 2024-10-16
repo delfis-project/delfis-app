@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.adapter.AdapterPowerup;
+import goldenage.delfis.app.adapter.AdapterPowerupStore;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Powerup;
 import goldenage.delfis.app.model.response.User;
@@ -33,7 +33,7 @@ public class SellPowerupsActivity extends AppCompatActivity {
     private TextView textMoedas;
     private ImageView btSeta;
     private List<Powerup> powerups = new ArrayList<>();
-    private AdapterPowerup adapterPowerup;
+    private AdapterPowerupStore adapterPowerupStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,8 @@ public class SellPowerupsActivity extends AppCompatActivity {
         });
         textMoedas.setText(String.valueOf(user.getCoins()));
 
-        adapterPowerup = new AdapterPowerup(powerups, user);
-        recyclerViewLoja.setAdapter(adapterPowerup);
+        adapterPowerupStore = new AdapterPowerupStore(powerups, user);
+        recyclerViewLoja.setAdapter(adapterPowerupStore);
         recyclerViewLoja.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         Toast.makeText(SellPowerupsActivity.this, "Carregando powerups...", Toast.LENGTH_LONG).show();
@@ -70,7 +70,7 @@ public class SellPowerupsActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     powerups.clear();
                     powerups.addAll(response.body());
-                    adapterPowerup.notifyDataSetChanged();
+                    adapterPowerupStore.notifyDataSetChanged();
                 } else {
                     Log.d(TAG, "Erro ao recuperar powerups: " + response.code());
                     Toast.makeText(SellPowerupsActivity.this, "Falha ao carregar powerups. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();

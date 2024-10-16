@@ -3,6 +3,8 @@ package goldenage.delfis.app.api;
 import java.util.List;
 import java.util.Map;
 
+import goldenage.delfis.app.model.request.AppUserPowerupRequest;
+import goldenage.delfis.app.model.response.AppUserPowerup;
 import goldenage.delfis.app.model.response.Plan;
 import goldenage.delfis.app.model.response.Powerup;
 import goldenage.delfis.app.model.response.Session;
@@ -10,6 +12,7 @@ import goldenage.delfis.app.model.request.LoginRequest;
 import goldenage.delfis.app.model.response.LoginResponse;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.Sudoku;
+import goldenage.delfis.app.model.response.Theme;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.model.request.UserRequest;
 import goldenage.delfis.app.model.response.WordSearch;
@@ -28,6 +31,9 @@ public interface DelfisApiService {
 
     @POST("api/app-user/insert")
     Call<Void> createUser(@Header("Authorization") String token, @Body UserRequest userRequest);
+
+    @POST("api/app-user-powerup/insert")
+    Call<AppUserPowerup> createAppUserPowerup(@Header("Authorization") String token, @Body AppUserPowerupRequest appUserPowerupRequest);
 
     @GET("api/app-user/get-by-username/{username}")
     Call<User> getUserByUsername(@Header("Authorization") String token, @Path("username") String username);
@@ -49,6 +55,9 @@ public interface DelfisApiService {
 
     @GET("api/powerup/get-all")
     Call<List<Powerup>> getAllPowerups(@Header("Authorization") String token);
+
+    @GET("api/theme/get-all")
+    Call<List<Theme>> getAllThemes(@Header("Authorization") String token);
 
     @GET("api/plan/get-by-name/{name}")
     Call<Plan> getPlanByName(@Header("Authorization") String token, @Path("name") String name);
