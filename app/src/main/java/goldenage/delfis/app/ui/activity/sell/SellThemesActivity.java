@@ -2,6 +2,7 @@ package goldenage.delfis.app.ui.activity.sell;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,8 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.adapter.AdapterPowerupStore;
 import goldenage.delfis.app.adapter.AdapterThemeStore;
 import goldenage.delfis.app.api.DelfisApiService;
+import goldenage.delfis.app.model.response.Powerup;
 import goldenage.delfis.app.model.response.Theme;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
@@ -29,11 +33,12 @@ import retrofit2.Response;
 
 public class SellThemesActivity extends AppCompatActivity {
     private User user;
-    private RecyclerView recyclerViewLoja;
-    private TextView textMoedas;
+    private RecyclerView recyclerViewLoja, recyclerViewUser;
+    private TextView textMoedas, textVazio;
     private ImageView btSeta;
-    private List<Theme> themes = new ArrayList<>();
-    private AdapterThemeStore adapterThemeStore;
+    private final List<Theme> themes = new ArrayList<>();
+    private final List<Theme> themesUser = new ArrayList<>();
+    private AdapterThemeStore adapterThemeStore, adapterThemeStoreUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class SellThemesActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         textMoedas = findViewById(R.id.textMoedas);
         btSeta = findViewById(R.id.btSeta);
+        recyclerViewUser = findViewById(R.id.recyclerViewUser);
+        textVazio = findViewById(R.id.textVazio);
 
         btSeta.setOnClickListener(v -> {
             Intent intent = new Intent(SellThemesActivity.this, StoreActivity.class);
@@ -56,6 +63,10 @@ public class SellThemesActivity extends AppCompatActivity {
         adapterThemeStore = new AdapterThemeStore(themes, user);
         recyclerViewLoja.setAdapter(adapterThemeStore);
         recyclerViewLoja.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        adapterThemeStoreUser = new AdapterThemeStore(themesUser, user);
+        recyclerViewUser.setAdapter(adapterThemeStoreUser);
+        recyclerViewUser.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         Toast.makeText(SellThemesActivity.this, "Carregando temas...", Toast.LENGTH_LONG).show();
         loadThemes(user.getToken());
@@ -72,15 +83,38 @@ public class SellThemesActivity extends AppCompatActivity {
                     themes.addAll(response.body());
                     adapterThemeStore.notifyDataSetChanged();
                 } else {
-                    Log.d(TAG, "Erro ao recuperar themes: " + response.code());
-                    Toast.makeText(SellThemesActivity.this, "Falha ao carregar themes. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "Erro ao recuperar temas: " + response.code());
+                    Toast.makeText(SellThemesActivity.this, "Falha ao carregar temas. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Theme>> call, Throwable t) {
-                Log.d(TAG, "Erro ao recusperar themes: " + t.getMessage());
-                Toast.makeText(SellThemesActivity.this, "Não foi possível carregar themes. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Erro ao recuperar temas: " + t.getMessage());
+                Toast.makeText(SellThemesActivity.this, "Não foi possível carregar temas. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Call<List<Theme>> call2 = delfisApiService.getThemesByAppUserId(token, user.getId());
+        call2.enqueue(new Callback<List<Theme>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Theme>> call, @NonNull Response<List<Theme>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    themesUser.clear();
+                    themesUser.addAll(response.body());
+                    adapterThemeStoreUser.notifyDataSetChanged();
+
+                    textVazio.setVisibility(View.INVISIBLE);
+                } else {
+                    recyclerViewUser.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Theme>> call, @NonNull Throwable t) {
+                recyclerViewUser.setVisibility(View.INVISIBLE);
+                Log.d(TAG, "Erro ao recuperar powerups: " + t.getMessage());
+                Toast.makeText(SellThemesActivity.this, "Não foi possível carregar temas. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
             }
         });
     }

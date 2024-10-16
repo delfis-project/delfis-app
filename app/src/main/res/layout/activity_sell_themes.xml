@@ -71,13 +71,55 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewLoja"
-            android:layout_width="389dp"
-            android:layout_height="511dp"
+            android:layout_width="364dp"
+            android:layout_height="200dp"
             android:layout_marginTop="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:layout_constraintVertical_bias="0.084"
+            tools:listitem="@layout/item_powerup_theme" />
+
+        <TextView
+            android:id="@+id/textView69"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="244dp"
+            android:text="MEUS TEMAS"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textVazio"
+            android:layout_width="345dp"
+            android:layout_height="154dp"
+            android:text="Poxa... tá tão vazio aqui... Vamos jogar para juntar dinheiro e comprar temas?"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView69"
+            app:layout_constraintVertical_bias="0.307" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewUser"
+            android:layout_width="362dp"
+            android:layout_height="196dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView69"
+            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item_powerup_theme" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

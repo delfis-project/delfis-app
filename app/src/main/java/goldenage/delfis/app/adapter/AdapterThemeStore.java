@@ -1,6 +1,8 @@
 package goldenage.delfis.app.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +101,12 @@ public class AdapterThemeStore extends RecyclerView.Adapter<AdapterThemeStore.Vi
                                             if (user != null) {
                                                 requisitante.setCoins(user.getCoins());
                                                 Toast.makeText(itemView.getContext(), "Tema comprado!", Toast.LENGTH_LONG).show();
+
+                                                @SuppressLint("UnsafeIntentLaunch")
+                                                Intent intent = ((Activity) itemView.getContext()).getIntent();
+                                                intent.putExtra("user", requisitante);
+                                                ((Activity) itemView.getContext()).finish();
+                                                itemView.getContext().startActivity(intent);
                                             }
                                         } else {
                                             Toast.makeText(itemView.getContext(), "Erro ao comprar tema!", Toast.LENGTH_LONG).show();

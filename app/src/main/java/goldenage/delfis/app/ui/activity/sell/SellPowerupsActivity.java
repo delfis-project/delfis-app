@@ -2,6 +2,7 @@ package goldenage.delfis.app.ui.activity.sell;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,11 +31,12 @@ import retrofit2.Response;
 
 public class SellPowerupsActivity extends AppCompatActivity {
     private User user;
-    private RecyclerView recyclerViewLoja;
-    private TextView textMoedas;
+    private RecyclerView recyclerViewLoja, recyclerViewUser;
+    private TextView textMoedas, textVazio;
     private ImageView btSeta;
-    private List<Powerup> powerups = new ArrayList<>();
-    private AdapterPowerupStore adapterPowerupStore;
+    private final List<Powerup> powerups = new ArrayList<>();
+    private final List<Powerup> powerupsUser = new ArrayList<>();
+    private AdapterPowerupStore adapterPowerupStore, adapterPowerupStoreUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class SellPowerupsActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         textMoedas = findViewById(R.id.textMoedas);
         btSeta = findViewById(R.id.btSeta);
+        recyclerViewUser = findViewById(R.id.recyclerViewUser);
+        textVazio = findViewById(R.id.textVazio);
 
         btSeta.setOnClickListener(v -> {
             Intent intent = new Intent(SellPowerupsActivity.this, StoreActivity.class);
@@ -57,16 +62,21 @@ public class SellPowerupsActivity extends AppCompatActivity {
         recyclerViewLoja.setAdapter(adapterPowerupStore);
         recyclerViewLoja.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        adapterPowerupStoreUser = new AdapterPowerupStore(powerupsUser, user);
+        recyclerViewUser.setAdapter(adapterPowerupStoreUser);
+        recyclerViewUser.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         Toast.makeText(SellPowerupsActivity.this, "Carregando powerups...", Toast.LENGTH_LONG).show();
         loadPowerups(user.getToken());
     }
 
     private void loadPowerups(String token) {
         DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
+
         Call<List<Powerup>> call = delfisApiService.getAllPowerups(token);
         call.enqueue(new Callback<List<Powerup>>() {
             @Override
-            public void onResponse(Call<List<Powerup>> call, Response<List<Powerup>> response) {
+            public void onResponse(@NonNull Call<List<Powerup>> call, @NonNull Response<List<Powerup>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     powerups.clear();
                     powerups.addAll(response.body());
@@ -78,8 +88,31 @@ public class SellPowerupsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Powerup>> call, Throwable t) {
-                Log.d(TAG, "Erro ao recusperar powerups: " + t.getMessage());
+            public void onFailure(@NonNull Call<List<Powerup>> call, @NonNull Throwable t) {
+                Log.d(TAG, "Erro ao recuperar powerups: " + t.getMessage());
+                Toast.makeText(SellPowerupsActivity.this, "Não foi possível carregar powerups. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Call<List<Powerup>> call2 = delfisApiService.getPowerupsByAppUserId(token, user.getId());
+        call2.enqueue(new Callback<List<Powerup>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Powerup>> call, @NonNull Response<List<Powerup>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    powerupsUser.clear();
+                    powerupsUser.addAll(response.body());
+                    adapterPowerupStoreUser.notifyDataSetChanged();
+
+                    textVazio.setVisibility(View.INVISIBLE);
+                } else {
+                    recyclerViewUser.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Powerup>> call, @NonNull Throwable t) {
+                recyclerViewUser.setVisibility(View.INVISIBLE);
+                Log.d(TAG, "Erro ao recuperar powerups: " + t.getMessage());
                 Toast.makeText(SellPowerupsActivity.this, "Não foi possível carregar powerups. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
             }
         });

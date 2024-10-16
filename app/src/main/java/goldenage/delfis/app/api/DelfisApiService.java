@@ -67,6 +67,12 @@ public interface DelfisApiService {
     @GET("api/plan/get-by-name/{name}")
     Call<Plan> getPlanByName(@Header("Authorization") String token, @Path("name") String name);
 
+    @GET("api/powerup/get-by-app-user/{id}")
+    Call<List<Powerup>> getPowerupsByAppUserId(@Header("Authorization") String token, @Path("id") long fkAppUserId);
+
+    @GET("api/theme/get-by-app-user/{id}")
+    Call<List<Theme>> getThemesByAppUserId(@Header("Authorization") String token, @Path("id") long fkAppUserId);
+
     @POST("api/sudoku/generate")
     Call<Sudoku> generateSudokuBoard(@Header("Authorization") String token);
 }
