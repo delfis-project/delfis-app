@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.sell.PremiumActivity">
+    tools:context=".ui.activity.sell.SellPremiumActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/btX"
             android:layout_width="27dp"
             android:layout_height="34dp"
             android:layout_marginTop="24dp"
@@ -40,8 +40,8 @@
             app:srcCompat="@drawable/x" />
 
         <LinearLayout
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
+            android:layout_width="285dp"
+            android:layout_height="397dp"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|start"
-                    android:text="Remover Anúncios"
+                    android:text="Remove anúncios"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -92,7 +92,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|start"
-                    android:text="1.5xp a mais "
+                    android:text="50% a mais de XP"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -140,7 +140,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|start"
-                    android:text="imunidade de streak a cada 5 dias"
+                    android:text="Imunidade de streak a cada 5 dias"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -161,7 +161,7 @@
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="171dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center|start"
                     android:text="POWER up aleatório a cada 2 dias"
@@ -176,6 +176,7 @@
         android:id="@+id/textView11"
         android:layout_width="311dp"
         android:layout_height="63dp"
+        android:layout_marginBottom="16dp"
         android:text="após assinar o plano premium, mensalmente será cobrado o valor da assinatura. O plano pode ser cancelado a qualquer momento"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -193,12 +194,12 @@
         app:srcCompat="@drawable/button_fundo_escuro" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textBtCompra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comprar por R$19,99"
+        android:text="Carregando..."
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/btComprar"
         app:layout_constraintEnd_toEndOf="@+id/btComprar"
         app:layout_constraintStart_toStartOf="@+id/btComprar"

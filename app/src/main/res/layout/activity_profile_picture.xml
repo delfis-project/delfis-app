@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#113D6C"
-    tools:context=".activity.ProfilePictureActivity">
+    tools:context=".ui.activity.ProfilePictureActivity">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"

@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity.game;
+package goldenage.delfis.app.ui.activity.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +19,7 @@ import java.util.Random;
 
 import goldenage.delfis.app.BuildConfig;
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.navbar.HomeActivity;
+import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.model.client.GptClient;
 import goldenage.delfis.app.model.response.User;
 

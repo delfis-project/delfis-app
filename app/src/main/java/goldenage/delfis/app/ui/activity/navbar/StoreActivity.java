@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity.navbar;
+package goldenage.delfis.app.ui.activity.navbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.sell.CoinsActivity;
-import goldenage.delfis.app.activity.sell.PowerupsActivity;
-import goldenage.delfis.app.activity.sell.PremiumActivity;
-import goldenage.delfis.app.activity.sell.ThemesActivity;
+import goldenage.delfis.app.ui.activity.sell.SellCoinsActivity;
+import goldenage.delfis.app.ui.activity.sell.SellPowerupsActivity;
+import goldenage.delfis.app.ui.activity.sell.SellPremiumActivity;
+import goldenage.delfis.app.ui.activity.sell.SellThemesActivity;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
 
@@ -46,31 +46,27 @@ public class StoreActivity extends AppCompatActivity {
         });
 
         btTemas.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, ThemesActivity.class);
+            Intent intent = new Intent(StoreActivity.this, SellThemesActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            
         });
 
         btPowerups.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, PowerupsActivity.class);
+            Intent intent = new Intent(StoreActivity.this, SellPowerupsActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            
         });
 
         btMoedas.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, CoinsActivity.class);
+            Intent intent = new Intent(StoreActivity.this, SellCoinsActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            
         });
 
         btPremium.setOnClickListener(v -> {
-            Intent intent = new Intent(StoreActivity.this, PremiumActivity.class);
+            Intent intent = new Intent(StoreActivity.this, SellPremiumActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            
         });
     }
 }

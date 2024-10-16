@@ -54,7 +54,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/imageView16"
+            android:id="@+id/img"
             android:layout_width="344dp"
             android:layout_height="217dp"
             app:layout_constraintBottom_toTopOf="@+id/btSudoku"
@@ -106,11 +106,11 @@
             android:text="0"
             android:textColor="#FFFFFF"
             android:textSize="42sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView16"
-            app:layout_constraintEnd_toEndOf="@+id/imageView16"
+            app:layout_constraintBottom_toBottomOf="@+id/img"
+            app:layout_constraintEnd_toEndOf="@+id/img"
             app:layout_constraintHorizontal_bias="0.246"
-            app:layout_constraintStart_toStartOf="@+id/imageView16"
-            app:layout_constraintTop_toTopOf="@+id/imageView16"
+            app:layout_constraintStart_toStartOf="@+id/img"
+            app:layout_constraintTop_toTopOf="@+id/img"
             app:layout_constraintVertical_bias="0.534" />
 
         <TextView
@@ -120,11 +120,11 @@
             android:text="sequência"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView16"
-            app:layout_constraintEnd_toEndOf="@+id/imageView16"
+            app:layout_constraintBottom_toBottomOf="@+id/img"
+            app:layout_constraintEnd_toEndOf="@+id/img"
             app:layout_constraintHorizontal_bias="0.157"
-            app:layout_constraintStart_toStartOf="@+id/imageView16"
-            app:layout_constraintTop_toTopOf="@+id/imageView16"
+            app:layout_constraintStart_toStartOf="@+id/img"
+            app:layout_constraintTop_toTopOf="@+id/img"
             app:layout_constraintVertical_bias="0.291" />
 
         <TextView
@@ -135,11 +135,11 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView16"
-            app:layout_constraintEnd_toEndOf="@+id/imageView16"
+            app:layout_constraintBottom_toBottomOf="@+id/img"
+            app:layout_constraintEnd_toEndOf="@+id/img"
             app:layout_constraintHorizontal_bias="0.915"
-            app:layout_constraintStart_toStartOf="@+id/imageView16"
-            app:layout_constraintTop_toTopOf="@+id/imageView16"
+            app:layout_constraintStart_toStartOf="@+id/img"
+            app:layout_constraintTop_toTopOf="@+id/img"
             app:layout_constraintVertical_bias="0.52" />
 
         <TextView

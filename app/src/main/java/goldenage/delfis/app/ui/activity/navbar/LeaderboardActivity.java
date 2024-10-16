@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity.navbar;
+package goldenage.delfis.app.ui.activity.navbar;
 
 import static android.content.ContentValues.TAG;
 
@@ -79,7 +79,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.d(TAG, "Erro ao recuperar usuários: " + t.getMessage());
+                Log.d(TAG, "Erro ao recusperar usuários: " + t.getMessage());
                 Toast.makeText(LeaderboardActivity.this, "Não foi possível carregar o placar. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
             }
         });

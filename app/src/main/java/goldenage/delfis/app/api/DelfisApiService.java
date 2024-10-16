@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import goldenage.delfis.app.model.response.Plan;
+import goldenage.delfis.app.model.response.Powerup;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.request.LoginRequest;
 import goldenage.delfis.app.model.response.LoginResponse;
@@ -46,12 +47,12 @@ public interface DelfisApiService {
     @GET("api/app-user/leaderboard")
     Call<List<User>> getLeaderboard(@Header("Authorization") String token);
 
-    @GET("api/app-user/leaderboard")
-    Call<Plan> getPlanByName(@Header("Authorization") String token, String name);
+    @GET("api/powerup/get-all")
+    Call<List<Powerup>> getAllPowerups(@Header("Authorization") String token);
+
+    @GET("api/plan/get-by-name/{name}")
+    Call<Plan> getPlanByName(@Header("Authorization") String token, @Path("name") String name);
 
     @POST("api/sudoku/generate")
     Call<Sudoku> generateSudokuBoard(@Header("Authorization") String token);
-
-    @POST("api/word-search/generate")
-    Call<WordSearch> generateWordSearch(@Header("Authorization") String token, @Query("gridSize") int gridSize, @Query("words") String words);
 }

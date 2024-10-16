@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity.game;
+package goldenage.delfis.app.ui.activity.game;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.navbar.HomeActivity;
+import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Sudoku;
 import goldenage.delfis.app.model.response.User;

@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity;
+package goldenage.delfis.app.ui.activity;
 
 import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
 
@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.navbar.ConfigActivity;
+import goldenage.delfis.app.ui.activity.navbar.ConfigActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.RetrofitFactory;

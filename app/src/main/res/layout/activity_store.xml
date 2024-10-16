@@ -160,7 +160,7 @@
         android:layout_height="27dp"
         android:layout_marginTop="8dp"
         android:autoSizeTextType="none"
-        android:text="POWER UPS"
+        android:text="POWERUPS"
         android:textColor="@color/delfis01"
         android:textSize="20dp"
         android:textStyle="bold"

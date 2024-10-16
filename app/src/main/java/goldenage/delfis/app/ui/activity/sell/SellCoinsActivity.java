@@ -1,18 +1,20 @@
-package goldenage.delfis.app.activity.sell;
+package goldenage.delfis.app.ui.activity.sell;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
 
-public class CoinsActivity extends AppCompatActivity {
+public class SellCoinsActivity extends AppCompatActivity {
     private User user;
-    private ImageView btCompra1, btCompra2, btCompra3, btCompra4;
+    private ImageView btSeta, btCompra1, btCompra2, btCompra3, btCompra4;
     private TextView textMoedas, textMoedas1, textMoedas2, textMoedas3, textMoedas4;
     private TextView textBtCompra1, textBtCompra2, textBtCompra3, textBtCompra4;
 
@@ -28,6 +30,7 @@ public class CoinsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coins);
 
         user = (User) getIntent().getSerializableExtra("user");
+        btSeta = findViewById(R.id.btSeta);
         btCompra1 = findViewById(R.id.btCompra1);
         btCompra2 = findViewById(R.id.btCompra2);
         btCompra3 = findViewById(R.id.btCompra3);
@@ -43,6 +46,13 @@ public class CoinsActivity extends AppCompatActivity {
         textBtCompra4 = findViewById(R.id.textBtCompra4);
 
         textMoedas.setText(String.valueOf(user.getCoins()));
+
+        btSeta.setOnClickListener(v -> {
+            Intent intent = new Intent(SellCoinsActivity.this, StoreActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            finish();
+        });
 
         TEXT_BOTOES = new TextView[]{textBtCompra1, textBtCompra2, textBtCompra3, textBtCompra4};
         TEXT_QUANTIDADES = new TextView[]{textMoedas1, textMoedas2, textMoedas3, textMoedas4};

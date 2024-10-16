@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity;
+package goldenage.delfis.app.ui.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.navbar.HomeActivity;
+import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.request.LoginRequest;

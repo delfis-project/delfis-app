@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity.navbar;
+package goldenage.delfis.app.ui.activity.navbar;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -16,8 +16,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.activity.game.SudokuActivity;
-import goldenage.delfis.app.activity.game.TicTacToeActivity;
+import goldenage.delfis.app.ui.activity.game.SudokuActivity;
+import goldenage.delfis.app.ui.activity.game.TicTacToeActivity;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;

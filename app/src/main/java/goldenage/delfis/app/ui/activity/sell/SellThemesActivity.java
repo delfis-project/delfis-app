@@ -1,4 +1,4 @@
-package goldenage.delfis.app.activity.sell;
+package goldenage.delfis.app.ui.activity.sell;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import goldenage.delfis.app.R;
 
-public class ThemesActivity extends AppCompatActivity {
+public class SellThemesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
