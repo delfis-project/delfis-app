@@ -57,7 +57,7 @@ public class SellThemesActivity extends AppCompatActivity {
         recyclerViewLoja.setAdapter(adapterThemeStore);
         recyclerViewLoja.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        Toast.makeText(SellThemesActivity.this, "Carregando themes...", Toast.LENGTH_LONG).show();
+        Toast.makeText(SellThemesActivity.this, "Carregando temas...", Toast.LENGTH_LONG).show();
         loadThemes(user.getToken());
     }
 

@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import goldenage.delfis.app.model.request.AppUserPowerupRequest;
+import goldenage.delfis.app.model.request.AppUserThemeRequest;
 import goldenage.delfis.app.model.response.AppUserPowerup;
+import goldenage.delfis.app.model.response.AppUserTheme;
 import goldenage.delfis.app.model.response.Plan;
 import goldenage.delfis.app.model.response.Powerup;
 import goldenage.delfis.app.model.response.Session;
@@ -34,6 +36,9 @@ public interface DelfisApiService {
 
     @POST("api/app-user-powerup/insert")
     Call<AppUserPowerup> createAppUserPowerup(@Header("Authorization") String token, @Body AppUserPowerupRequest appUserPowerupRequest);
+
+    @POST("api/app-user-theme/insert")
+    Call<AppUserTheme> createAppUserTheme(@Header("Authorization") String token, @Body AppUserThemeRequest appUserThemeRequest);
 
     @GET("api/app-user/get-by-username/{username}")
     Call<User> getUserByUsername(@Header("Authorization") String token, @Path("username") String username);
