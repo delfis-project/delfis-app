@@ -72,8 +72,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewLoja"
-            android:layout_width="383dp"
-            android:layout_height="240dp"
+            android:layout_width="392dp"
+            android:layout_height="243dp"
             android:layout_marginBottom="308dp"
             android:foregroundGravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -96,8 +96,8 @@
 
         <TextView
             android:id="@+id/textVazio"
-            android:layout_width="345dp"
-            android:layout_height="154dp"
+            android:layout_width="352dp"
+            android:layout_height="202dp"
             android:text="Poxa... tá tão vazio aqui... Vamos jogar para juntar dinheiro e comprar powerups?"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
@@ -110,8 +110,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewUser"
-            android:layout_width="386dp"
-            android:layout_height="206dp"
+            android:layout_width="396dp"
+            android:layout_height="209dp"
             android:layout_marginTop="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

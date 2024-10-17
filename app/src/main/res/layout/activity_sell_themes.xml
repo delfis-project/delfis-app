@@ -97,8 +97,8 @@
 
         <TextView
             android:id="@+id/textVazio"
-            android:layout_width="345dp"
-            android:layout_height="154dp"
+            android:layout_width="378dp"
+            android:layout_height="193dp"
             android:text="Poxa... tá tão vazio aqui... Vamos jogar para juntar dinheiro e comprar temas?"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
