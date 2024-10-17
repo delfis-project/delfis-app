@@ -71,11 +71,8 @@ public class SudokuActivity extends AppCompatActivity {
             Toast.makeText(SudokuActivity.this, "Parabéns! Todas as respostas estão corretas!", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
-            if (user != null)
-                intent.putExtra("user", user);
-
+            intent.putExtra("user", user);
             startActivity(intent);
-            
         } else {
             Toast.makeText(SudokuActivity.this, "Algumas respostas estão incorretas. Tente novamente!", Toast.LENGTH_LONG).show();
         }
@@ -95,11 +92,8 @@ public class SudokuActivity extends AppCompatActivity {
                     Toast.makeText(SudokuActivity.this, "Falha ao carregar o Sudoku", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
-                    if (user != null)
-                        intent.putExtra("user", user);
-
+                    intent.putExtra("user", user);
                     startActivity(intent);
-                    
                 }
             }
 
@@ -108,11 +102,8 @@ public class SudokuActivity extends AppCompatActivity {
                 Toast.makeText(SudokuActivity.this, "Erro ao conectar ao servidor. Verifique sua conexão.", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
-                if (user != null)
-                    intent.putExtra("user", user);
-
+                intent.putExtra("user", user);
                 startActivity(intent);
-                
             }
         });
     }

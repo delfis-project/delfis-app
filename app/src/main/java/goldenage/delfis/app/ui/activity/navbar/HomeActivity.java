@@ -16,6 +16,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.ui.activity.game.MathChallengesActivity;
 import goldenage.delfis.app.ui.activity.game.SudokuActivity;
 import goldenage.delfis.app.ui.activity.game.TicTacToeActivity;
 import goldenage.delfis.app.model.response.Streak;
@@ -55,30 +56,27 @@ public class HomeActivity extends AppCompatActivity {
 
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(HomeActivity.this, item);
-            if (user != null)
-                intent.putExtra("user", user);
-
+            intent.putExtra("user", user);
             startActivity(intent);
-
             
             return true;
         });
 
         btSudoku.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, SudokuActivity.class);
-
-            if (user != null)
-                intent.putExtra("user", user);
-
+            intent.putExtra("user", user);
             startActivity(intent);
         });
 
         btJogoVelha.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, TicTacToeActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        });
 
-            if (user != null)
-                intent.putExtra("user", user);
-
+        btDesafiosMatematicos.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, MathChallengesActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         });
     }

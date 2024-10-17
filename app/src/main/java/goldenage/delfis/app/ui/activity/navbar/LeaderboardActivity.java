@@ -52,9 +52,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(LeaderboardActivity.this, item);
-            if (user != null)
-                intent.putExtra("user", user);
-
+            intent.putExtra("user", user);
             startActivity(intent);
             
             return true;

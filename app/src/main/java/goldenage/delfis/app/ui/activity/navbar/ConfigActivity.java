@@ -54,35 +54,33 @@ public class ConfigActivity extends AppCompatActivity {
         btMudarFoto = findViewById(R.id.btMudarFoto);
         btSair = findViewById(R.id.btSair);
         btEditarInfo = findViewById(R.id.btEditarInfo);
-
         user = (User) getIntent().getSerializableExtra("user");
-        if (user != null) {
-            levelUser.setText(String.valueOf(user.getLevel()));
-            textNome.setText(user.getName());
-            textEmail.setText(user.getEmail());
 
-            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String data = LocalDate.parse(user.getBirthDate(), inputFormatter).format(outputFormatter);
-            textNascimento.setText(data);
+        levelUser.setText(String.valueOf(user.getLevel()));
+        textNome.setText(user.getName());
+        textEmail.setText(user.getEmail());
 
-            if (user.getPictureUrl() != null) {
-                int widthValue = (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        160,
-                        getResources().getDisplayMetrics());
-                int heightValue = (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        180,
-                        getResources().getDisplayMetrics());
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String data = LocalDate.parse(user.getBirthDate(), inputFormatter).format(outputFormatter);
+        textNascimento.setText(data);
 
-                ViewGroup.LayoutParams layoutParams = imgPerfil.getLayoutParams();
-                layoutParams.width = widthValue;
-                layoutParams.height = heightValue;
-                imgPerfil.setLayoutParams(layoutParams);
+        if (user.getPictureUrl() != null) {
+            int widthValue = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    160,
+                    getResources().getDisplayMetrics());
+            int heightValue = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    180,
+                    getResources().getDisplayMetrics());
 
-                Glide.with(this).load(user.getPictureUrl()).into(imgPerfil);
-            }
+            ViewGroup.LayoutParams layoutParams = imgPerfil.getLayoutParams();
+            layoutParams.width = widthValue;
+            layoutParams.height = heightValue;
+            imgPerfil.setLayoutParams(layoutParams);
+
+            Glide.with(this).load(user.getPictureUrl()).into(imgPerfil);
         }
 
         btMudarFoto.setOnClickListener(v -> {
@@ -100,9 +98,7 @@ public class ConfigActivity extends AppCompatActivity {
         // Listener para navegação
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(ConfigActivity.this, item);
-            if (user != null)
-                intent.putExtra("user", user);
-
+            intent.putExtra("user", user);
             startActivity(intent);
             
             return true;

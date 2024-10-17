@@ -37,9 +37,7 @@ public class StoreActivity extends AppCompatActivity {
         nav.setSelectedItemId(R.id.lojaMenu);
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(StoreActivity.this, item);
-            if (user != null)
-                intent.putExtra("user", user);
-
+            intent.putExtra("user", user);
             startActivity(intent);
             
             return true;
