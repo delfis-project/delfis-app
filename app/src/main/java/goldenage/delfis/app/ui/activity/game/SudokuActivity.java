@@ -69,10 +69,12 @@ public class SudokuActivity extends AppCompatActivity {
     private void checkSudokuAnswers() {
         if (isSudokuValid(sudokuBoard)) {
             Toast.makeText(SudokuActivity.this, "Parabéns! Todas as respostas estão corretas!", Toast.LENGTH_LONG).show();
+            GameUtil.payUser(SudokuActivity.this, user);
 
             Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(SudokuActivity.this, "Algumas respostas estão incorretas. Tente novamente!", Toast.LENGTH_LONG).show();
         }
@@ -150,5 +152,14 @@ public class SudokuActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
     }
 }

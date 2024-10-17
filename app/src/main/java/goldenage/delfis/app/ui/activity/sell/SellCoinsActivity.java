@@ -1,15 +1,24 @@
 package goldenage.delfis.app.ui.activity.sell;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
 
 public class SellCoinsActivity extends AppCompatActivity {
@@ -20,6 +29,7 @@ public class SellCoinsActivity extends AppCompatActivity {
 
     private static TextView[] TEXT_BOTOES;
     private static TextView[] TEXT_QUANTIDADES;
+    private static ImageView[] BT_COMPRAS;
     private static final int[] QUANTIDADES = {50, 100, 150, 200};
     private static final double[] PRECOS = {9.99, 15.99, 19.99, 29.99};
 
@@ -56,10 +66,40 @@ public class SellCoinsActivity extends AppCompatActivity {
 
         TEXT_BOTOES = new TextView[]{textBtCompra1, textBtCompra2, textBtCompra3, textBtCompra4};
         TEXT_QUANTIDADES = new TextView[]{textMoedas1, textMoedas2, textMoedas3, textMoedas4};
-
         for (int i = 0; i < TEXT_BOTOES.length; i++) {
             TEXT_BOTOES[i].setText("Comprar por R$" + String.valueOf(PRECOS[i]).replace('.', ','));
             TEXT_QUANTIDADES[i].setText(String.valueOf(QUANTIDADES[i]));
         }
+
+        BT_COMPRAS = new ImageView[]{btCompra1, btCompra2, btCompra3, btCompra4};
+        
+    }
+
+    public void notificarCompra(int quantidadeMoedas) {
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        @SuppressLint("DefaultLocale")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("Compra aprovada!")
+                .setContentText(String.format("Sua compra de %d moedas foi aprovada!", quantidadeMoedas))
+                .setSmallIcon(R.drawable.delfis)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        NotificationChannel channel = new NotificationChannel("channel_id", "Notificar",
+                NotificationManager.IMPORTANCE_HIGH);
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(channel);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
+            return;
+        }
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(1, builder.build());
     }
 }

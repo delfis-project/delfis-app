@@ -54,6 +54,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             Intent intent = ActivityUtil.getNextIntent(LeaderboardActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
             
             return true;
         });
@@ -81,5 +82,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                 Toast.makeText(LeaderboardActivity.this, "Não foi possível carregar o placar. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(LeaderboardActivity.this, HomeActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
     }
 }

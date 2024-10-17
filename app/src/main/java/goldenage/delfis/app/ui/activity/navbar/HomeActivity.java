@@ -21,6 +21,7 @@ import goldenage.delfis.app.ui.activity.game.SudokuActivity;
 import goldenage.delfis.app.ui.activity.game.TicTacToeActivity;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.ui.activity.sell.SellPremiumActivity;
 import goldenage.delfis.app.util.ActivityUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,7 +32,7 @@ import java.time.format.DateTimeFormatter;
 public class HomeActivity extends AppCompatActivity {
     private User user;
     private BottomNavigationView nav;
-    private ImageView btSudoku, btJogoVelha, btDesafiosMatematicos;
+    private ImageView btSudoku, btJogoVelha, btDesafiosMatematicos, btAntiAds;
     private TextView textCoins, textStreak;
 
     @Override
@@ -47,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         btDesafiosMatematicos = findViewById(R.id.btDesafiosMatematicos);
         textCoins = findViewById(R.id.textCoins);
         textStreak = findViewById(R.id.textStreak);
+        btAntiAds = findViewById(R.id.btAntiAds);
 
         textCoins.setText(String.valueOf(user.getCoins()));
 
@@ -58,26 +60,36 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = ActivityUtil.getNextIntent(HomeActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
             
             return true;
+        });
+
+        btAntiAds.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, SellPremiumActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
 
         btSudoku.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, SudokuActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         });
 
         btJogoVelha.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, TicTacToeActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         });
 
         btDesafiosMatematicos.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, MathChallengesActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -92,30 +104,9 @@ public class HomeActivity extends AppCompatActivity {
         textStreak.setText(String.valueOf(dias));
     }
 
-    public void notificarDesafioDiario() {
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Já fez sua atividade diária?")
-                .setContentText("Não se esqueça de completar sua atividade diária para ganhar moedas e recompensas!")
-                .setSmallIcon(R.drawable.delfis)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
-
-        NotificationChannel channel = new NotificationChannel("channel_id", "Notificar",
-                NotificationManager.IMPORTANCE_HIGH);
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        manager.createNotificationChannel(channel);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-            return;
-        }
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(1, builder.build());
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }

@@ -153,7 +153,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/btAntiAds"
                 android:layout_width="84dp"
                 android:layout_height="74dp"
                 app:layout_constraintBottom_toBottomOf="parent"

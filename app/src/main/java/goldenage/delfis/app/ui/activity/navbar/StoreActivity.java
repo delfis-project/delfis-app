@@ -39,6 +39,7 @@ public class StoreActivity extends AppCompatActivity {
             Intent intent = ActivityUtil.getNextIntent(StoreActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
             
             return true;
         });
@@ -66,5 +67,14 @@ public class StoreActivity extends AppCompatActivity {
             intent.putExtra("user", user);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(StoreActivity.this, HomeActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
     }
 }

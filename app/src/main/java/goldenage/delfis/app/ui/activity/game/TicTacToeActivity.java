@@ -107,7 +107,14 @@ public class TicTacToeActivity extends AppCompatActivity {
 
     public void verificarSeAcabou() {
         if (verificarVitoria()) {
-            String resultado = jogada % 2 != 0 ? "Vitória!" : "Derrota :(";
+            String resultado;
+            if (jogada % 2 != 0) {
+                resultado = "Vitória!";
+                GameUtil.payUser(TicTacToeActivity.this, user);
+            } else {
+                resultado = "Derrota :(";
+            }
+
             ((TextView) findViewById(R.id.resultado)).setText(resultado);
             handler.postDelayed(() -> {
                 Intent intent = new Intent(TicTacToeActivity.this, HomeActivity.class);
@@ -183,5 +190,14 @@ public class TicTacToeActivity extends AppCompatActivity {
         jogo[i][j] = PLAYER_O;
         jogada++;
         verificarSeAcabou();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(TicTacToeActivity.this, HomeActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
     }
 }

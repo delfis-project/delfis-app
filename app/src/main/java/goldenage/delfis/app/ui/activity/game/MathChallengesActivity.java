@@ -149,6 +149,8 @@ public class MathChallengesActivity extends AppCompatActivity {
 
             if (!haveErrors) {
                 Toast.makeText(MathChallengesActivity.this, "Correto! Parabéns!", Toast.LENGTH_LONG).show();
+                GameUtil.payUser(MathChallengesActivity.this, user);
+
                 Intent intent = new Intent(MathChallengesActivity.this, HomeActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
@@ -162,5 +164,14 @@ public class MathChallengesActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(MathChallengesActivity.this, HomeActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
     }
 }

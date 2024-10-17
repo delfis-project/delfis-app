@@ -37,5 +37,7 @@ public class User implements Serializable {
 
     private Streak currentStreak;
     private Session currentSession;
+
+    private int counterPlayedGames;
 }
 

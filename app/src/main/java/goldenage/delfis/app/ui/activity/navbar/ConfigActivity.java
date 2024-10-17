@@ -26,6 +26,7 @@ import goldenage.delfis.app.ui.activity.ProfilePictureActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.ui.activity.game.MathChallengesActivity;
 import goldenage.delfis.app.util.ActivityUtil;
 import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
@@ -87,12 +88,14 @@ public class ConfigActivity extends AppCompatActivity {
             Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         });
 
         btEditarInfo.setOnClickListener(v -> {
             Intent intent = new Intent(ConfigActivity.this, EditInfoActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         });
 
         // Listener para navegação
@@ -100,6 +103,7 @@ public class ConfigActivity extends AppCompatActivity {
             Intent intent = ActivityUtil.getNextIntent(ConfigActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
             
             return true;
         });
@@ -126,5 +130,14 @@ public class ConfigActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ConfigActivity.this, HomeActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
     }
 }

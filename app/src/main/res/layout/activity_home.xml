@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/btAntiAds"
             android:layout_width="55dp"
             android:layout_height="68dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:text="Sudoku"
             android:textColor="#FFFFFF"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/btSudoku"
             app:layout_constraintEnd_toEndOf="@+id/btSudoku"
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:text="Jogo da Velha"
             android:textColor="#FFFFFF"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/btJogoVelha"
             app:layout_constraintEnd_toEndOf="@+id/btJogoVelha"
@@ -176,7 +176,7 @@
             android:layout_height="wrap_content"
             android:text="Desafios Matemáticos"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/btDesafiosMatematicos"
             app:layout_constraintEnd_toEndOf="@+id/btDesafiosMatematicos"
