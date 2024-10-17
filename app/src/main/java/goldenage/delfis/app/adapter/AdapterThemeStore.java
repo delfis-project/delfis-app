@@ -1,12 +1,17 @@
 package goldenage.delfis.app.adapter;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +42,7 @@ import retrofit2.Response;
 public class AdapterThemeStore extends RecyclerView.Adapter<AdapterThemeStore.ViewHolderTheme> {
     private final List<Theme> themes;
     private final User requisitante;
+    private PopupWindow popupWindow;
 
     public AdapterThemeStore(List<Theme> themes, User requisitante) {
         this.themes = themes;
@@ -75,6 +81,8 @@ public class AdapterThemeStore extends RecyclerView.Adapter<AdapterThemeStore.Vi
             textPrice = itemView.findViewById(R.id.textPrice);
 
             itemView.setOnClickListener(v -> {
+                showBuyPopup((Activity) v.getContext());
+
                 if (requisitante.getCoins() >= themes.get(getAdapterPosition()).getPrice()) {
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("coins", requisitante.getCoins() - themes.get(getAdapterPosition()).getPrice());
@@ -132,6 +140,23 @@ public class AdapterThemeStore extends RecyclerView.Adapter<AdapterThemeStore.Vi
                     Toast.makeText(itemView.getContext(), "Moedas insuficientes!", Toast.LENGTH_LONG).show();
                 }
             });
+        }
+
+        private void showBuyPopup(Activity activity) {
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+            @SuppressLint("InflateParams")
+            View popupView = inflater.inflate(R.layout.popup_buy, null);
+
+            popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+            popupWindow.showAtLocation(activity.getWindow().getDecorView().getRootView(), Gravity.CENTER, 0, 0);
+
+            new Handler().postDelayed(() -> {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+            }, 10_000);
         }
     }
 }

@@ -94,27 +94,14 @@ public class SellPowerupsActivity extends AppCompatActivity {
             }
         });
 
-        Call<List<Powerup>> call2 = delfisApiService.getPowerupsByAppUserId(token, user.getId());
-        call2.enqueue(new Callback<List<Powerup>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Powerup>> call, @NonNull Response<List<Powerup>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    powerupsUser.clear();
-                    powerupsUser.addAll(response.body());
-                    adapterPowerupStoreUser.notifyDataSetChanged();
+        if (user.getPowerups() != null && !user.getPowerups().isEmpty()) {
+            powerupsUser.clear();
+            powerupsUser.addAll(user.getPowerups());
+            adapterPowerupStoreUser.notifyDataSetChanged();
 
-                    textVazio.setVisibility(View.INVISIBLE);
-                } else {
-                    recyclerViewUser.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Powerup>> call, @NonNull Throwable t) {
-                recyclerViewUser.setVisibility(View.INVISIBLE);
-                Log.d(TAG, "Erro ao recuperar powerups: " + t.getMessage());
-                Toast.makeText(SellPowerupsActivity.this, "Não foi possível carregar powerups. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-            }
-        });
+            textVazio.setVisibility(View.INVISIBLE);
+        } else {
+            recyclerViewUser.setVisibility(View.INVISIBLE);
+        }
     }
 }
