@@ -51,10 +51,9 @@ public class HomeActivity extends AppCompatActivity {
         btAntiAds = findViewById(R.id.btAntiAds);
 
         textCoins.setText(String.valueOf(user.getCoins()));
+        System.out.println(user.getCoins());
 
         atualizarStreak();
-
-        notificarDesafioDiario();
 
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(HomeActivity.this, item);

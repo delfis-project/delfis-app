@@ -43,15 +43,16 @@
             android:id="@+id/textCoins"
             android:layout_width="17dp"
             android:layout_height="29dp"
+            android:gravity="start"
             android:text="0"
             android:textColor="#FFFFFF"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintHorizontal_bias="0.35"
             app:layout_constraintStart_toEndOf="@+id/imageView7"
             app:layout_constraintTop_toTopOf="@+id/imageView5"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.375" />
 
         <ImageView
             android:id="@+id/img"

@@ -13,13 +13,23 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
+import goldenage.delfis.app.util.RetrofitFactory;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SellCoinsActivity extends AppCompatActivity {
     private User user;
@@ -72,7 +82,40 @@ public class SellCoinsActivity extends AppCompatActivity {
         }
 
         BT_COMPRAS = new ImageView[]{btCompra1, btCompra2, btCompra3, btCompra4};
-        
+        for (int i = 0; i < BT_COMPRAS.length; i++) {
+            int finalI = i;
+            BT_COMPRAS[i].setOnClickListener(v -> {
+                Handler handler = new Handler();
+                handler.postDelayed(() -> {
+                    notificarCompra(QUANTIDADES[finalI]);
+
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("coins", user.getCoins() + QUANTIDADES[finalI]);
+
+                    DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
+                    Call<User> call = delfisApiService.updateUserPartially(user.getToken(), user.getId(), updates);
+                    call.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            if (response.isSuccessful()) {
+                                User updatedUser = response.body();
+                                if (updatedUser != null) {
+                                    user.setCoins(updatedUser.getCoins());
+                                    textMoedas.setText(String.valueOf(user.getCoins()));
+                                }
+                            } else {
+                                Toast.makeText(SellCoinsActivity.this, "Falha ao atualizar informações.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(SellCoinsActivity.this, "Falha na conexão.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }, 90_000);
+            });
+        }
     }
 
     public void notificarCompra(int quantidadeMoedas) {
