@@ -197,8 +197,6 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Theme>>() {
             @Override
             public void onResponse(@NonNull Call<List<Theme>> call, @NonNull Response<List<Theme>> response) {
-                System.out.println(response.code());
-                System.out.println(response.raw().body());
                 user.setThemes(response.body());
                 startSession(delfisApiService, token, user);
             }
