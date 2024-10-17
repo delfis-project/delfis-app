@@ -13,5 +13,5 @@ public class AppUserThemeRequest {
     private int transactionPrice;
     private String transactionDate;
     private long fkAppUserId;
-    private long fkPowerupId;
+    private long fkThemeId;
 }

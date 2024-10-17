@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,9 +79,18 @@ public class AdapterPowerupStore extends RecyclerView.Adapter<AdapterPowerupStor
             textPrice = itemView.findViewById(R.id.textPrice);
 
             itemView.setOnClickListener(v -> {
-                showBuyPopup((Activity) v.getContext());
+                if (requisitante.getPowerups() != null) {
+                    for (Powerup powerup : requisitante.getPowerups()) {
+                        if (powerup.getId() == powerups.get(getAdapterPosition()).getId()) {
+                            Toast.makeText(itemView.getContext(), "Você já possui esse powerup!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                }
 
                 if (requisitante.getCoins() >= powerups.get(getAdapterPosition()).getPrice()) {
+                    showBuyPopup((Activity) v.getContext());
+
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("coins", requisitante.getCoins() - powerups.get(getAdapterPosition()).getPrice());
 
@@ -105,6 +115,11 @@ public class AdapterPowerupStore extends RecyclerView.Adapter<AdapterPowerupStor
                                             User user = response.body();
                                             if (user != null) {
                                                 requisitante.setCoins(user.getCoins());
+
+                                                if (requisitante.getPowerups() == null)
+                                                    requisitante.setPowerups(new ArrayList<>());
+                                                requisitante.getPowerups().add(powerups.get(getAdapterPosition()));
+
                                                 Toast.makeText(itemView.getContext(), "Powerup comprado!", Toast.LENGTH_LONG).show();
 
                                                 @SuppressLint("UnsafeIntentLaunch")

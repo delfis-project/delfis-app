@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,9 +82,18 @@ public class AdapterThemeStore extends RecyclerView.Adapter<AdapterThemeStore.Vi
             textPrice = itemView.findViewById(R.id.textPrice);
 
             itemView.setOnClickListener(v -> {
-                showBuyPopup((Activity) v.getContext());
+                if (requisitante.getThemes() != null) {
+                    for (Theme theme : requisitante.getThemes()) {
+                        if (theme.getId() == themes.get(getAdapterPosition()).getId()) {
+                            Toast.makeText(itemView.getContext(), "Você já possui esse tema!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                }
 
                 if (requisitante.getCoins() >= themes.get(getAdapterPosition()).getPrice()) {
+                    showBuyPopup((Activity) v.getContext());
+
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("coins", requisitante.getCoins() - themes.get(getAdapterPosition()).getPrice());
 
@@ -108,7 +118,12 @@ public class AdapterThemeStore extends RecyclerView.Adapter<AdapterThemeStore.Vi
                                             User user = response.body();
                                             if (user != null) {
                                                 requisitante.setCoins(user.getCoins());
-                                                Toast.makeText(itemView.getContext(), "Tema comprado!", Toast.LENGTH_LONG).show();
+
+                                                if (requisitante.getThemes() == null)
+                                                    requisitante.setThemes(new ArrayList<>());
+                                                requisitante.getThemes().add(themes.get(getAdapterPosition()));
+
+                                                Toast.makeText(itemView.getContext(), "Tema comprado! Reinicie o app para vê-lo!", Toast.LENGTH_LONG).show();
 
                                                 @SuppressLint("UnsafeIntentLaunch")
                                                 Intent intent = ((Activity) itemView.getContext()).getIntent();
