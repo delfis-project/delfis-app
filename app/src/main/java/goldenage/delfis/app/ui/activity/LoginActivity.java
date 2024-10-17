@@ -11,7 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import goldenage.delfis.app.R;
+import goldenage.delfis.app.model.request.StreakRequest;
 import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
@@ -76,7 +80,32 @@ public class LoginActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onResponse(@NonNull Call<Streak> call, @NonNull Response<Streak> response) {
                                                         Streak streak = response.body();
-                                                        user.setCurrentStreak(streak);
+                                                        if (streak != null) {
+                                                            user.setCurrentStreak(streak);
+                                                        } else {
+                                                            StreakRequest streakRequest = new StreakRequest(
+                                                                    LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                                                                    user.getId()
+                                                            );
+
+                                                            Call<Streak> streakInsertCall = delfisApiService.createStreak(token, streakRequest);
+                                                            streakInsertCall.enqueue(new Callback<Streak>() {
+                                                                @Override
+                                                                public void onResponse(Call<Streak> call, Response<Streak> response) {
+                                                                    if (response.isSuccessful()) {
+                                                                        Streak newStreak = response.body();
+                                                                        user.setCurrentStreak(newStreak);
+                                                                    } else {
+                                                                        Toast.makeText(LoginActivity.this, "Erro ao criar streak.", Toast.LENGTH_LONG).show();
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(Call<Streak> call, Throwable t) {
+                                                                    Toast.makeText(LoginActivity.this, "Erro de conexão ao criar streak. Verifique sua internet e tente novamente.", Toast.LENGTH_LONG).show();
+                                                                }
+                                                            });
+                                                        }
 
                                                         Call<Session> callSession = delfisApiService.startSession(token, user.getId());
                                                         callSession.enqueue(new Callback<Session>() {

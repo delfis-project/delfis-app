@@ -5,6 +5,7 @@ import java.util.Map;
 
 import goldenage.delfis.app.model.request.AppUserPowerupRequest;
 import goldenage.delfis.app.model.request.AppUserThemeRequest;
+import goldenage.delfis.app.model.request.StreakRequest;
 import goldenage.delfis.app.model.response.AppUserPowerup;
 import goldenage.delfis.app.model.response.AppUserTheme;
 import goldenage.delfis.app.model.response.Plan;
@@ -33,6 +34,9 @@ public interface DelfisApiService {
 
     @POST("api/app-user/insert")
     Call<Void> createUser(@Header("Authorization") String token, @Body UserRequest userRequest);
+
+    @POST("api/streak/insert")
+    Call<Streak> createStreak(@Header("Authorization") String token, @Body StreakRequest streakRequest);
 
     @POST("api/app-user-powerup/insert")
     Call<AppUserPowerup> createAppUserPowerup(@Header("Authorization") String token, @Body AppUserPowerupRequest appUserPowerupRequest);
