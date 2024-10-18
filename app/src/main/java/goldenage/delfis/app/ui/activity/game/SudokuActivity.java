@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 public class SudokuActivity extends AppCompatActivity {
     private User user;
     private Button btCheck;
+    private ImageView btSetaVoltar;
     private final int BOARD_HEIGHT = 6;
     private final int BOARD_WIDTH = 6;
     private final int[][] sudokuBoard = new int[BOARD_WIDTH][BOARD_HEIGHT];
@@ -36,6 +38,7 @@ public class SudokuActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("user");
         btCheck = findViewById(R.id.btCheck);
+        btSetaVoltar = findViewById(R.id.btSetaVoltar);
 
         for (int i = 0; i < BOARD_HEIGHT; i++) {
             for (int j = 0; j < BOARD_WIDTH; j++) {
@@ -51,9 +54,8 @@ public class SudokuActivity extends AppCompatActivity {
                 buttons[i][j].setOnClickListener(v -> {
                     int currentValue = Integer.parseInt(buttons[finalI][finalJ].getText().toString());
                     currentValue = (currentValue + 1) % 7;
-                    if (currentValue == 0) {
+                    if (currentValue == 0)
                         currentValue = 1;
-                    }
                     buttons[finalI][finalJ].setText(String.valueOf(currentValue));
                     sudokuBoard[finalI][finalJ] = currentValue;
                 });
@@ -64,6 +66,12 @@ public class SudokuActivity extends AppCompatActivity {
         fetchSudokuBoard();
 
         btCheck.setOnClickListener(v -> checkSudokuAnswers());
+        btSetaVoltar.setOnClickListener(v -> {
+            Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void checkSudokuAnswers() {
@@ -112,23 +120,29 @@ public class SudokuActivity extends AppCompatActivity {
 
     private boolean isSudokuValid(int[][] board) {
         for (int i = 0; i < BOARD_HEIGHT; i++) {
-            boolean[] rowCheck = new boolean[7];
-            boolean[] colCheck = new boolean[7];
+            boolean[] rowCheck = new boolean[BOARD_WIDTH + 1];
+            boolean[] colCheck = new boolean[BOARD_HEIGHT + 1];
 
             for (int j = 0; j < BOARD_WIDTH; j++) {
-                if (board[i][j] != 0) {
-                    if (rowCheck[board[i][j]]) {
-                        return false;
-                    }
-                    rowCheck[board[i][j]] = true;
+                // Verificação da linha
+                int rowValue = board[i][j];
+                if (rowValue < 1 || rowValue > BOARD_WIDTH) {
+                    return false;
                 }
+                if (rowCheck[rowValue]) {
+                    return false;
+                }
+                rowCheck[rowValue] = true;
 
-                if (board[j][i] != 0) {
-                    if (colCheck[board[j][i]]) {
-                        return false;
-                    }
-                    colCheck[board[j][i]] = true;
+                // Verificação da coluna
+                int colValue = board[j][i];
+                if (colValue < 1 || colValue > BOARD_HEIGHT) {
+                    return false;
                 }
+                if (colCheck[colValue]) {
+                    return false;
+                }
+                colCheck[colValue] = true;
             }
         }
 
