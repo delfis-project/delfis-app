@@ -3,6 +3,8 @@ package goldenage.delfis.app.model.response;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +39,8 @@ public class User implements Serializable {
 
     private Streak currentStreak;
     private Session currentSession;
+    private List<Powerup> powerups;
+    private List<Theme> themes;
 
     private int counterPlayedGames;
 }

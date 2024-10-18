@@ -1,12 +1,17 @@
 package goldenage.delfis.app.adapter;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +40,7 @@ import retrofit2.Response;
 public class AdapterPowerupStore extends RecyclerView.Adapter<AdapterPowerupStore.ViewHolderPowerup> {
     private final List<Powerup> powerups;
     private final User requisitante;
+    private PopupWindow popupWindow;
 
     public AdapterPowerupStore(List<Powerup> powerups, User requisitante) {
         this.powerups = powerups;
@@ -72,7 +79,18 @@ public class AdapterPowerupStore extends RecyclerView.Adapter<AdapterPowerupStor
             textPrice = itemView.findViewById(R.id.textPrice);
 
             itemView.setOnClickListener(v -> {
+                if (requisitante.getPowerups() != null) {
+                    for (Powerup powerup : requisitante.getPowerups()) {
+                        if (powerup.getId() == powerups.get(getAdapterPosition()).getId()) {
+                            Toast.makeText(itemView.getContext(), "Você já possui esse powerup!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                }
+
                 if (requisitante.getCoins() >= powerups.get(getAdapterPosition()).getPrice()) {
+                    showBuyPopup((Activity) v.getContext());
+
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("coins", requisitante.getCoins() - powerups.get(getAdapterPosition()).getPrice());
 
@@ -97,6 +115,11 @@ public class AdapterPowerupStore extends RecyclerView.Adapter<AdapterPowerupStor
                                             User user = response.body();
                                             if (user != null) {
                                                 requisitante.setCoins(user.getCoins());
+
+                                                if (requisitante.getPowerups() == null)
+                                                    requisitante.setPowerups(new ArrayList<>());
+                                                requisitante.getPowerups().add(powerups.get(getAdapterPosition()));
+
                                                 Toast.makeText(itemView.getContext(), "Powerup comprado!", Toast.LENGTH_LONG).show();
 
                                                 @SuppressLint("UnsafeIntentLaunch")
@@ -129,6 +152,23 @@ public class AdapterPowerupStore extends RecyclerView.Adapter<AdapterPowerupStor
                     Toast.makeText(itemView.getContext(), "Moedas insuficientes!", Toast.LENGTH_LONG).show();
                 }
             });
+        }
+
+        private void showBuyPopup(Activity activity) {
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+            @SuppressLint("InflateParams")
+            View popupView = inflater.inflate(R.layout.popup_buy, null);
+
+            popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+            popupWindow.showAtLocation(activity.getWindow().getDecorView().getRootView(), Gravity.CENTER, 0, 0);
+
+            new Handler().postDelayed(() -> {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+            }, 10_000);
         }
     }
 }

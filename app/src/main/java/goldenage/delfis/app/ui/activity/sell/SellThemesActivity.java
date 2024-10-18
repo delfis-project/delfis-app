@@ -95,27 +95,14 @@ public class SellThemesActivity extends AppCompatActivity {
             }
         });
 
-        Call<List<Theme>> call2 = delfisApiService.getThemesByAppUserId(token, user.getId());
-        call2.enqueue(new Callback<List<Theme>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Theme>> call, @NonNull Response<List<Theme>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    themesUser.clear();
-                    themesUser.addAll(response.body());
-                    adapterThemeStoreUser.notifyDataSetChanged();
+        if (user.getThemes() != null && !user.getThemes().isEmpty()) {
+            themesUser.clear();
+            themesUser.addAll(user.getThemes());
+            adapterThemeStoreUser.notifyDataSetChanged();
 
-                    textVazio.setVisibility(View.INVISIBLE);
-                } else {
-                    recyclerViewUser.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Theme>> call, @NonNull Throwable t) {
-                recyclerViewUser.setVisibility(View.INVISIBLE);
-                Log.d(TAG, "Erro ao recuperar powerups: " + t.getMessage());
-                Toast.makeText(SellThemesActivity.this, "Não foi possível carregar temas. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-            }
-        });
+            textVazio.setVisibility(View.INVISIBLE);
+        } else {
+            recyclerViewUser.setVisibility(View.INVISIBLE);
+        }
     }
 }

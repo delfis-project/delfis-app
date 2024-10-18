@@ -14,7 +14,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +39,7 @@ import retrofit2.Response;
 
 public class SellPremiumActivity extends AppCompatActivity {
     private User user;
+    private PopupWindow popupWindow;
     private Plan premiumPlan;
     private ImageView btX, btComprar;
     private TextView textBtCompra;
@@ -74,6 +80,8 @@ public class SellPremiumActivity extends AppCompatActivity {
                 return;
             }
 
+            showQrPopup(v);
+
             Handler handler = new Handler();
             handler.postDelayed(() -> {
                 if (premiumPlan == null) return;
@@ -110,6 +118,23 @@ public class SellPremiumActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    private void showQrPopup(View view) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        @SuppressLint("InflateParams")
+        View popupView = inflater.inflate(R.layout.popup_qr, null);
+
+        popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        new Handler().postDelayed(() -> {
+            if (popupWindow != null && popupWindow.isShowing()) {
+                popupWindow.dismiss();
+            }
+        }, 10_000);
     }
 
     public void notificarCompra() {

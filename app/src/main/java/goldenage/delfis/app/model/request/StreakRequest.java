@@ -1,4 +1,4 @@
-package goldenage.delfis.app.model.response;
+package goldenage.delfis.app.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppUserTheme {
-    private long id;
-    private int transactionPrice;
-    private String transactionDate;
+public class StreakRequest {
+    private String initialDate;
     private long fkAppUserId;
-    private long fkThemeId;
 }

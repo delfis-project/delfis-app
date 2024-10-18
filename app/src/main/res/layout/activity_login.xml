@@ -105,5 +105,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.833" />
 
+    <ImageView
+        android:id="@+id/mudarviewsenha"
+        android:layout_width="24dp"
+        android:layout_height="37dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextSenha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextSenha"
+        app:layout_constraintTop_toTopOf="@+id/editTextSenha"
+        app:srcCompat="@drawable/olhofechado" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +38,8 @@ import retrofit2.Response;
 
 public class SellCoinsActivity extends AppCompatActivity {
     private User user;
+    private PopupWindow popupWindow;
+
     private ImageView btSeta, btCompra1, btCompra2, btCompra3, btCompra4;
     private TextView textMoedas, textMoedas1, textMoedas2, textMoedas3, textMoedas4;
     private TextView textBtCompra1, textBtCompra2, textBtCompra3, textBtCompra4;
@@ -40,6 +47,7 @@ public class SellCoinsActivity extends AppCompatActivity {
     private static TextView[] TEXT_BOTOES;
     private static TextView[] TEXT_QUANTIDADES;
     private static ImageView[] BT_COMPRAS;
+
     private static final int[] QUANTIDADES = {50, 100, 150, 200};
     private static final double[] PRECOS = {9.99, 15.99, 19.99, 29.99};
 
@@ -85,6 +93,8 @@ public class SellCoinsActivity extends AppCompatActivity {
         for (int i = 0; i < BT_COMPRAS.length; i++) {
             int finalI = i;
             BT_COMPRAS[i].setOnClickListener(v -> {
+                showQrPopup(v);
+
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
                     notificarCompra(QUANTIDADES[finalI]);
@@ -116,6 +126,23 @@ public class SellCoinsActivity extends AppCompatActivity {
                 }, 90_000);
             });
         }
+    }
+
+    private void showQrPopup(View view) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        @SuppressLint("InflateParams")
+        View popupView = inflater.inflate(R.layout.popup_qr, null);
+
+        popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        new Handler().postDelayed(() -> {
+            if (popupWindow != null && popupWindow.isShowing()) {
+                popupWindow.dismiss();
+            }
+        }, 10_000);
     }
 
     public void notificarCompra(int quantidadeMoedas) {

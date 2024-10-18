@@ -70,7 +70,7 @@
                     android:gravity="center|start"
                     android:text="Remove anúncios"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -94,7 +94,7 @@
                     android:gravity="center|start"
                     android:text="50% a mais de XP"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -118,7 +118,7 @@
                     android:gravity="center|start"
                     android:text="Dobro de moedas "
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -142,7 +142,7 @@
                     android:gravity="center|start"
                     android:text="Imunidade de streak a cada 5 dias"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -166,7 +166,7 @@
                     android:gravity="center|start"
                     android:text="POWER up aleatório a cada 2 dias"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
