@@ -127,6 +127,12 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    private void habilitarBotoes(boolean habilitar) {
+        for (int botao : botoes) {
+            findViewById(botao).setEnabled(habilitar);
+        }
+    }
+
     public void colocarJogada(View view) {
         String id = view.getResources().getResourceEntryName(view.getId()).replace("a", "");
         int i = Integer.parseInt(String.valueOf(id.charAt(0)));
@@ -136,8 +142,12 @@ public class TicTacToeActivity extends AppCompatActivity {
             ((ImageView) findViewById(mapPosicoes.get(String.format("a%d%d", i, j)))).setImageResource(R.drawable.x_velha);
             jogo[i][j] = PLAYER_X;
             jogada++;
+
             verificarSeAcabou();
+
             if (!verificarVitoria()) {
+                habilitarBotoes(false);
+
                 setPosicaoGpt();
             }
         }
@@ -166,12 +176,15 @@ public class TicTacToeActivity extends AppCompatActivity {
                 } else {
                     fazerJogadaAutomatica();
                 }
+
+                habilitarBotoes(true);
             }
 
             @Override
             public void onFailure(Throwable t) {
                 fazerJogadaAutomatica();
                 Log.e("GptClient", t.getMessage());
+                habilitarBotoes(true);
             }
         });
     }
@@ -190,6 +203,8 @@ public class TicTacToeActivity extends AppCompatActivity {
         jogo[i][j] = PLAYER_O;
         jogada++;
         verificarSeAcabou();
+
+        habilitarBotoes(true);
     }
 
     @Override
