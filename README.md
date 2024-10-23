@@ -41,6 +41,6 @@ Contate os desenvolvedores: [@EduardoNehmeSS](https://github.com/EduardoNehmeSS)
 
 <hr />
 <div style="display: flex">
-   <img src="https://firebasestorage.googleapis.com/v0/b/delfis-app.appspot.com/o/tela_login.png?alt=media&token=1411fb9b-bccb-4c71-a0bb-13c03ef19f42" alt="tela de login da Delfis!" />
-   <img src="https://firebasestorage.googleapis.com/v0/b/delfis-app.appspot.com/o/home.png?alt=media&token=4417ac6d-707d-4903-a0b3-6dd8756207ba" alt="home da Delfis!" />
+   <img src="https://firebasestorage.googleapis.com/v0/b/delfis-app-314bf.appspot.com/o/tela_login.png?alt=media&token=a9de7d8e-4862-41ae-9d25-0b6eba9f1a14" alt="tela de login da Delfis!" />
+   <img src="https://firebasestorage.googleapis.com/v0/b/delfis-app-314bf.appspot.com/o/home.png?alt=media&token=bf4b6202-1f82-409c-bf3f-d3eb3d2cbd87" alt="home da Delfis!" />
 </div>

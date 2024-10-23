@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1024275809783",
-    "project_id": "delfis-app",
-    "storage_bucket": "delfis-app.appspot.com"
+    "project_number": "726079385319",
+    "project_id": "delfis-app-314bf",
+    "storage_bucket": "delfis-app-314bf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1024275809783:android:f74328f8ebe9db87619af2",
+        "mobilesdk_app_id": "1:726079385319:android:7fcaad255fee43c8c0fc42",
         "android_client_info": {
           "package_name": "goldenage.delfis.app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAfNCOuPdUWOOpFuVhnGHYd65KdaG1_GNI"
+          "current_key": "AIzaSyB3rjzG7FgKppexxX78UWblJoYrLhOo7Aw"
         }
       ],
       "services": {
