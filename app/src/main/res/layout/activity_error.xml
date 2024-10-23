@@ -7,7 +7,7 @@
     android:background="#113D6C">
 
     <ImageView
-        android:id="@+id/imageView19"
+        android:id="@+id/btMudarFoto"
         android:layout_width="251dp"
         android:layout_height="238dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView19" />
+        app:layout_constraintTop_toBottomOf="@+id/btMudarFoto" />
 
     <TextView
         android:id="@+id/textView14"

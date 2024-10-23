@@ -28,6 +28,10 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.RestrictAreaActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.game.MathChallengesActivity"
             android:screenOrientation="portrait"
             android:exported="false" />

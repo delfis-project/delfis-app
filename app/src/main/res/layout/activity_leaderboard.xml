@@ -21,18 +21,20 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUsers"
-        android:layout_width="404dp"
-        android:layout_height="614dp"
+        android:layout_width="382dp"
+        android:layout_height="589dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
         app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_user_leaderboard" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="417dp"
-        android:layout_height="201dp"
+        android:layout_width="425dp"
+        android:layout_height="187dp"
         android:background="@drawable/trofeu_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

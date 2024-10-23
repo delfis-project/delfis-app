@@ -56,8 +56,8 @@
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="371dp"
-            android:layout_height="221dp"
+            android:layout_width="344dp"
+            android:layout_height="217dp"
             app:layout_constraintBottom_toTopOf="@+id/btSudoku"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
@@ -130,18 +130,18 @@
 
         <TextView
             android:id="@+id/textPontos"
-            android:layout_width="135dp"
-            android:layout_height="96dp"
+            android:layout_width="165dp"
+            android:layout_height="89dp"
             android:text="fazer desafio diário"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/img"
             app:layout_constraintEnd_toEndOf="@+id/img"
-            app:layout_constraintHorizontal_bias="0.915"
+            app:layout_constraintHorizontal_bias="0.96"
             app:layout_constraintStart_toStartOf="@+id/img"
             app:layout_constraintTop_toTopOf="@+id/img"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintVertical_bias="0.273" />
 
         <TextView
             android:id="@+id/textOperacaoConta3"
@@ -187,16 +187,16 @@
             app:layout_constraintVertical_bias="0.472" />
 
         <ImageView
-            android:id="@+id/playgame"
-            android:layout_width="43dp"
-            android:layout_height="44dp"
-            android:src="@drawable/play"
+            android:id="@+id/imageView4"
+            android:layout_width="125dp"
+            android:layout_height="78dp"
+            android:src="@drawable/playbutton"
             app:layout_constraintBottom_toBottomOf="@+id/img"
             app:layout_constraintEnd_toEndOf="@+id/img"
-            app:layout_constraintHorizontal_bias="0.794"
+            app:layout_constraintHorizontal_bias="0.858"
             app:layout_constraintStart_toStartOf="@+id/img"
-            app:layout_constraintTop_toBottomOf="@+id/textPontos"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/img"
+            app:layout_constraintVertical_bias="0.784" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

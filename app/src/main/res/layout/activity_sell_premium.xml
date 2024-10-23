@@ -56,7 +56,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView17"
+                    android:id="@+id/btSair"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -80,7 +80,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView19"
+                    android:id="@+id/btMudarFoto"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

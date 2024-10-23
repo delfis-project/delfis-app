@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView18"
+            android:id="@+id/btAreaRestrita"
             android:layout_width="26dp"
             android:layout_height="27dp"
             android:src="@drawable/moeda"

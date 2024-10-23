@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import goldenage.delfis.app.ui.activity.ProfilePictureActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.ui.activity.RestrictAreaActivity;
 import goldenage.delfis.app.ui.activity.game.MathChallengesActivity;
 import goldenage.delfis.app.util.ActivityUtil;
 import goldenage.delfis.app.util.RetrofitFactory;
@@ -37,7 +39,7 @@ public class ConfigActivity extends AppCompatActivity {
     private User user;
     private BottomNavigationView nav;
     private TextView levelUser, textNome, textEmail, textNascimento;
-    private ImageView btMudarFoto, btSair, btEditarInfo;
+    private ImageView btMudarFoto, btSair, btEditarInfo, btAreaRestrita;
     private CircleImageView imgPerfil;
 
     @Override
@@ -55,6 +57,7 @@ public class ConfigActivity extends AppCompatActivity {
         btMudarFoto = findViewById(R.id.btMudarFoto);
         btSair = findViewById(R.id.btSair);
         btEditarInfo = findViewById(R.id.btEditarInfo);
+        btAreaRestrita = findViewById(R.id.btAreaRestrita);
         user = (User) getIntent().getSerializableExtra("user");
 
         levelUser.setText(String.valueOf(user.getLevel()));
@@ -88,17 +91,20 @@ public class ConfigActivity extends AppCompatActivity {
             Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
 
         btEditarInfo.setOnClickListener(v -> {
             Intent intent = new Intent(ConfigActivity.this, EditInfoActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
 
-        // Listener para navegação
+        btAreaRestrita.setOnClickListener(v -> {
+            Intent intent = new Intent(ConfigActivity.this, RestrictAreaActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        });
+
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(ConfigActivity.this, item);
             intent.putExtra("user", user);
