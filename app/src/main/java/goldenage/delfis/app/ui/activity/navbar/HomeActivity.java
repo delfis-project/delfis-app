@@ -28,12 +28,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 public class HomeActivity extends AppCompatActivity {
     private User user;
     private BottomNavigationView nav;
-    private ImageView btSudoku, btJogoVelha, btDesafiosMatematicos, btAntiAds;
+    private ImageView btSudoku, btJogoVelha, btDesafiosMatematicos, btAntiAds, btDesafioDiario;
     private TextView textCoins, textStreak;
+    private final Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         textCoins = findViewById(R.id.textCoins);
         textStreak = findViewById(R.id.textStreak);
         btAntiAds = findViewById(R.id.btAntiAds);
+        btDesafioDiario = findViewById(R.id.btDesafioDiario);
 
         textCoins.setText(String.valueOf(user.getCoins()));
 
@@ -73,21 +76,38 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, SudokuActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
 
         btJogoVelha.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, TicTacToeActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
 
         btDesafiosMatematicos.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, MathChallengesActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
+        });
+
+        btDesafioDiario.setOnClickListener(view -> {
+            int n = random.nextInt(4);
+            Intent intent;
+
+            switch (n) {
+                case 0:
+                    intent = new Intent(HomeActivity.this, SudokuActivity.class);
+                    break;
+                case 1:
+                    intent = new Intent(HomeActivity.this, TicTacToeActivity.class);
+                    break;
+                default:
+                    intent = new Intent(HomeActivity.this, MathChallengesActivity.class);
+                    break;
+            }
+
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
     }
 
