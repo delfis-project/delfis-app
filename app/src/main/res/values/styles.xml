@@ -1,0 +1,24 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/delfisBackground</item>
+        <item name="colorPrimaryDark">@color/delfisBackground</item>
+        <item name="colorAccent">#03DAC5</item>
+        <item name="android:navigationBarColor">@color/delfisBackground</item>
+    </style>
+
+    <style name="CustomButtonStyle">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="SudokuButtonStyle">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+</resources>

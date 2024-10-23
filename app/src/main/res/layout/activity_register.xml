@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#064273">
+
+    <Button
+        android:id="@+id/btAtualizar"
+        android:layout_width="175dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="CRIAR"
+        android:textColor="#03355D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNome"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="NOME"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#717171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMoedas" />
+
+    <TextView
+        android:id="@+id/textMoedas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="INSIRA SEU NOME:"
+        android:textColor="@color/white"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="EMAIL"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#717171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMoedas1" />
+
+    <TextView
+        android:id="@+id/textMoedas2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="INSIRA SUA SENHA:"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="APELIDO"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#717171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMoedas3" />
+
+    <TextView
+        android:id="@+id/textMoedas3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="INSIRA SEU APELIDO:"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+
+    <TextView
+        android:id="@+id/textMoedas4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="INSIRA SUA DATA DE NASCIMENTO:"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+
+    <EditText
+        android:id="@+id/editTextSenha"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="SENHA"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#717171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMoedas2" />
+
+    <TextView
+        android:id="@+id/textMoedas1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="INSIRA SEU EMAIL:"
+        android:textColor="@color/white"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.255"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
+
+    <EditText
+        android:id="@+id/editTextData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="DD/MM/AAAA"
+        android:inputType="date"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#717171"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMoedas4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

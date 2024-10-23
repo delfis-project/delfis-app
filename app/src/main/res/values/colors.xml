@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="black">#FF000000</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="white">#FFFFFFFF</color>
     <color name="delfisBar">#064273</color>
     <color name="delfis01">#064273</color>
+    <color name="delfisBackground">#113D6C</color>
+    <color name="sudokuTemplate" tools:ignore="ReferenceType">@drawable/sudokutemplate</color>
+    <color name="wordSearchTemplate" tools:ignore="ReferenceType">@drawable/wordsearchtemplate</color>
     <color name="falsefooter">#A6A6A6</color>
 </resources>
