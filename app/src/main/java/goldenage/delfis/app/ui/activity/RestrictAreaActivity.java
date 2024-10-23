@@ -37,7 +37,8 @@ public class RestrictAreaActivity extends AppCompatActivity {
 
         webView = findViewById(R.id.webView);
         progressBar = findViewById(R.id.progressBar);
-        user = (User) getIntent().getSerializableExtra("user");
+
+        renderizarInfo();
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -61,6 +62,16 @@ public class RestrictAreaActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
+    }
+
+    @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
             webView.goBack();
@@ -69,7 +80,6 @@ public class RestrictAreaActivity extends AppCompatActivity {
             Intent intent = new Intent(RestrictAreaActivity.this, ConfigActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         }
     }
 }

@@ -254,4 +254,10 @@ public class LoginActivity extends AppCompatActivity {
 
         passwordEditText.setSelection(passwordEditText.getText().length());
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

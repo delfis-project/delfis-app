@@ -57,7 +57,6 @@ public class SellCoinsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coins);
 
-        user = (User) getIntent().getSerializableExtra("user");
         btSeta = findViewById(R.id.btSeta);
         btCompra1 = findViewById(R.id.btCompra1);
         btCompra2 = findViewById(R.id.btCompra2);
@@ -73,21 +72,13 @@ public class SellCoinsActivity extends AppCompatActivity {
         textBtCompra3 = findViewById(R.id.textBtCompra3);
         textBtCompra4 = findViewById(R.id.textBtCompra4);
 
-        textMoedas.setText(String.valueOf(user.getCoins()));
+        renderizarInfo();
 
         btSeta.setOnClickListener(v -> {
             Intent intent = new Intent(SellCoinsActivity.this, StoreActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
-
-        TEXT_BOTOES = new TextView[]{textBtCompra1, textBtCompra2, textBtCompra3, textBtCompra4};
-        TEXT_QUANTIDADES = new TextView[]{textMoedas1, textMoedas2, textMoedas3, textMoedas4};
-        for (int i = 0; i < TEXT_BOTOES.length; i++) {
-            TEXT_BOTOES[i].setText("Comprar por R$" + String.valueOf(PRECOS[i]).replace('.', ','));
-            TEXT_QUANTIDADES[i].setText(String.valueOf(QUANTIDADES[i]));
-        }
 
         BT_COMPRAS = new ImageView[]{btCompra1, btCompra2, btCompra3, btCompra4};
         for (int i = 0; i < BT_COMPRAS.length; i++) {
@@ -125,6 +116,24 @@ public class SellCoinsActivity extends AppCompatActivity {
                     });
                 }, 90_000);
             });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
+        textMoedas.setText(String.valueOf(user.getCoins()));
+
+        TEXT_BOTOES = new TextView[]{textBtCompra1, textBtCompra2, textBtCompra3, textBtCompra4};
+        TEXT_QUANTIDADES = new TextView[]{textMoedas1, textMoedas2, textMoedas3, textMoedas4};
+        for (int i = 0; i < TEXT_BOTOES.length; i++) {
+            TEXT_BOTOES[i].setText("Comprar por R$" + String.valueOf(PRECOS[i]).replace('.', ','));
+            TEXT_QUANTIDADES[i].setText(String.valueOf(QUANTIDADES[i]));
         }
     }
 

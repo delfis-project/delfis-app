@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity.game;
+package goldenage.delfis.app.util;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -8,7 +8,6 @@ import java.util.Map;
 
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

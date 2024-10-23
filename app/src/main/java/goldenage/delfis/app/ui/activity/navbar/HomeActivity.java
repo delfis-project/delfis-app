@@ -44,7 +44,6 @@ public class HomeActivity extends AppCompatActivity {
 
         nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.bottom_menu);
-        user = (User) getIntent().getSerializableExtra("user");
         btSudoku = findViewById(R.id.btSudoku);
         btJogoVelha = findViewById(R.id.btJogoVelha);
         btDesafiosMatematicos = findViewById(R.id.btDesafiosMatematicos);
@@ -53,15 +52,12 @@ public class HomeActivity extends AppCompatActivity {
         btAntiAds = findViewById(R.id.btAntiAds);
         btDesafioDiario = findViewById(R.id.btDesafioDiario);
 
-        textCoins.setText(String.valueOf(user.getCoins()));
-
-        atualizarStreak();
+        renderizarInfo();
 
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(HomeActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
             
             return true;
         });
@@ -109,6 +105,18 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtra("user", user);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
+        textCoins.setText(String.valueOf(user.getCoins()));
+        atualizarStreak();
     }
 
     private void atualizarStreak() {

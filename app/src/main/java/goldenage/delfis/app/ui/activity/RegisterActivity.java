@@ -53,14 +53,13 @@ public class RegisterActivity extends AppCompatActivity {
         Retrofit retrofit = RetrofitFactory.getClient();
         apiService = retrofit.create(DelfisApiService.class);
 
-        // TextWatcher para formatar a data de nascimento
         birthDateEditText.addTextChangedListener(new TextWatcher() {
             private boolean isUpdating = false;
             private String previousText = "";
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                previousText = s.toString(); // Armazena o texto anterior
+                previousText = s.toString();
             }
 
             @Override
@@ -69,9 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 String currentText = s.toString();
-                String cleanInput = currentText.replaceAll("[^\\d]", ""); // Remove qualquer caractere que não seja número
+                String cleanInput = currentText.replaceAll("[^\\d]", "");
 
-                // Se o usuário está deletando, permite apagar números e hífens
                 if (before == 1 && currentText.length() < previousText.length()) {
                     isUpdating = true;
                     birthDateEditText.setText(cleanInput);
@@ -80,12 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Limita a 8 dígitos
                 if (cleanInput.length() > 8) {
                     cleanInput = cleanInput.substring(0, 8);
                 }
 
-                // Adiciona os hífens no formato dd-MM-yyyy
                 StringBuilder formatted = new StringBuilder();
                 int len = cleanInput.length();
                 if (len >= 2) {
@@ -104,13 +100,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                 isUpdating = true;
                 birthDateEditText.setText(formatted.toString());
-                birthDateEditText.setSelection(formatted.length()); // Move o cursor para o final do texto
+                birthDateEditText.setSelection(formatted.length());
                 isUpdating = false;
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Nada a fazer aqui
             }
         });
 

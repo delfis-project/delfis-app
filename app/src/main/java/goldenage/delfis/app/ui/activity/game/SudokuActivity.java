@@ -17,6 +17,7 @@ import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Sudoku;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.util.GameUtil;
 import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -104,6 +105,7 @@ public class SudokuActivity extends AppCompatActivity {
                     Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
+                    finish();
                 }
             }
 
@@ -114,6 +116,7 @@ public class SudokuActivity extends AppCompatActivity {
                 Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
+                finish();
             }
         });
     }

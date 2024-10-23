@@ -50,29 +50,11 @@ public class SellPremiumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_premium);
 
-        user = (User) getIntent().getSerializableExtra("user");
         textBtCompra = findViewById(R.id.textBtCompra);
         btX = findViewById(R.id.btX);
         btComprar = findViewById(R.id.btComprar);
 
-        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
-        Call<Plan> call = delfisApiService.getPlanByName(user.getToken(), PREMIUM_NAME);
-        call.enqueue(new Callback<Plan>() {
-            @Override
-            public void onResponse(Call<Plan> call, Response<Plan> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    premiumPlan = response.body();
-                    textBtCompra.setText("Comprar por R$" + String.valueOf(premiumPlan.getPrice()).replace(".", ","));
-                } else {
-                    Toast.makeText(SellPremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Plan> call, Throwable t) {
-                Toast.makeText(SellPremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-            }
-        });
+        renderizarInfo();
 
         btComprar.setOnClickListener(v -> {
             if (premiumPlan != null && user.getPlanId() == premiumPlan.getId()) {
@@ -90,6 +72,8 @@ public class SellPremiumActivity extends AppCompatActivity {
 
                 Map<String, Object> updates = new HashMap<>();
                 updates.put("fkPlanId", premiumPlan.getId());
+
+                DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
 
                 Call<User> call2 = delfisApiService.updateUserPartially(user.getToken(), user.getId(), updates);
                 call2.enqueue(new Callback<User>() {
@@ -116,7 +100,35 @@ public class SellPremiumActivity extends AppCompatActivity {
             Intent intent = new Intent(SellPremiumActivity.this, StoreActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
+
+        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
+        Call<Plan> call = delfisApiService.getPlanByName(user.getToken(), PREMIUM_NAME);
+        call.enqueue(new Callback<Plan>() {
+            @Override
+            public void onResponse(Call<Plan> call, Response<Plan> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    premiumPlan = response.body();
+                    textBtCompra.setText("Comprar por R$" + String.valueOf(premiumPlan.getPrice()).replace(".", ","));
+                } else {
+                    Toast.makeText(SellPremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Plan> call, Throwable t) {
+                Toast.makeText(SellPremiumActivity.this, "Erro ao buscar plano. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+            }
         });
     }
 

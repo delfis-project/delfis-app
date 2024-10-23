@@ -45,19 +45,30 @@ public class SellThemesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_themes);
 
-        recyclerViewLoja = findViewById(R.id.recyclerViewLoja);
-        user = (User) getIntent().getSerializableExtra("user");
         textMoedas = findViewById(R.id.textMoedas);
         btSeta = findViewById(R.id.btSeta);
-        recyclerViewUser = findViewById(R.id.recyclerViewUser);
         textVazio = findViewById(R.id.textVazio);
+
+        renderizarInfo();
 
         btSeta.setOnClickListener(v -> {
             Intent intent = new Intent(SellThemesActivity.this, StoreActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        recyclerViewUser = findViewById(R.id.recyclerViewUser);
+        recyclerViewLoja = findViewById(R.id.recyclerViewLoja);
+        user = (User) getIntent().getSerializableExtra("user");
+
         textMoedas.setText(String.valueOf(user.getCoins()));
 
         adapterThemeStore = new AdapterThemeStore(themes, user);

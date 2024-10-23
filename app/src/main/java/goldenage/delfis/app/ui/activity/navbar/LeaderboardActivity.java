@@ -40,6 +40,25 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.placarMenu);
+
+        renderizarInfo();
+
+        nav.setOnItemSelectedListener(item -> {
+            Intent intent = ActivityUtil.getNextIntent(LeaderboardActivity.this, item);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            
+            return true;
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
         user = (User) getIntent().getSerializableExtra("user");
         recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
 
@@ -49,15 +68,6 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         Toast.makeText(LeaderboardActivity.this, "Carregando usuários...", Toast.LENGTH_LONG).show();
         loadLeaderboard(user.getToken());
-
-        nav.setOnItemSelectedListener(item -> {
-            Intent intent = ActivityUtil.getNextIntent(LeaderboardActivity.this, item);
-            intent.putExtra("user", user);
-            startActivity(intent);
-            finish();
-            
-            return true;
-        });
     }
 
     private void loadLeaderboard(String token) {
@@ -90,6 +100,5 @@ public class LeaderboardActivity extends AppCompatActivity {
         Intent intent = new Intent(LeaderboardActivity.this, HomeActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        finish();
     }
 }

@@ -58,34 +58,8 @@ public class ConfigActivity extends AppCompatActivity {
         btSair = findViewById(R.id.btSair);
         btEditarInfo = findViewById(R.id.btEditarInfo);
         btAreaRestrita = findViewById(R.id.btAreaRestrita);
-        user = (User) getIntent().getSerializableExtra("user");
 
-        levelUser.setText(String.valueOf(user.getLevel()));
-        textNome.setText(user.getName());
-        textEmail.setText(user.getEmail());
-
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String data = LocalDate.parse(user.getBirthDate(), inputFormatter).format(outputFormatter);
-        textNascimento.setText(data);
-
-        if (user.getPictureUrl() != null) {
-            int widthValue = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    160,
-                    getResources().getDisplayMetrics());
-            int heightValue = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    180,
-                    getResources().getDisplayMetrics());
-
-            ViewGroup.LayoutParams layoutParams = imgPerfil.getLayoutParams();
-            layoutParams.width = widthValue;
-            layoutParams.height = heightValue;
-            imgPerfil.setLayoutParams(layoutParams);
-
-            Glide.with(this).load(user.getPictureUrl()).into(imgPerfil);
-        }
+        renderizarInfo();
 
         btMudarFoto.setOnClickListener(v -> {
             Intent intent = new Intent(ConfigActivity.this, ProfilePictureActivity.class);
@@ -109,7 +83,6 @@ public class ConfigActivity extends AppCompatActivity {
             Intent intent = ActivityUtil.getNextIntent(ConfigActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
             
             return true;
         });
@@ -139,11 +112,47 @@ public class ConfigActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
+
+        levelUser.setText(String.valueOf(user.getLevel()));
+        textNome.setText(user.getName());
+        textEmail.setText(user.getEmail());
+
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String data = LocalDate.parse(user.getBirthDate(), inputFormatter).format(outputFormatter);
+        textNascimento.setText(data);
+
+        if (user.getPictureUrl() != null) {
+            int widthValue = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    160,
+                    getResources().getDisplayMetrics());
+            int heightValue = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    180,
+                    getResources().getDisplayMetrics());
+
+            ViewGroup.LayoutParams layoutParams = imgPerfil.getLayoutParams();
+            layoutParams.width = widthValue;
+            layoutParams.height = heightValue;
+            imgPerfil.setLayoutParams(layoutParams);
+
+            Glide.with(this).load(user.getPictureUrl()).into(imgPerfil);
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(ConfigActivity.this, HomeActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        finish();
     }
 }

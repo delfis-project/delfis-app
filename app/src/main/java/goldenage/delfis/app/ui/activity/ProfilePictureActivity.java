@@ -91,12 +91,13 @@ public class ProfilePictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_picture);
 
-        user = (User) getIntent().getSerializableExtra("user");
         cameraExecutor = Executors.newSingleThreadExecutor();
         viewFinder = findViewById(R.id.viewFinder);
         imgCarregando = findViewById(R.id.imgCarregando);
         textCarregando = findViewById(R.id.textCarregando);
         textCapturar = findViewById(R.id.textCapturar);
+
+        renderizarInfo();
 
         if (allPermissionsGranted()) {
             startCamera();
@@ -106,6 +107,16 @@ public class ProfilePictureActivity extends AppCompatActivity {
 
         btCapturar = findViewById(R.id.btCapturar);
         btCapturar.setOnClickListener(v -> takePhoto());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
     }
 
     private void takePhoto() {
@@ -180,7 +191,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
                     Intent intent = new Intent(ProfilePictureActivity.this, ConfigActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
-                    
+
                 }
             }
 

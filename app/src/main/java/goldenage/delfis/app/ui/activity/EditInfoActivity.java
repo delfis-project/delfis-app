@@ -38,8 +38,6 @@ public class EditInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_info);
 
-        user = (User) getIntent().getSerializableExtra("user");
-
         editTextNome = findViewById(R.id.editTextNome);
         editTextSenha = findViewById(R.id.editTextSenha);
         editTextData = findViewById(R.id.editTextData);
@@ -47,16 +45,7 @@ public class EditInfoActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         btAtualizar = findViewById(R.id.btAtualizar);
 
-        setFormatterDate();
-
-        editTextNome.setText(user.getName());
-        editTextUsername.setText(user.getUsername());
-        editTextEmail.setText(user.getEmail());
-
-        DateTimeFormatter apiFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dataFormatada = LocalDate.parse(user.getBirthDate(), apiFormatter).format(outFormatter);
-        editTextData.setText(dataFormatada);
+        renderizarInfo();
 
         btAtualizar.setOnClickListener(v -> {
             String name = editTextNome.getText().toString().trim();
@@ -164,6 +153,27 @@ public class EditInfoActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
+
+        setFormatterDate();
+
+        editTextNome.setText(user.getName());
+        editTextUsername.setText(user.getUsername());
+        editTextEmail.setText(user.getEmail());
+
+        DateTimeFormatter apiFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataFormatada = LocalDate.parse(user.getBirthDate(), apiFormatter).format(outFormatter);
+        editTextData.setText(dataFormatada);
     }
 
     private void setFormatterDate() {

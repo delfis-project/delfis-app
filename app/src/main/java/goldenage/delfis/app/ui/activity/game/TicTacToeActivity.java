@@ -22,6 +22,7 @@ import goldenage.delfis.app.R;
 import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
 import goldenage.delfis.app.model.client.GptClient;
 import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.util.GameUtil;
 
 import android.content.Intent;
 import android.widget.Toast;
@@ -120,6 +121,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                 Intent intent = new Intent(TicTacToeActivity.this, HomeActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
+                finish();
             }, 2000);
         } else if (jogada == 9) {
             Toast.makeText(this, "Empate! Reiniciando...", Toast.LENGTH_LONG).show();

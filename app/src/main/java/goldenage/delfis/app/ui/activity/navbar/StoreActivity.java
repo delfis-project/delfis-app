@@ -28,18 +28,18 @@ public class StoreActivity extends AppCompatActivity {
 
         nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.bottom_menu);
-        user = (User) getIntent().getSerializableExtra("user");
         btTemas = findViewById(R.id.btTemas);
         btPowerups = findViewById(R.id.btPowerups);
         btMoedas = findViewById(R.id.btMoedas);
         btPremium = findViewById(R.id.btPremium);
+
+        renderizarInfo();
 
         nav.setSelectedItemId(R.id.lojaMenu);
         nav.setOnItemSelectedListener(item -> {
             Intent intent = ActivityUtil.getNextIntent(StoreActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
-            finish();
             
             return true;
         });
@@ -70,11 +70,20 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        renderizarInfo();
+    }
+
+    private void renderizarInfo() {
+        user = (User) getIntent().getSerializableExtra("user");
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(StoreActivity.this, HomeActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        finish();
     }
 }
