@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity;
+package goldenage.delfis.app.activity;
 
 import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
 

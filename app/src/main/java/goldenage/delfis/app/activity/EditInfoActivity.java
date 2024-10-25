@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity;
+package goldenage.delfis.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.ui.activity.navbar.ConfigActivity;
+import goldenage.delfis.app.activity.navbar.ConfigActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.RetrofitFactory;

@@ -28,55 +28,55 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.RestrictAreaActivity"
+            android:name=".activity.RestrictAreaActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.game.MathChallengesActivity"
+            android:name=".activity.game.MathChallengesActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.EditInfoActivity"
+            android:name=".activity.EditInfoActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.game.TicTacToeActivity"
+            android:name=".activity.game.TicTacToeActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.game.SudokuActivity"
+            android:name=".activity.game.SudokuActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.sell.SellPowerupsActivity"
+            android:name=".activity.sell.SellPowerupsActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.sell.SellThemesActivity"
+            android:name=".activity.sell.SellThemesActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.sell.SellPremiumActivity"
+            android:name=".activity.sell.SellPremiumActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.sell.SellCoinsActivity"
+            android:name=".activity.sell.SellCoinsActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.navbar.LeaderboardActivity"
+            android:name=".activity.navbar.LeaderboardActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ProfilePictureActivity"
+            android:name=".activity.ProfilePictureActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.navbar.LeaderboardTabletActivity"
+            android:name=".activity.navbar.LeaderboardTabletActivity"
             android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.SplashScreenActivity"
+            android:name=".activity.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
@@ -87,19 +87,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.navbar.HomeActivity"
+            android:name=".activity.navbar.HomeActivity"
             android:screenOrientation="portrait"
             android:exported="true" />
-        <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.ErrorActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ErrorActivity" />
         <activity
-            android:name=".ui.activity.navbar.StoreActivity"
+            android:name=".activity.navbar.StoreActivity"
             android:exported="true" />
-        <activity android:name=".ui.activity.navbar.ConfigActivity" />
+        <activity android:name=".activity.navbar.ConfigActivity" />
     </application>
 
 </manifest>

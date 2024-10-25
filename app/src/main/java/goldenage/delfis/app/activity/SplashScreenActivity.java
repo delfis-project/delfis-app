@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity;
+package goldenage.delfis.app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
