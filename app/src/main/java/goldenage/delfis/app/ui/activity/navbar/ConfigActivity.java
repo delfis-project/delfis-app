@@ -41,6 +41,7 @@ public class ConfigActivity extends AppCompatActivity {
     private TextView levelUser, textNome, textEmail, textNascimento;
     private ImageView btMudarFoto, btSair, btEditarInfo, btAreaRestrita;
     private CircleImageView imgPerfil;
+    private static final int ADM_USER_ROLE_ID = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,13 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         btAreaRestrita.setOnClickListener(v -> {
-            Intent intent = new Intent(ConfigActivity.this, RestrictAreaActivity.class);
-            intent.putExtra("user", user);
-            startActivity(intent);
+            if (user.getUserRoleId() == ADM_USER_ROLE_ID) {
+                Intent intent = new Intent(ConfigActivity.this, RestrictAreaActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            } else {
+                Toast.makeText(ConfigActivity.this, "Você não tem permissão para acessar essa área.", Toast.LENGTH_LONG).show();
+            }
         });
 
         nav.setOnItemSelectedListener(item -> {
