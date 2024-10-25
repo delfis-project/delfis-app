@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,6 +74,24 @@ public class EditInfoActivity extends AppCompatActivity {
                 Toast.makeText(this, "Por favor, insira sua data de nascimento.", Toast.LENGTH_LONG).show();
                 editTextData.requestFocus();
                 return;
+            } else {
+                try {
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate localDate = LocalDate.parse(birthDate, inputFormatter);
+
+                    if (LocalDate.now().getYear() - localDate.getYear() > 130
+                            || localDate.getDayOfMonth() > 31
+                            || localDate.getDayOfMonth() < 1
+                            || localDate.getMonthValue() > 12
+                            || localDate.getMonthValue() < 1) {
+                        Toast.makeText(this, "Por favor, insira uma data de nascimento válida.", Toast.LENGTH_LONG).show();
+                        editTextData.requestFocus();
+                        return;
+                    }
+                } catch (DateTimeParseException dtpe) {
+                    Toast.makeText(this, "Por favor, insira uma data de nascimento válida.", Toast.LENGTH_LONG).show();
+                    return;
+                }
             }
 
             Toast.makeText(this, "Aguarde...", Toast.LENGTH_LONG).show();

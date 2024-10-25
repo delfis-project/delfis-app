@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText nameEditText, usernameEditText, passwordEditText, emailEditText, birthDateEditText;
@@ -142,15 +143,21 @@ public class RegisterActivity extends AppCompatActivity {
                 birthDateEditText.requestFocus();
                 return;
             } else {
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate localDate = LocalDate.parse(birthDate, inputFormatter);
-                if(LocalDate.now().getYear() - localDate.getYear() > 130
-                    || localDate.getDayOfMonth() > 31
-                    || localDate.getDayOfMonth() < 1
-                    || localDate.getMonthValue() > 12
-                    || localDate.getMonthValue() < 1) {
+                try {
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate localDate = LocalDate.parse(birthDate, inputFormatter);
+                    if(LocalDate.now().getYear() - localDate.getYear() > 130
+                            || localDate.getDayOfMonth() > 31
+                            || localDate.getDayOfMonth() < 1
+                            || localDate.getMonthValue() > 12
+                            || localDate.getMonthValue() < 1) {
+                        Toast.makeText(this, "Por favor, insira uma data de nascimento válida.", Toast.LENGTH_LONG).show();
+                        birthDateEditText.requestFocus();
+                        return;
+                    }
+                } catch (DateTimeParseException dtpe) {
                     Toast.makeText(this, "Por favor, insira uma data de nascimento válida.", Toast.LENGTH_LONG).show();
-                    birthDateEditText.requestFocus();
+                    return;
                 }
             }
 

@@ -77,7 +77,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private final CameraSelector cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
     private User user;
-    private ImageView btCapturar, imgCarregando;
+    private ImageView btCapturar, imgCarregando, btVoltar;
     private TextView textCarregando, textCapturar;
 
     @Override
@@ -96,6 +96,14 @@ public class ProfilePictureActivity extends AppCompatActivity {
         imgCarregando = findViewById(R.id.imgCarregando);
         textCarregando = findViewById(R.id.textCarregando);
         textCapturar = findViewById(R.id.textCapturar);
+        btVoltar = findViewById(R.id.btSetaVoltar3);
+
+        btVoltar.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfilePictureActivity.this, ConfigActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            finish();
+        });
 
         renderizarInfo();
 

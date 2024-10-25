@@ -39,6 +39,7 @@ public class TicTacToeActivity extends AppCompatActivity {
     private static final String API_URL = BuildConfig.GPT_API_URL;
     private static final String API_KEY = BuildConfig.GPT_API_KEY;
     private User user;
+    private ImageView btVoltar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,15 @@ public class TicTacToeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tic_tac_toe);
 
         user = (User) getIntent().getSerializableExtra("user");
+        btVoltar = findViewById(R.id.btSetaVoltar2);
+
+        btVoltar.setOnClickListener(v -> {
+            Intent intent = new Intent(TicTacToeActivity.this, HomeActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            finish();
+        });
+
         jogo = new char[3][3];
         jogada = 0;
         handler = new Handler();
