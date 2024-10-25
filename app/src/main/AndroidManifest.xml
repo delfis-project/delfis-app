@@ -74,7 +74,7 @@
         <activity
             android:name=".ui.activity.navbar.LeaderboardTabletActivity"
             android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.activity.SplashScreenActivity"
             android:exported="true"
@@ -88,9 +88,11 @@
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ui.activity.navbar.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.ErrorActivity" />

@@ -21,11 +21,12 @@
 
     <ImageView
         android:id="@+id/imageView20"
-        android:layout_width="377dp"
-        android:layout_height="375dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_width="456dp"
+        android:layout_height="348dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btEditarInfo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/squarelarge" />
@@ -34,9 +35,9 @@
         android:id="@+id/imageView22"
         android:layout_width="110dp"
         android:layout_height="56dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView20"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="@+id/imageView20"
         app:layout_constraintTop_toTopOf="@+id/imageView20"
         app:srcCompat="@drawable/squaresmall" />
@@ -119,53 +120,53 @@
         app:layout_constraintTop_toBottomOf="@+id/textEmail" />
 
     <ImageView
-        android:id="@+id/btEditarInfo"
-        android:layout_width="163dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView20"
-        app:srcCompat="@drawable/model_user_self_ranking" />
-
-    <ImageView
         android:id="@+id/btSair"
-        android:layout_width="163dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="148dp"
+        android:layout_width="303dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView20"
+        app:layout_constraintTop_toBottomOf="@+id/btAreaRestrita"
         app:srcCompat="@drawable/model_user_self_ranking" />
 
     <ImageView
         android:id="@+id/btAreaRestrita"
-        android:layout_width="163dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="148dp"
+        android:layout_width="303dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/btSair"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView20"
+        app:layout_constraintTop_toBottomOf="@+id/btMudarFoto"
         app:srcCompat="@drawable/model_user_self_ranking" />
 
     <ImageView
         android:id="@+id/btMudarFoto"
-        android:layout_width="163dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="303dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/btAreaRestrita"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btEditarInfo"
+        app:srcCompat="@drawable/model_user_self_ranking" />
+
+    <ImageView
+        android:id="@+id/btEditarInfo"
+        android:layout_width="303dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/btMudarFoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView20"
         app:srcCompat="@drawable/model_user_self_ranking" />
 
     <TextView
         android:id="@+id/textView19"
-        android:layout_width="126dp"
-        android:layout_height="56dp"
+        android:layout_width="222dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:text="Editar informações"
         android:textColor="#FDF6FE"

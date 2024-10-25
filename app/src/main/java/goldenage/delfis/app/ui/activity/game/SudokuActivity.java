@@ -2,8 +2,10 @@ package goldenage.delfis.app.ui.activity.game;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -40,6 +42,20 @@ public class SudokuActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         btCheck = findViewById(R.id.btCheck);
         btSetaVoltar = findViewById(R.id.btSetaVoltar);
+
+        // Identificar se é um tablet
+        boolean isTablet = (getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+
+        GridLayout sudokuGrid = findViewById(R.id.sudokuGrid);
+
+        // Se for um tablet, ajuste o tamanho
+        if (isTablet) {
+            // Ajuste a largura para 2/3 da tela
+            int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.66);
+            sudokuGrid.getLayoutParams().width = width;
+        }
 
         for (int i = 0; i < BOARD_HEIGHT; i++) {
             for (int j = 0; j < BOARD_WIDTH; j++) {
