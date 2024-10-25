@@ -42,10 +42,9 @@ public class AdapterUserLeaderboard extends RecyclerView.Adapter<AdapterUserLead
         holder.textLugar.setText("#" + (position + 1));
 
         if (currentUser.getId() == requisitante.getId())
-            holder.layout.setBackgroundColor(holder.layout
-                    .getContext()
-                    .getResources()
-                    .getColor(R.color.delfisBackground));
+            holder.layout.setBackgroundResource(R.drawable.model_user_self_ranking);
+        else
+            holder.layout.setBackgroundResource(R.drawable.model_user_ranking);
     }
 
     @Override
