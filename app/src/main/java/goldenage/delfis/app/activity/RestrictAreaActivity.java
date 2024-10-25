@@ -20,9 +20,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.ui.activity.navbar.ConfigActivity;
-import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
-import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
+import goldenage.delfis.app.activity.navbar.ConfigActivity;
+import goldenage.delfis.app.activity.navbar.HomeActivity;
+import goldenage.delfis.app.activity.navbar.StoreActivity;
 
 public class RestrictAreaActivity extends AppCompatActivity {
     private User user;

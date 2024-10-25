@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity.navbar;
+package goldenage.delfis.app.activity.navbar;
 
 import static android.content.ContentValues.TAG;
 
@@ -22,13 +22,12 @@ import java.time.format.DateTimeFormatter;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.ui.activity.EditInfoActivity;
-import goldenage.delfis.app.ui.activity.ProfilePictureActivity;
+import goldenage.delfis.app.activity.EditInfoActivity;
+import goldenage.delfis.app.activity.ProfilePictureActivity;
+import goldenage.delfis.app.activity.RestrictAreaActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.ui.activity.RestrictAreaActivity;
-import goldenage.delfis.app.ui.activity.game.MathChallengesActivity;
 import goldenage.delfis.app.util.ActivityUtil;
 import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;

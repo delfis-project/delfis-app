@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity.navbar;
+package goldenage.delfis.app.activity.navbar;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -16,12 +16,12 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.ui.activity.game.MathChallengesActivity;
-import goldenage.delfis.app.ui.activity.game.SudokuActivity;
-import goldenage.delfis.app.ui.activity.game.TicTacToeActivity;
+import goldenage.delfis.app.activity.game.MathChallengesActivity;
+import goldenage.delfis.app.activity.game.SudokuActivity;
+import goldenage.delfis.app.activity.game.TicTacToeActivity;
 import goldenage.delfis.app.model.response.Streak;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.ui.activity.sell.SellPremiumActivity;
+import goldenage.delfis.app.activity.sell.SellPremiumActivity;
 import goldenage.delfis.app.util.ActivityUtil;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = ActivityUtil.getNextIntent(HomeActivity.this, item);
             intent.putExtra("user", user);
             startActivity(intent);
-            
+
             return true;
         });
 

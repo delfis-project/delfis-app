@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity.navbar;
+package goldenage.delfis.app.activity.navbar;
 
 import static android.content.ContentValues.TAG;
 

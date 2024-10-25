@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity.sell;
+package goldenage.delfis.app.activity.sell;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -29,8 +29,8 @@ import java.util.Map;
 import goldenage.delfis.app.R;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
-import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
+import goldenage.delfis.app.activity.navbar.HomeActivity;
+import goldenage.delfis.app.activity.navbar.StoreActivity;
 import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;

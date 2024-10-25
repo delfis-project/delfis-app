@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.ui.activity.ErrorActivity;
-import goldenage.delfis.app.ui.activity.navbar.ConfigActivity;
-import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
-import goldenage.delfis.app.ui.activity.navbar.LeaderboardActivity;
-import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
+import goldenage.delfis.app.activity.ErrorActivity;
+import goldenage.delfis.app.activity.navbar.ConfigActivity;
+import goldenage.delfis.app.activity.navbar.HomeActivity;
+import goldenage.delfis.app.activity.navbar.LeaderboardActivity;
+import goldenage.delfis.app.activity.navbar.StoreActivity;
 
 public class ActivityUtil {
     public static Intent getNextIntent(Context context, MenuItem item) {

@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity.navbar;
+package goldenage.delfis.app.activity.navbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.ui.activity.sell.SellCoinsActivity;
-import goldenage.delfis.app.ui.activity.sell.SellPowerupsActivity;
-import goldenage.delfis.app.ui.activity.sell.SellPremiumActivity;
-import goldenage.delfis.app.ui.activity.sell.SellThemesActivity;
+import goldenage.delfis.app.activity.sell.SellCoinsActivity;
+import goldenage.delfis.app.activity.sell.SellPowerupsActivity;
+import goldenage.delfis.app.activity.sell.SellPremiumActivity;
+import goldenage.delfis.app.activity.sell.SellThemesActivity;
 import goldenage.delfis.app.model.response.User;
 import goldenage.delfis.app.util.ActivityUtil;
 

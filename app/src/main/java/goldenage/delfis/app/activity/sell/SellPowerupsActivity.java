@@ -1,4 +1,4 @@
-package goldenage.delfis.app.ui.activity.sell;
+package goldenage.delfis.app.activity.sell;
 
 import static android.content.ContentValues.TAG;
 
@@ -23,7 +23,7 @@ import goldenage.delfis.app.adapter.AdapterPowerupStore;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Powerup;
 import goldenage.delfis.app.model.response.User;
-import goldenage.delfis.app.ui.activity.navbar.StoreActivity;
+import goldenage.delfis.app.activity.navbar.StoreActivity;
 import goldenage.delfis.app.util.RetrofitFactory;
 import retrofit2.Call;
 import retrofit2.Callback;

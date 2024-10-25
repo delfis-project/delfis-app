@@ -21,7 +21,7 @@ import goldenage.delfis.app.R;
 import goldenage.delfis.app.model.request.StreakRequest;
 import goldenage.delfis.app.model.response.Powerup;
 import goldenage.delfis.app.model.response.Theme;
-import goldenage.delfis.app.ui.activity.navbar.HomeActivity;
+import goldenage.delfis.app.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.request.LoginRequest;
