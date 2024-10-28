@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         mudarViewSenha = findViewById(R.id.mudarviewsenha);
         mudarViewSenha.setOnClickListener(view -> togglePasswordVisibility());
 
-        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class); // Instância única do serviço
+        DelfisApiService delfisApiService = RetrofitFactory.getClient().create(DelfisApiService.class);
 
         entrarButton.setOnClickListener(v -> {
             String username = usernameEditText.getText().toString();
