@@ -28,53 +28,56 @@
         android:theme="@style/Theme.Delfis"
         tools:targetApi="31">
         <activity
-            android:name=".activity.RestrictAreaActivity"
-            android:screenOrientation="portrait"
+            android:name=".activity.PointsActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.RestrictAreaActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.game.MathChallengesActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.EditInfoActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.game.TicTacToeActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.game.SudokuActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sell.SellPowerupsActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sell.SellThemesActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sell.SellPremiumActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sell.SellCoinsActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.navbar.LeaderboardActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ProfilePictureActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.navbar.LeaderboardTabletActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashScreenActivity"
             android:exported="true"
@@ -88,12 +91,12 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.navbar.HomeActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.ErrorActivity" />
         <activity
