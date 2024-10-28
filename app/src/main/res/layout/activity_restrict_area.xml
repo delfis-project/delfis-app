@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606"
+        app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/atividadebackground" />
 
     <ImageView
@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.372"
+        app:layout_constraintVertical_bias="0.271"
         app:srcCompat="@drawable/atividadebackground" />
 
     <TextView
@@ -77,10 +77,21 @@
         android:layout_height="54dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.097"
         app:srcCompat="@drawable/seta_voltar" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="227dp"
+        android:layout_height="160dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691"
+        app:srcCompat="@drawable/logopremium" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
