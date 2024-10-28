@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#064273"
+    tools:context=".activity.LoginActivity" >
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="1296dp"
+        android:layout_height="165dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ondas" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="264dp"
+        android:layout_height="253dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/delfis" />
+
+    <EditText
+        android:id="@+id/editTextTextUsername"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="NOME DE USUÁRIO"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#717171"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.012" />
+
+    <EditText
+        android:id="@+id/editTextSenha"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="SENHA"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#717171"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername"
+        app:layout_constraintVertical_bias="0.115" />
+
+    <Button
+        android:id="@+id/btAtualizar"
+        android:layout_width="175dp"
+        android:layout_height="52dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="ENTRAR"
+        android:textColor="#03355D"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenha"
+        app:layout_constraintVertical_bias="0.405" />
+
+    <TextView
+        android:id="@+id/criarConta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CRIAR CONTA"
+        android:textColor="#A6C5FF"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAtualizar"
+        app:layout_constraintVertical_bias="0.272" />
+
+    <TextView
+        android:id="@+id/delfis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="delfis!"
+        android:textColor="#FFFFFF"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextUsername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.833" />
+
+    <ImageView
+        android:id="@+id/mudarviewsenha"
+        android:layout_width="24dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextSenha"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSenha"
+        app:layout_constraintTop_toTopOf="@+id/editTextSenha"
+        app:srcCompat="@drawable/olhofechado" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

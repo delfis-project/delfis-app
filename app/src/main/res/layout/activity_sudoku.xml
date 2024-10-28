@@ -1,0 +1,266 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.game.SudokuActivity">
+
+    <GridLayout
+        android:id="@+id/sudokuGrid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/sudokuTemplate"
+        android:columnCount="6"
+        android:rowCount="6"
+        app:layout_constraintBottom_toTopOf="@+id/btCheck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Linha 0 -->
+        <Button
+            android:id="@+id/btn_0_0"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_0_1"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_0_2"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_0_3"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_0_4"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_0_5"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <!-- Linha 1 -->
+        <Button
+            android:id="@+id/btn_1_0"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_1_1"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_1_2"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_1_3"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_1_4"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_1_5"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <!-- Linha 2 -->
+        <Button
+            android:id="@+id/btn_2_0"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_2_1"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_2_2"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_2_3"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_2_4"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_2_5"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <!-- Linha 3 -->
+        <Button
+            android:id="@+id/btn_3_0"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_3_1"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_3_2"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_3_3"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_3_4"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_3_5"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <!-- Linha 4 -->
+        <Button
+            android:id="@+id/btn_4_0"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_4_1"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_4_2"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_4_3"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_4_4"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_4_5"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <!-- Linha 5 -->
+        <Button
+            android:id="@+id/btn_5_0"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_5_1"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_5_2"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_5_3"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_5_4"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_5_5"
+            style="@style/SudokuButtonStyle"
+            android:text="0" />
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/delfisBackground"
+        android:text="Checar Tabuleiro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sudokuGrid" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="29dp"
+        android:text="SUDOKU"
+        android:textColor="@color/delfisBackground"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sudokuGrid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
+
+    <ImageView
+        android:id="@+id/btSetaVoltar"
+        android:layout_width="53dp"
+        android:layout_height="54dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.054"
+        app:srcCompat="@drawable/seta_voltar" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clique na célula para alterar seu valor!"
+        android:textColor="@color/delfisBackground"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sudokuGrid"
+        app:layout_constraintVertical_bias="0.075" />
+</androidx.constraintlayout.widget.ConstraintLayout>
