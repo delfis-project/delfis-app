@@ -1,85 +1,60 @@
 package goldenage.delfis.app.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ImageView;
 
 import goldenage.delfis.app.R;
-import goldenage.delfis.app.model.response.User;
+import goldenage.delfis.app.activity.game.SudokuActivity;
 import goldenage.delfis.app.activity.navbar.ConfigActivity;
 import goldenage.delfis.app.activity.navbar.HomeActivity;
-import goldenage.delfis.app.activity.navbar.StoreActivity;
+import goldenage.delfis.app.activity.navbar.LeaderboardActivity;
+import goldenage.delfis.app.model.response.User;
 
 public class RestrictAreaActivity extends AppCompatActivity {
     private User user;
-    private WebView webView;
-    private ProgressBar progressBar;
+    private ImageView btDashboard, btForm, btSetaVoltar;
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restrict_area);
 
-        webView = findViewById(R.id.webView);
-        progressBar = findViewById(R.id.progressBar);
+        user = (User) getIntent().getSerializableExtra("user");
+        btDashboard = findViewById(R.id.btDashboard);
+        btForm = findViewById(R.id.btForm);
+        btSetaVoltar = findViewById(R.id.btSetaVoltar9);
 
-        renderizarInfo();
-
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setDisplayZoomControls(false);
-
-        webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient() {
-            public void onProgressChanged(WebView view, int progress) {
-                if(progress < 100 && progressBar.getVisibility() == ProgressBar.GONE)
-                    progressBar.setVisibility(ProgressBar.VISIBLE);
-
-                progressBar.setProgress(progress);
-
-                if(progress == 100)
-                    progressBar.setVisibility(ProgressBar.GONE);
-            }
+        btDashboard.setOnClickListener(v -> {
+            Intent intent = new Intent(RestrictAreaActivity.this, WebViewActivity.class);
+            intent.putExtra("user", user);
+            intent.putExtra("url", "https://delfis-project.github.io/delfis-restrict-area");
+            startActivity(intent);
         });
 
-        webView.loadUrl("https://delfis-project.github.io/delfis-restrict-area");
-    }
+        btForm.setOnClickListener(v -> {
+            Intent intent = new Intent(RestrictAreaActivity.this, WebViewActivity.class);
+            intent.putExtra("user", user);
+            intent.putExtra("url", "http://ec2-34-232-168-144.compute-1.amazonaws.com:5000");
+            startActivity(intent);
+        });
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        renderizarInfo();
-    }
-
-    private void renderizarInfo() {
-        user = (User) getIntent().getSerializableExtra("user");
+        btSetaVoltar.setOnClickListener(v -> {
+            Intent intent = new Intent(RestrictAreaActivity.this, ConfigActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+            finish();
+        });
     }
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
-            Intent intent = new Intent(RestrictAreaActivity.this, ConfigActivity.class);
-            intent.putExtra("user", user);
-            startActivity(intent);
-        }
+        super.onBackPressed();
+        Intent intent = new Intent(RestrictAreaActivity.this, ConfigActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        finish();
     }
 }
