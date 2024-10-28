@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -149,13 +150,8 @@ public class MathChallengesActivity extends AppCompatActivity {
             }
 
             if (!haveErrors) {
-                Toast.makeText(MathChallengesActivity.this, "Correto! Parabéns!", Toast.LENGTH_LONG).show();
                 GameUtil.payUser(MathChallengesActivity.this, user);
-
-                Intent intent = new Intent(MathChallengesActivity.this, HomeActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-                finish();
+                Toast.makeText(MathChallengesActivity.this, "Correto! Parabéns!", Toast.LENGTH_LONG).show();
             }
         });
 

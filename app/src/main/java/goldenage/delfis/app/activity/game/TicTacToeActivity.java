@@ -101,16 +101,12 @@ public class TicTacToeActivity extends AppCompatActivity {
     }
 
     public void limparJogo() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ignored) {
-        }
-
         jogo = new char[3][3];
         jogada = 0;
 
         for (int botao : botoes) {
             ((ImageView) findViewById(botao)).setImageDrawable(new ColorDrawable(Color.TRANSPARENT));
+            findViewById(botao).setEnabled(true);
         }
 
         ((TextView) findViewById(R.id.resultado)).setText("");
@@ -121,21 +117,26 @@ public class TicTacToeActivity extends AppCompatActivity {
             String resultado;
             if (jogada % 2 != 0) {
                 resultado = "Vitória!";
+                ((TextView) findViewById(R.id.resultado)).setText(resultado);
                 GameUtil.payUser(TicTacToeActivity.this, user);
             } else {
                 resultado = "Derrota :(";
+                ((TextView) findViewById(R.id.resultado)).setText(resultado);
+                handler.postDelayed(() -> {
+                    Intent intent = new Intent(TicTacToeActivity.this, HomeActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                    finish();
+                }, 2000);
             }
-
-            ((TextView) findViewById(R.id.resultado)).setText(resultado);
+        } else if (jogada == 9) {
+            ((TextView) findViewById(R.id.resultado)).setText("Empate!");
             handler.postDelayed(() -> {
                 Intent intent = new Intent(TicTacToeActivity.this, HomeActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
                 finish();
             }, 2000);
-        } else if (jogada == 9) {
-            Toast.makeText(this, "Empate! Reiniciando...", Toast.LENGTH_LONG).show();
-            limparJogo();
         }
     }
 

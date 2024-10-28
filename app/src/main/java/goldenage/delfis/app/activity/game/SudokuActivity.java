@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ public class SudokuActivity extends AppCompatActivity {
     private final int BOARD_WIDTH = 6;
     private final int[][] sudokuBoard = new int[BOARD_WIDTH][BOARD_HEIGHT];
     private final Button[][] buttons = new Button[BOARD_WIDTH][BOARD_HEIGHT];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,13 +95,8 @@ public class SudokuActivity extends AppCompatActivity {
 
     private void checkSudokuAnswers() {
         if (isSudokuValid(sudokuBoard)) {
-            Toast.makeText(SudokuActivity.this, "Parabéns! Todas as respostas estão corretas!", Toast.LENGTH_LONG).show();
             GameUtil.payUser(SudokuActivity.this, user);
-
-            Intent intent = new Intent(SudokuActivity.this, HomeActivity.class);
-            intent.putExtra("user", user);
-            startActivity(intent);
-            finish();
+            Toast.makeText(SudokuActivity.this, "Parabéns! Todas as respostas estão corretas!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(SudokuActivity.this, "Algumas respostas estão incorretas. Tente novamente!", Toast.LENGTH_LONG).show();
         }

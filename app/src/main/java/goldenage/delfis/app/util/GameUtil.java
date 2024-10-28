@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import goldenage.delfis.app.activity.PointsActivity;
+import goldenage.delfis.app.activity.game.MathChallengesActivity;
+import goldenage.delfis.app.activity.navbar.HomeActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.User;
 import retrofit2.Call;
@@ -16,10 +18,6 @@ import retrofit2.Response;
 
 public class GameUtil {
     public static void payUser(Context context, User user) {
-        Intent intent = new Intent(context, PointsActivity.class);
-        intent.putExtra("user", user);
-        context.startActivity(intent);
-
         Map<String, Object> updates = new HashMap<>();
 
         user.setCounterPlayedGames(user.getCounterPlayedGames() + 1);
@@ -52,5 +50,9 @@ public class GameUtil {
                 Toast.makeText(context, "Falha na conexão.", Toast.LENGTH_LONG).show();
             }
         });
+
+        Intent intent = new Intent(context, PointsActivity.class);
+        intent.putExtra("user", user);
+        context.startActivity(intent);
     }
 }

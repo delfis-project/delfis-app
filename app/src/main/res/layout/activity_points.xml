@@ -10,7 +10,7 @@
         android:id="@+id/imageFilterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -21,8 +21,8 @@
         android:id="@+id/imageView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/btVoltar9"
+        android:layout_marginBottom="104dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,21 +52,6 @@
         app:layout_constraintEnd_toEndOf="@+id/imageFilterView"
         app:layout_constraintStart_toEndOf="@+id/imageView14"
         app:layout_constraintTop_toTopOf="@+id/imageFilterView" />
-
-    <Button
-        android:id="@+id/btVoltar9"
-        android:layout_width="190dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="68dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="VOLTAR"
-        android:textColor="#03355D"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView16"
@@ -99,7 +84,9 @@
         android:layout_height="314dp"
         app:layout_constraintBottom_toTopOf="@+id/imageFilterView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.387"
         app:srcCompat="@drawable/delfisdelfisdelfis" />
 </androidx.constraintlayout.widget.ConstraintLayout>
