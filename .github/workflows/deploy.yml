@@ -19,13 +19,6 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Decrypt keystore
-        env:
-          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
-        run: |
-          echo $ANDROID_KEYSTORE | base64 -d > app/keystore.jks
-          echo $ANDROID_KEYSTORE | base64 -d > /home/runner/.gradle/daemon/8.2/keystore.jks
-
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
         with:
@@ -37,6 +30,13 @@ jobs:
 
       - name: Create config.properties file
         run: echo "${{ secrets.CONFIG_PROPERTIES }}" > app/config.properties
+
+      - name: Decrypt keystore
+        env:
+          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+        run: |
+          echo $ANDROID_KEYSTORE | base64 -d > app/keystore.jks
+          echo $ANDROID_KEYSTORE | base64 -d > /home/runner/.gradle/daemon/8.2/keystore.jks
 
       - name: Build APK
         run: |
