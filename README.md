@@ -13,7 +13,7 @@ Delfis app Android. Jogos para exercitar a mente todos os dias!
 
 ## Instalação via APK
 Siga as etapas abaixo para instalar o aplicativo via APK:
-1. Baixe o arquivo APK a partir do [link de download](https://drive.google.com/file/d/16SKREtnzbsPzso_qHmsM_khW9N_H5h2q/view?usp=sharing).
+1. Baixe o arquivo APK nas releases do Github.
 2. No dispositivo Android, vá em **Configurações** > **Segurança** > **Permitir instalação de fontes desconhecidas**.
 3. Abra o arquivo APK baixado e siga as instruções na tela para instalar.
 
