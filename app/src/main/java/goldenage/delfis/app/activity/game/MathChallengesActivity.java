@@ -141,7 +141,11 @@ public class MathChallengesActivity extends AppCompatActivity {
 
             boolean haveErrors = false;
             for (int i = 0; i < NUM_CONTAS; i++) {
-                int resposta = Integer.parseInt(EDIT_TEXT_RESPOSTAS[i].getText().toString());
+                int resposta = 0;
+                try {
+                    resposta = Integer.parseInt(EDIT_TEXT_RESPOSTAS[i].getText().toString());
+                } catch (Exception e) {
+                }
                 if (resposta != RESPOSTAS[i]) {
                     Toast.makeText(MathChallengesActivity.this, "Há alguma conta errada! Verifique e tente novamente!", Toast.LENGTH_LONG).show();
                     haveErrors = true;
