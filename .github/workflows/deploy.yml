@@ -36,6 +36,9 @@ jobs:
     needs: apk
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+    
       - name: Download APK from build
         uses: actions/download-artifact@v4
         with:
@@ -45,14 +48,9 @@ jobs:
         run: mv app-debug.apk Delfis.apk
 
       - name: Create Release
-        uses: elgohr/Github-Release-Action@v5
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          title: Release ${{ github.ref }}
-          tag: ${{ github.ref }}
-          
-      - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: Delfis.apk
+          tag: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
