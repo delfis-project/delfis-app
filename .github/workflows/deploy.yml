@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         
       - name: Setup JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: 17
           
@@ -22,7 +22,7 @@ jobs:
         run: bash ./gradlew assembleDebug --stacktrace
         
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: app/build/outputs/apk/debug/app-debug.apk 
@@ -33,29 +33,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download APK from build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: apk  
           
       - name: Rename APK
         run: mv app-debug.apk Delfis.apk
-        
+
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+        uses: elgohr/Github-Release-Action@v5
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }} 
+          title: Release ${{ github.ref }}
+          tag: ${{ github.ref }}
           
-      - name: Upload Release APK
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: Delfis.apk
-          asset_name: Delfis.apk
-          asset_content_type: application/vnd.android.package-archive
+          files: Delfis.apk
