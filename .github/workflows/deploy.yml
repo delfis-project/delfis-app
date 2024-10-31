@@ -1,73 +1,57 @@
-name: Build Android APK and Release
+name: Minimal Android CI Workflow
 
 on:
   push:
     branches:
-      - dev
+      - master
+    tags:
+      - 'v*'
 
 jobs:
-  build:
+  apk:
+    name: Generate APK
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v2
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
         with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: 29
-          build-tools: 29.0.3
-
-      - name: Grant execute permission to Gradle wrapper
-        run: chmod +x ./gradlew
-
-      - name: Create config.properties file
-        run: echo "${{ secrets.CONFIG_PROPERTIES }}" > app/config.properties
-
-      - name: Decrypt keystore
-        env:
-          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
-        run: echo $ANDROID_KEYSTORE | base64 -d > app/keystore.jks
-
-      - name: List files in app directory
-        run: ls -la app
-
+          java-version: 1.8
       - name: Build APK
-        run: |
-          ./gradlew assembleRelease \
-          -Pandroid.injected.signing.store.file=keystore.jks \
-          -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
-          -Pandroid.injected.signing.key.alias=${{ secrets.KEY_ALIAS }} \
-          -Pandroid.injected.signing.key.password=${{ secrets.KEY_PASSWORD }}
-          --info
-          
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk 
+  release:
+    name: Release APK
+    needs: apk
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
+        with:
+          name: apk  
       - name: Rename APK
-        run: mv app/build/outputs/apk/release/app-release.apk delfis.apk
-
-      - name: Create GitHub Release
+        run: mv app-debug.apk Delfis.apk
+      - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         with:
-          tag_name: "v1.0.${{ github.run_number }}"
-          release_name: "v1.0.${{ github.run_number }}"
-          draft: false
-          prerelease: false
-
-      - name: Upload APK to Release
-        uses: actions/upload-release-asset@v1
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }} 
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./delfis.apk
-          asset_name: "delfis.apk"
+          asset_path: Delfis.apk
+          asset_name: Delfis.apk
           asset_content_type: application/vnd.android.package-archive
