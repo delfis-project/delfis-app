@@ -51,8 +51,8 @@ jobs:
         with:
           name: Delfis
           
-      - name: Extract APK
-        run: unzip Delfis.zip
+      - name: ls
+        run: ls -la $GITHUB_WORKSPACE
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
