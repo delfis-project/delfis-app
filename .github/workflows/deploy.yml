@@ -24,7 +24,7 @@ jobs:
       - name: Decrypt keystore
         env:
           ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
-        run: echo $ANDROID_KEYSTORE | base64 -d > keystore.jks
+        run: echo $ANDROID_KEYSTORE | base64 -d > app/keystore.jks
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
