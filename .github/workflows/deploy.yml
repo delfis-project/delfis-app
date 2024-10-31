@@ -34,12 +34,10 @@ jobs:
       - name: Decrypt keystore
         env:
           ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
-        run: |
-          echo $ANDROID_KEYSTORE | base64 -d > app/keystore.jks
-          mkdir -p /home/runner/.gradle
-          mkdir -p /home/runner/.gradle/daemon
-          mkdir -p /home/runner/.gradle/daemon/8.2
-          echo $ANDROID_KEYSTORE | base64 -d > /home/runner/.gradle/daemon/8.2/keystore.jks
+        run: echo $ANDROID_KEYSTORE | base64 -d > app/keystore.jks
+
+      - name: List files in app directory
+        run: ls -la app
 
       - name: Build APK
         run: |
