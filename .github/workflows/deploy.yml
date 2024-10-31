@@ -29,12 +29,15 @@ jobs:
       - name: Build APK
         run: bash ./gradlew assembleDebug --stacktrace
         
+      - name: Move APK to a specific location
+        run: mv app/build/outputs/apk/debug/app-debug.apk ./Delfis.apk
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: apk
-          path: app/build/outputs/apk/debug/app-debug.apk 
-          
+          name: Delfis
+          path: Delfis.apk 
+  
   release:
     name: Release APK
     needs: apk
@@ -46,7 +49,7 @@ jobs:
       - name: Download APK from build
         uses: actions/download-artifact@v4
         with:
-          name: apk  
+          name: Delfis  # Nome do artifact para baixar
           
       - name: Rename APK
         run: mv app-debug.apk Delfis.apk
@@ -55,6 +58,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: Delfis.apk
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
