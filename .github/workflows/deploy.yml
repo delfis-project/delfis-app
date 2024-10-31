@@ -35,6 +35,9 @@ jobs:
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x ./gradlew
 
+      - name: Create config.properties file
+        run: echo "${{ secrets.CONFIG_PROPERTIES }}" > app/config.properties
+
       - name: Build APK
         run: ./gradlew assembleRelease -Pandroid.injected.signing.store.file=keystore.jks \
                                         -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
