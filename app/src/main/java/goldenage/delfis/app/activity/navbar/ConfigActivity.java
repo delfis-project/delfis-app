@@ -24,7 +24,6 @@ import goldenage.delfis.app.R;
 import goldenage.delfis.app.activity.EditInfoActivity;
 import goldenage.delfis.app.activity.ProfilePictureActivity;
 import goldenage.delfis.app.activity.RestrictAreaActivity;
-import goldenage.delfis.app.activity.WebViewActivity;
 import goldenage.delfis.app.api.DelfisApiService;
 import goldenage.delfis.app.model.response.Session;
 import goldenage.delfis.app.model.response.User;
@@ -40,7 +39,7 @@ public class ConfigActivity extends AppCompatActivity {
     private TextView levelUser, textNome, textEmail, textNascimento;
     private ImageView btMudarFoto, btSair, btEditarInfo, btAreaRestrita;
     private CircleImageView imgPerfil;
-    private static final int ADM_USER_ROLE_ID = 3;
+    private static final long ID_USER_ROLE_ADM = 3L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         btAreaRestrita.setOnClickListener(v -> {
-            if (user.getUserRoleId() == ADM_USER_ROLE_ID) {
+            if (user.getUserRoleId() == ID_USER_ROLE_ADM) {
                 Intent intent = new Intent(ConfigActivity.this, RestrictAreaActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
