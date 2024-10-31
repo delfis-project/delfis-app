@@ -5,6 +5,10 @@ on:
     branches:
       - dev
 
+permissions:
+  contents: write
+  deployments: write
+
 jobs:
   apk:
     name: Generate APK
