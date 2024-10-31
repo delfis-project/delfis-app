@@ -39,11 +39,12 @@ jobs:
         run: echo "${{ secrets.CONFIG_PROPERTIES }}" > app/config.properties
 
       - name: Build APK
-        run: ./gradlew assembleRelease -Pandroid.injected.signing.store.file=keystore.jks \
-                                        -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
-                                        -Pandroid.injected.signing.key.alias=${{ secrets.KEY_ALIAS }} \
-                                        -Pandroid.injected.signing.key.password=${{ secrets.KEY_PASSWORD }}
-
+        run: ./gradlew assembleRelease \
+          -Pandroid.injected.signing.store.file=keystore.jks \
+          -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
+          -Pandroid.injected.signing.key.alias=${{ secrets.KEY_ALIAS }} \
+          -Pandroid.injected.signing.key.password=${{ secrets.KEY_PASSWORD }}
+          
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release.apk delfis.apk
 
