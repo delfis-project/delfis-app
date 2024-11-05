@@ -125,8 +125,12 @@ public class HomeActivity extends AppCompatActivity {
         if (streakAtual != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate inicio = LocalDate.parse(streakAtual.getInitialDate(), formatter);
-            dias = (int) (LocalDate.now().toEpochDay() - inicio.toEpochDay()) + 1;
+            dias = (int) (LocalDate.now().toEpochDay() - inicio.toEpochDay());
         }
+
+        if (dias == 0 && user.getCounterPlayedGames() > 0)
+            dias = 1;
+
         textStreak.setText(String.valueOf(dias));
     }
 
